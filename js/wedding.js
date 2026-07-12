@@ -2,12 +2,12 @@
 
 /* ══════════════════════════════════════════
    WEDDING WEBSITE — JAVASCRIPT
-   Mohammed Abdul Razak & Henna Shireen
-   Nikah: Wednesday, 20 May 2026, 5:30 PM IST
+   Nadirsha Mahin & Rismina Shafi
+   Walima: Sunday, 15 November 2026, 5:00 PM IST
 ══════════════════════════════════════════ */
 
 // ── Wedding date target ────────────────────
-const WEDDING_DATE = new Date('2026-05-20T17:30:00+05:30');
+const WEDDING_DATE = new Date('2026-11-15T00:00:00+05:00');
 
 // ── DOM refs ───────────────────────────────
 const splash        = document.getElementById('splash');
