@@ -732,4 +732,318 @@ img { display: block; }
 }
 .venue-time {
   display: flex; align-items: center; gap: 8px;
-  font-size: 13px; color:
+  font-size: 13px; color: #333;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+.directions-btn-full {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 13px;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(135deg, var(--primary) 0%, #5a0050 100%);
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 4px 14px rgba(120,2,105,0.25);
+  transition: opacity 0.2s, transform 0.15s;
+}
+.directions-btn-full:active { opacity: 0.88; transform: scale(0.97); }
+
+/* ── Contact cards ───────────────────────── */
+.contact-full {
+  display: flex; align-items: center;
+  justify-content: space-between; gap: 16px;
+  margin-bottom: 12px;
+}
+.contact-meta { display: flex; flex-direction: column; gap: 4px; }
+.contact-name {
+  font-family: var(--font-heading);
+  font-size: 17px; font-weight: 700;
+  color: #1a1a1a; letter-spacing: 0.04em; line-height: 1.2;
+}
+.contact-role { font-size: 12px; color: var(--text-body); }
+.contact-phone { font-size: 13px; color: var(--primary); font-weight: 500; }
+.phone-btn {
+  width: 44px; height: 44px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; transition: transform 0.2s;
+}
+.phone-btn:active { transform: scale(0.93); }
+.phone-btn.primary { background: var(--primary); color: #fff; }
+.phone-btn.outline { border: 1px solid var(--primary); color: var(--primary); }
+
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.contact-center {
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center; gap: 4px; padding: 18px 12px 14px;
+}
+.contact-center .contact-name { font-size: 15px; font-weight: 700; }
+.contact-center .phone-btn { margin-top: 10px; }
+
+/* ── How to Reach ────────────────────────── */
+.transport-accordion { display: flex; flex-direction: column; gap: 10px; }
+
+.accordion-item {
+  background: #ffffff;
+  border: 1px solid #eee5ed;
+  border-radius: 14px;
+  overflow: hidden;
+}
+.accordion-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 15px 18px;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.18s;
+}
+.accordion-header:active { background: rgba(120,2,105,0.05); }
+.transport-icon {
+  width: 40px; height: 40px; border-radius: 10px;
+  background: rgba(120,2,105,0.08);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  color: var(--primary);
+  transition: background 0.2s;
+}
+.accordion-item.open .transport-icon { background: rgba(120,2,105,0.14); }
+.transport-title {
+  font-size: 15px; font-weight: 600; color: #222; flex: 1;
+}
+.accordion-chevron {
+  color: var(--text-body);
+  flex-shrink: 0;
+  transition: transform 0.32s cubic-bezier(0.32,0.72,0,1);
+}
+.accordion-item.open .accordion-chevron { transform: rotate(180deg); }
+
+.accordion-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.32s cubic-bezier(0.32,0.72,0,1);
+}
+.accordion-item.open .accordion-body {
+  grid-template-rows: 1fr;
+}
+.accordion-inner {
+  overflow: hidden;
+  padding: 0 18px;
+  transition: padding 0.32s cubic-bezier(0.32,0.72,0,1);
+}
+.accordion-item.open .accordion-inner {
+  padding: 0 18px 16px;
+}
+
+.transport-list {
+  list-style: none;
+  display: flex; flex-direction: column; gap: 7px;
+  padding: 0;
+}
+.transport-list li {
+  font-size: 13px; color: var(--text-body); line-height: 1.5;
+  padding-left: 14px;
+  position: relative;
+}
+.transport-list li::before {
+  content: '·';
+  position: absolute; left: 0;
+  color: var(--primary);
+  font-weight: 700;
+}
+.t-highlight { color: var(--primary); font-weight: 500; }
+
+/* ── Photo Gallery / Selfie card ─────────── */
+.selfie-card { padding: 0; overflow: hidden; }
+
+.selfie-header {
+  background: linear-gradient(135deg, #c040a0 0%, #780269 100%);
+  padding: 22px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.selfie-scan-wrap {
+  position: relative;
+  width: 54px; height: 54px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.kwik-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,0.3);
+  pointer-events: none;
+}
+.kwik-ring-1 { width: 54px; height: 54px; animation: kwik-pulse 2.4s ease-in-out infinite; }
+.kwik-ring-2 { width: 38px; height: 38px; animation: kwik-pulse 2.4s ease-in-out 0.8s infinite; }
+@keyframes kwik-pulse {
+  0%, 100% { opacity: 0.25; transform: scale(1); }
+  50%       { opacity: 0.7;  transform: scale(1.07); }
+}
+.kwik-face-icon { color: #fff; position: relative; z-index: 1; }
+
+.selfie-coming-tag {
+  margin-left: auto;
+  color: rgba(255,255,255,0.9);
+  font-family: var(--font-sans);
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  background: rgba(255,255,255,0.15);
+  padding: 4px 11px; border-radius: var(--radius-pill);
+  border: 1px solid rgba(255,255,255,0.22);
+}
+
+.selfie-body { padding: 18px 20px 22px; }
+
+.selfie-headline {
+  font-family: var(--font-heading);
+  font-size: 20px; font-weight: 700;
+  color: var(--text-dark);
+  line-height: 1.25; letter-spacing: 0.02em;
+}
+.selfie-sub {
+  font-size: 13px; color: var(--text-body);
+  line-height: 1.6; margin-top: 9px;
+}
+
+.selfie-cta {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  width: 100%; margin-top: 18px;
+  padding: 14px;
+  background: rgba(120,2,105,0.18);
+  color: rgba(120,2,105,0.55);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-sans); font-size: 15px; font-weight: 500;
+  cursor: not-allowed;
+  border: none;
+}
+
+.selfie-note {
+  font-size: 11px;
+  color: var(--text-body);
+  text-align: center;
+  margin-top: 10px;
+  font-style: italic;
+  opacity: 0.75;
+}
+
+/* ── Downloads ───────────────────────────── */
+.download-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.download-card {
+  display: flex; flex-direction: column; gap: 10px;
+  padding: 10px; align-items: center;
+}
+.download-thumb-wrap {
+  width: 100%; height: 130px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+.download-thumb { width: 100%; height: 100%; object-fit: cover; }
+.download-label { font-size: 12px; color: var(--text-body); width: 100%; text-align: center; }
+.download-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%; padding: 10px 12px; border-radius: var(--radius-pill);
+  background: var(--primary); color: #fff;
+  font-size: 13px; font-weight: 400; border: none; cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+.download-btn:active { background: var(--primary-dark); transform: scale(0.97); }
+.download-btn.disabled {
+  background: rgba(120,2,105,0.2);
+  cursor: not-allowed; transform: none;
+}
+
+/* ── Footer ──────────────────────────────── */
+.wedding-footer { margin-top: 44px; text-align: center; padding-bottom: 12px; }
+.wedding-footer p { font-size: 13px; color: var(--text-body); }
+.footer-names {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 26px !important;
+  font-weight: 700;
+  color: var(--primary) !important;
+  margin-top: 6px;
+}
+
+/* ════════════════════════════════════════════
+   RESPONSIVE — COMPACT HEIGHTS (≤820px)
+════════════════════════════════════════════ */
+@media (max-height: 820px) {
+  .splash-groom, .splash-bride { font-size: clamp(30px, 8.5vw, 36px) !important; }
+  .splash-weds  { font-size: 22px !important; }
+
+  .count-box       { width: 54px; height: 70px; }
+  .count-box span  { font-size: 24px; }
+  .count-label     { font-size: 12px; }
+  .count-sep       { padding-bottom: 28px; }
+
+  .swipe-wrap {
+    bottom: calc(max(env(safe-area-inset-bottom, 0px), 20px) + 16px);
+  }
+  .event-meta {
+    top: auto;
+    bottom: calc(max(env(safe-area-inset-bottom, 0px), 20px) + 96px);
+  }
+  .countdown {
+    top: auto;
+    bottom: calc(max(env(safe-area-inset-bottom, 0px), 20px) + 148px);
+  }
+
+  .swipe-track  { height: 68px; }
+  .swipe-thumb  { width: 54px; height: 54px; }
+  .swipe-label  { padding-left: 70px; font-size: 13px; }
+  .swipe-track.done .swipe-label { padding-left: 0; }
+}
+
+/* ════════════════════════════════════════════
+   RESPONSIVE — TINY SCREENS (≤700px, e.g. SE)
+════════════════════════════════════════════ */
+@media (max-height: 700px) {
+  .splash-invite {
+    top: calc(max(env(safe-area-inset-top, 0px), 44px) + 210px);
+    font-size: 10px;
+  }
+  .splash-groom {
+    top: calc(max(env(safe-area-inset-top, 0px), 44px) + 236px);
+    font-size: clamp(24px, 7.5vw, 28px) !important;
+  }
+  .splash-weds-wrap {
+    top: calc(max(env(safe-area-inset-top, 0px), 44px) + 284px);
+    width: 100px; height: 48px;
+  }
+  .splash-bride {
+    top: calc(max(env(safe-area-inset-top, 0px), 44px) + 330px);
+    font-size: clamp(24px, 7.5vw, 28px) !important;
+  }
+  .countdown {
+    bottom: calc(max(env(safe-area-inset-bottom, 0px), 16px) + 152px);
+  }
+}
+
+/* ════════════════════════════════════════════
+   DESKTOP — CENTERED PHONE FRAME
+════════════════════════════════════════════ */
+@media (min-width: 620px) {
+  html, body { background: #1a1a1a; }
+  .page {
+    left: 50% !important; right: auto !important;
+    width: 393px !important;
+    box-shadow: 0 0 80px rgba(0,0,0,0.6);
+    border-radius: 44px;
+    overflow: hidden;
+    transform: translateX(-50%) !important;
+  }
+  #details.revealed { transform: translateX(-50%) translateY(0) !important; }
+  #details:not(.revealed) { transform: translateX(-50%) translateY(100%) !important; }
+}
