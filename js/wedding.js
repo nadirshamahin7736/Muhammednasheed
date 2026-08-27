@@ -25,27 +25,24 @@ let musicStarted = false;  // has audio.play() ever succeeded?
 let musicMuted   = false;  // is it currently muted?
 
 /* ════════════════════════════════════════════
-   AUDIO UNLOCK — iOS Safari requires a play()
-   call during a user gesture before any later
-   play() will succeed. We trigger a silent
-   play/pause on the very first touch so that
-   by the time the swipe completes, the audio
-   context is already unlocked.
+   AUDIO UNLOCK — Mobile Safari & Chrome Fix
 ════════════════════════════════════════════ */
 (function unlockAudioOnFirstTouch() {
   if (!bgMusic) return;
   function unlock() {
-    bgMusic.muted = true;
     bgMusic.play().then(() => {
-      bgMusic.pause();
-      bgMusic.currentTime = 0;
-      bgMusic.muted = false;
+      if (!musicStarted) {
+        bgMusic.pause();
+        bgMusic.currentTime = 0;
+      }
     }).catch(() => {});
     document.removeEventListener('touchstart', unlock, true);
     document.removeEventListener('mousedown',  unlock, true);
+    document.removeEventListener('pointerdown', unlock, true);
   }
   document.addEventListener('touchstart', unlock, { capture: true, once: true, passive: true });
   document.addEventListener('mousedown',  unlock, { capture: true, once: true });
+  document.addEventListener('pointerdown', unlock, { capture: true, once: true });
 })();
 
 /* ════════════════════════════════════════════
@@ -61,7 +58,6 @@ function pad(n) { return String(Math.max(0, n)).padStart(2, '0'); }
 function animateDigit(el, newVal) {
   if (el.textContent === newVal) return;
   el.classList.remove('flip');
-  // Force reflow
   void el.offsetWidth;
   el.textContent = newVal;
   el.classList.add('flip');
@@ -170,22 +166,19 @@ setInterval(updateCountdown, 1000);
       swipeLabel.style.opacity = '1';
     }, 250);
 
-    // ── Start music SYNCHRONOUSLY during user gesture ──────────
-    // bgMusic.play() must be called within the touchend/mouseup
-    // event handler — any setTimeout breaks the autoplay policy.
-    if (bgMusic && !musicStarted) {
-      bgMusic.volume = 0;
+    // ── Instant Audio Playback (No Volume Freeze) ──────────
+    if (bgMusic) {
+      bgMusic.muted = false;
+      bgMusic.volume = 0.6; // Clear audible volume
       bgMusic.play().then(() => {
         musicStarted = true;
         musicMuted   = false;
         updateMusicUI();
-        fadeVolume(0, 0.55, 2000);
-      }).catch(() => {
-        // Autoplay blocked — user can tap the music pill to start
+      }).catch(err => {
+        console.log("Autoplay blocked:", err);
       });
     }
 
-    // Page reveal can safely be deferred (it's UI only)
     setTimeout(revealDetails, 700);
   }
 
@@ -229,43 +222,25 @@ function revealDetails() {
 
   splash.classList.add('exit');
   setTimeout(() => { splash.style.visibility = 'hidden'; }, 900);
-
 }
 
 /* ════════════════════════════════════════════
-   BACKGROUND MUSIC
+   BACKGROUND MUSIC TOGGLE
 ════════════════════════════════════════════ */
-function fadeVolume(from, to, durationMs) {
-  const steps    = 40;
-  const interval = durationMs / steps;
-  const delta    = (to - from) / steps;
-  let   current  = from;
-  const timer    = setInterval(() => {
-    current = Math.max(0, Math.min(1, current + delta));
-    bgMusic.volume = current;
-    if ((delta > 0 && current >= to) || (delta < 0 && current <= to)) {
-      clearInterval(timer);
-    }
-  }, interval);
-}
-
 function toggleMusic() {
   if (!bgMusic) return;
 
   if (!musicStarted) {
-    // Audio hasn't started yet (swipe not done / autoplay blocked)
-    // This click IS a user gesture so play() will work here
-    bgMusic.volume = 0;
+    bgMusic.volume = 0.6;
+    bgMusic.muted = false;
     bgMusic.play().then(() => {
       musicStarted = true;
       musicMuted   = false;
       updateMusicUI();
-      fadeVolume(0, 0.55, 1000);
     }).catch(() => {});
     return;
   }
 
-  // Toggle mute / unmute (don't pause — keep buffer position)
   musicMuted    = !musicMuted;
   bgMusic.muted = musicMuted;
   updateMusicUI();
@@ -293,7 +268,7 @@ if (musicPillDet) musicPillDet.addEventListener('click', toggleMusic);
 ════════════════════════════════════════════ */
 async function downloadWeddingCard(btn) {
   const CARD_URL = 'assets/wedding-card.png';
-  const FILENAME = 'Mohammed-Henna-WeddingCard.png';
+  const FILENAME = 'Nadirsha-Rismina-WeddingCard.png';
 
   const origText = btn.textContent;
   btn.textContent = 'Downloading…';
@@ -305,15 +280,13 @@ async function downloadWeddingCard(btn) {
     const blob = await res.blob();
     const file = new File([blob], FILENAME, { type: blob.type || 'image/png' });
 
-    // Mobile: native share sheet (WhatsApp status, etc.)
     if (navigator.canShare && navigator.canShare({ files: [file] })) {
       await navigator.share({
         files: [file],
-        title: 'Mohammed & Henna — Wedding Card',
+        title: 'Nadirsha & Rismina — Wedding Card',
         text:  'You\'re invited! ✨'
       });
     } else {
-      // Desktop / fallback: trigger download
       const url = URL.createObjectURL(blob);
       const a   = document.createElement('a');
       a.href     = url;
@@ -322,7 +295,7 @@ async function downloadWeddingCard(btn) {
       setTimeout(() => URL.revokeObjectURL(url), 60000);
     }
   } catch {
-    // Silently fail — card image may not be uploaded yet
+    // Silently fail if file missing
   } finally {
     btn.textContent = origText;
     btn.disabled    = false;
@@ -333,9 +306,8 @@ document.querySelectorAll('.download-btn:not(.disabled)').forEach(btn => {
   btn.addEventListener('click', () => downloadWeddingCard(btn));
 });
 
-
 /* ════════════════════════════════════════════
-   HAPTIC FEEDBACK (PWA / Safari)
+   HAPTIC FEEDBACK
 ════════════════════════════════════════════ */
 function vibrate(pattern) {
   if ('vibrate' in navigator) navigator.vibrate(pattern);
@@ -344,7 +316,7 @@ function vibrate(pattern) {
 swipeThumb.addEventListener('touchstart', () => vibrate(10), { passive: true });
 
 /* ════════════════════════════════════════════
-   LUCIDE ICONS — initialise all data-lucide
+   LUCIDE ICONS
 ════════════════════════════════════════════ */
 if (typeof lucide !== 'undefined') lucide.createIcons();
 
@@ -358,12 +330,10 @@ if (typeof lucide !== 'undefined') lucide.createIcons();
     if (!header) return;
     header.addEventListener('click', () => {
       const isOpen = item.classList.contains('open');
-      // Close all
       items.forEach(i => {
         i.classList.remove('open');
         i.querySelector('.accordion-header').setAttribute('aria-expanded', 'false');
       });
-      // Open the clicked one if it was closed
       if (!isOpen) {
         item.classList.add('open');
         header.setAttribute('aria-expanded', 'true');
