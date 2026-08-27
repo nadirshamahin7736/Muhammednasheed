@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&family=Poppins:wght@300;400;500;600&family=Sora:wght@600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/wedding.css?v=10" />
+  <link rel="stylesheet" href="css/wedding.css?v=11" />
 </head>
 <body>
 
@@ -380,13 +380,13 @@
   </audio>
 
   <!-- ════════════════════════════════════════
-       ACCURATE COUNTDOWN & STRICT SWIPE JS
+       ROBUST AUDIO UNLOCK & FULL SWIPE JS
   ════════════════════════════════════════ -->
   <script>
     (function() {
-      // 1. Music Logic
       var audio = document.getElementById('bgMusic');
       var pills = [document.getElementById('musicPill'), document.getElementById('musicPillDetails')];
+      var isAudioUnlocked = false;
 
       function updateMusicUI(isPlaying) {
         pills.forEach(function(p) {
@@ -405,6 +405,15 @@
         });
       }
 
+      // Mobile Browser Autoplay Unblocker
+      function unlockAudio() {
+        if (!audio || isAudioUnlocked) return;
+        audio.play().then(function() {
+          isAudioUnlocked = true;
+          updateMusicUI(true);
+        }).catch(function() {});
+      }
+
       function toggleMusic(e) {
         if (e) {
           e.preventDefault();
@@ -412,7 +421,10 @@
         }
         if (!audio) return;
         if (audio.paused) {
-          audio.play().then(function() { updateMusicUI(true); }).catch(function() {});
+          audio.play().then(function() {
+            isAudioUnlocked = true;
+            updateMusicUI(true);
+          }).catch(function() {});
         } else {
           audio.pause();
           updateMusicUI(false);
@@ -454,7 +466,7 @@
       setInterval(updateCountdown, 1000);
       updateCountdown();
 
-      // 3. Strict Full-Swipe Logic (Reveals ONLY on drag)
+      // 3. Strict Full-Swipe Logic
       var track = document.getElementById('swipeTrack');
       var thumb = document.getElementById('swipeThumb');
       var fill = document.getElementById('swipeFill');
@@ -464,17 +476,22 @@
         if (!details) return;
         details.classList.add('revealed');
         if (track) track.classList.add('done');
-        if (audio && audio.paused) {
-          audio.play().then(function() { updateMusicUI(true); }).catch(function() {});
+        if (audio) {
+          audio.play().then(function() {
+            isAudioUnlocked = true;
+            updateMusicUI(true);
+          }).catch(function() {});
         }
       }
 
       if (thumb && track) {
         var startX = 0, isDragging = false;
 
+        // Unlock audio on very first touch/click anywhere or on thumb
         thumb.addEventListener('touchstart', function(e) {
           isDragging = true;
           startX = e.touches[0].clientX;
+          unlockAudio();
         }, { passive: true });
 
         window.addEventListener('touchmove', function(e) {
@@ -506,6 +523,7 @@
         thumb.addEventListener('mousedown', function(e) {
           isDragging = true;
           startX = e.clientX;
+          unlockAudio();
           e.preventDefault();
         });
 
