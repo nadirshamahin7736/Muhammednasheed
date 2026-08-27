@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&family=Poppins:wght@300;400;500;600&family=Sora:wght@600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/wedding.css?v=7" />
+  <link rel="stylesheet" href="css/wedding.css?v=8" />
 </head>
 <body>
 
@@ -380,7 +380,7 @@
   </audio>
 
   <!-- ════════════════════════════════════════
-       INLINE JS (INSTANT, ROBUST, ERROR-FREE)
+       ACCURATE COUNTDOWN & STRICT SWIPE JS
   ════════════════════════════════════════ -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -418,15 +418,8 @@
 
       pills.forEach(p => { if (p) p.addEventListener('click', toggleMusic); });
 
-      // Auto-play on first user interaction
-      document.body.addEventListener('click', function initPlay() {
-        if (audio && audio.paused) {
-          audio.play().then(() => updateMusicUI(true)).catch(() => {});
-        }
-      }, { once: true });
-
-      // 2. Countdown Timer
-      const targetDate = new Date('2026-11-15T17:00:00+05:30').getTime();
+      // 2. Countdown Timer (Target: 15 Nov 2026, 17:00 IST)
+      const targetDate = new Date(2026, 10, 15, 17, 0, 0).getTime();
       function updateCountdown() {
         const now = new Date().getTime();
         const diff = targetDate - now;
@@ -453,13 +446,13 @@
       setInterval(updateCountdown, 1000);
       updateCountdown();
 
-      // 3. Swipe / Click to Reveal Details
+      // 3. Strict Full-Swipe Logic (Only reveals upon full drag to the right)
       const track = document.getElementById('swipeTrack');
       const thumb = document.getElementById('swipeThumb');
       const fill = document.getElementById('swipeFill');
       const details = document.getElementById('details');
 
-      function triggerReveal() {
+      function completeSwipe() {
         if (!details) return;
         details.classList.add('revealed');
         if (track) track.classList.add('done');
@@ -468,11 +461,10 @@
         }
       }
 
-      if (track && thumb) {
-        track.addEventListener('click', triggerReveal);
+      if (thumb && track) {
+        let startX = 0, isDragging = false;
 
-        let startX = 0, currentX = 0, isDragging = false;
-        
+        // Mobile Touch Events
         thumb.addEventListener('touchstart', (e) => {
           isDragging = true;
           startX = e.touches[0].clientX;
@@ -480,19 +472,57 @@
 
         window.addEventListener('touchmove', (e) => {
           if (!isDragging) return;
-          currentX = e.touches[0].clientX - startX;
-          const max = track.clientWidth - thumb.clientWidth - 12;
-          if (currentX > 0 && currentX <= max) {
+          const currentX = e.touches[0].clientX - startX;
+          const maxDrag = track.clientWidth - thumb.clientWidth - 12;
+
+          if (currentX >= 0 && currentX <= maxDrag) {
             thumb.style.transform = `translate(${currentX}px, -50%)`;
-            fill.style.width = `${currentX + 26}px`;
+            fill.style.width = `${currentX + 28}px`;
           }
-          if (currentX > max * 0.7) {
+
+          // Trigger ONLY when dragged at least 88% across
+          if (currentX >= maxDrag * 0.88) {
             isDragging = false;
-            triggerReveal();
+            thumb.style.transform = `translate(${maxDrag}px, -50%)`;
+            fill.style.width = `100%`;
+            completeSwipe();
           }
         }, { passive: true });
 
         window.addEventListener('touchend', () => {
+          if (!isDragging) return;
+          isDragging = false;
+          // Snap back if released before full swipe
+          thumb.style.transform = 'translate(0px, -50%)';
+          fill.style.width = '0px';
+        });
+
+        // Desktop Mouse Drag Events
+        thumb.addEventListener('mousedown', (e) => {
+          isDragging = true;
+          startX = e.clientX;
+          e.preventDefault();
+        });
+
+        window.addEventListener('mousemove', (e) => {
+          if (!isDragging) return;
+          const currentX = e.clientX - startX;
+          const maxDrag = track.clientWidth - thumb.clientWidth - 12;
+
+          if (currentX >= 0 && currentX <= maxDrag) {
+            thumb.style.transform = `translate(${currentX}px, -50%)`;
+            fill.style.width = `${currentX + 28}px`;
+          }
+
+          if (currentX >= maxDrag * 0.88) {
+            isDragging = false;
+            thumb.style.transform = `translate(${maxDrag}px, -50%)`;
+            fill.style.width = `100%`;
+            completeSwipe();
+          }
+        });
+
+        window.addEventListener('mouseup', () => {
           if (!isDragging) return;
           isDragging = false;
           thumb.style.transform = 'translate(0px, -50%)';
