@@ -6,14 +6,14 @@
 
 /* ── Design Tokens ───────────────────────── */
 :root {
-  --primary:      #780269;
-  --primary-dark: #5a0050;
+  --primary:      #ff2a8d;
+  --primary-dark: #8b0042;
   --pink-light:   #ed94d5;
   --pink-dark:    #fc72d7;
-  --text-dark:    #1f1f1f;
-  --text-body:    #5a6570;
-  --card-bg:      #ffffff;
-  --border:       rgba(255, 255, 255, 0.85);
+  --text-dark:    #ffffff;
+  --text-body:    #fce7f3;
+  --card-bg:      rgba(255, 255, 255, 0.12);
+  --border:       rgba(255, 255, 255, 0.45);
 
   /* Royal Font Families */
   --font-serif:    'Playfair Display', Georgia, serif;
@@ -21,11 +21,11 @@
   --font-sans:      'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-comforter:'Comforter', cursive;
 
-  --radius-sm:    8px;
-  --radius-md:    16px;
+  --radius-sm:    10px;
+  --radius-md:    22px;
   --radius-pill:  999px;
 
-  --shadow-float: 0 18px 32px rgba(82,0,72,0.28);
+  --shadow-float: 0 18px 32px rgba(45, 0, 20, 0.5);
   --ease-ios:     cubic-bezier(0.32, 0.72, 0, 1);
 }
 
@@ -36,7 +36,7 @@ html, body {
   overflow: hidden;
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
-  background: #e8b4df;
+  background: #240112;
 }
 a { text-decoration: none; color: inherit; }
 button { border: none; background: none; cursor: pointer; font-family: inherit; }
@@ -60,23 +60,22 @@ img { display: block; }
   overscroll-behavior: contain;
   transform: translateY(100%);
   transition: transform 0.9s var(--ease-ios);
-  background: #fdf6fb;
+  background: #240112;
 }
 #details.revealed { transform: translateY(0); }
 #details::-webkit-scrollbar { width: 0; }
 
 /* ════════════════════════════════════════════
    SPLASH PAGE — ABSOLUTE LAYOUT
-   Pixel positions match Figma frame (393×862)
 ════════════════════════════════════════════ */
 #splash { display: block; overflow: hidden; }
 
-/* ── Background ──────────────────── */
+/* ── Background ──────────────────────────── */
 .splash-bg {
   position: absolute;
   inset: 0;
   z-index: 0;
-  background: linear-gradient(160deg, #f5d5ef 0%, #e080cc 30%, #b840a8 60%, #780269 100%);
+  background: linear-gradient(160deg, #59022e 0%, #38011c 50%, #1f000e 100%);
 }
 .splash-bg-img {
   width: 100%;
@@ -89,17 +88,15 @@ img { display: block; }
   inset: 0;
   background: linear-gradient(180deg,
     rgba(220,130,210,0.06) 0%,
-    rgba(220,130,210,0.04) 60%,
-    rgba(200,100,190,0.12) 100%);
+    rgba(35, 1, 18, 0.6) 100%);
 }
 
-/* ── Z-layer for all content ─────────────── */
 #splash > *:not(.splash-bg):not(.petals) {
   position: absolute;
   z-index: 2;
 }
 
-/* ── Music Pill (top-right) ──────────────── */
+/* ── Music Pill ──────────────────────────── */
 .music-pill {
   top: calc(max(env(safe-area-inset-top, 0px), 4px) + 8px);
   right: 16px;
@@ -108,10 +105,10 @@ img { display: block; }
   gap: 8px;
   padding: 5px 6px 5px 12px;
   border-radius: var(--radius-pill);
-  border: 1px solid rgba(255,255,255,0.75);
+  border: 1px solid rgba(255,255,255,0.45);
   background: rgba(255,255,255,0.12);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
   color: #fff;
   transition: background 0.25s;
 }
@@ -130,10 +127,9 @@ img { display: block; }
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  border: 0.75px solid rgba(255,255,255,0.85);
+  border: 0.75px solid rgba(255,255,255,0.7);
   flex-shrink: 0;
 }
-/* Icon toggle */
 .music-pill .icon-play   { display: block; }
 .music-pill .icon-pause  { display: none; }
 .music-pill.playing .icon-play   { display: none; }
@@ -157,6 +153,7 @@ img { display: block; }
   height: 27px;
   object-fit: contain;
   object-position: center;
+  filter: brightness(1.2);
 }
 
 /* ── Malayalam title logo ────────────────── */
@@ -187,7 +184,7 @@ img { display: block; }
   line-height: 1.3;
 }
 
-/* ── Groom name (Playfair Model Font & Soft Gold) ─────── */
+/* ── Groom name ──────────────────────────── */
 .splash-groom {
   top: calc(max(env(safe-area-inset-top, 0px), 54px) + 260px);
   left: 50%;
@@ -202,7 +199,7 @@ img { display: block; }
   letter-spacing: 0.5px !important;
   text-transform: capitalize !important;
   color: #fff6d6 !important;
-  text-shadow: 0 3px 12px rgba(90, 0, 80, 0.5), 0 1px 3px rgba(0,0,0,0.3) !important;
+  text-shadow: 0 3px 15px rgba(255, 42, 141, 0.45), 0 1px 3px rgba(0,0,0,0.6) !important;
   text-align: center;
   line-height: 1.05;
   white-space: nowrap;
@@ -225,10 +222,10 @@ img { display: block; }
   position: absolute;
   width: 84px;
   height: 28px;
-  background: linear-gradient(135deg, #ff0099 0%, #780269 100%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  box-shadow: 0 4px 14px rgba(0,0,0,0.25);
-  border-radius: 4px;
+  background: linear-gradient(135deg, #ff007f 0%, #780269 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+  border-radius: 6px;
   transform: rotate(-21deg);
 }
 .splash-weds {
@@ -237,14 +234,14 @@ img { display: block; }
   font-style: italic !important;
   font-size: 24px !important;
   font-weight: 700 !important;
-  color: #fff6d6 !important;
+  color: #fff !important;
   transform: rotate(-21deg);
   line-height: 1;
   white-space: nowrap;
   z-index: 1;
 }
 
-/* ── Bride name (Playfair Model Font & Soft Gold) ─────── */
+/* ── Bride name ──────────────────────────── */
 .splash-bride {
   top: calc(max(env(safe-area-inset-top, 0px), 54px) + 418px);
   left: 50%;
@@ -256,7 +253,7 @@ img { display: block; }
   letter-spacing: 0.5px !important;
   text-transform: capitalize !important;
   color: #fff6d6 !important;
-  text-shadow: 0 3px 12px rgba(90, 0, 80, 0.5), 0 1px 3px rgba(0,0,0,0.3) !important;
+  text-shadow: 0 3px 15px rgba(255, 42, 141, 0.45), 0 1px 3px rgba(0,0,0,0.6) !important;
   text-align: center;
   line-height: 1.05;
   white-space: nowrap;
@@ -272,7 +269,6 @@ img { display: block; }
   justify-content: center;
   gap: 5px;
 }
-
 .count-unit {
   display: flex;
   flex-direction: column;
@@ -283,30 +279,24 @@ img { display: block; }
   font-family: var(--font-sans);
   font-size: 14px;
   font-weight: 500;
-  color: rgba(255,255,255,0.9);
-  letter-spacing: 0;
+  color: rgba(255,255,255,0.85);
   line-height: 1;
 }
 .count-box {
   width: 60px;
   height: 82px;
-  border-radius: 6px;
-  border: 1px solid rgba(255,255,255,0.8);
-  background: linear-gradient(180deg, var(--pink-light) 0%, var(--pink-dark) 100%);
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.45);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 6px 18px rgba(200,60,160,0.35);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255,255,255,0.5);
   position: relative;
   overflow: hidden;
   flex-shrink: 0;
-}
-.count-box::before {
-  content: '';
-  position: absolute;
-  inset: 0 0 50% 0;
-  background: rgba(255,255,255,0.18);
-  pointer-events: none;
 }
 .count-box span {
   font-family: 'Sora', var(--font-sans);
@@ -338,7 +328,7 @@ img { display: block; }
   font-family: var(--font-sans);
   font-size: 13.5px;
   font-weight: 400;
-  color: var(--primary);
+  color: #fce7f3;
   letter-spacing: -0.02em;
   line-height: 1.35;
 }
@@ -355,11 +345,11 @@ img { display: block; }
   width: 100%;
   height: 78px;
   border-radius: var(--radius-pill);
-  background: rgba(255,255,255,0.12);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  box-shadow: var(--shadow-float);
-  border: 1px solid rgba(255,255,255,0.28);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
   overflow: hidden;
   user-select: none;
   -webkit-user-select: none;
@@ -369,9 +359,7 @@ img { display: block; }
   position: absolute;
   inset: 0;
   border-radius: var(--radius-pill);
-  background: linear-gradient(90deg,
-    rgba(120,2,105,0.35),
-    rgba(252,114,215,0.25));
+  background: linear-gradient(90deg, rgba(255, 42, 141, 0.6), rgba(120, 2, 105, 0.6));
   width: 0;
 }
 .swipe-thumb {
@@ -383,7 +371,7 @@ img { display: block; }
   height: 62px;
   border-radius: 50%;
   background: #fff;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -392,7 +380,7 @@ img { display: block; }
   will-change: transform;
 }
 .swipe-thumb:active { cursor: grabbing; }
-.swipe-thumb svg { pointer-events: none; }
+.swipe-thumb svg { stroke: #59022e; pointer-events: none; }
 .swipe-label {
   position: absolute;
   inset: 0;
@@ -403,17 +391,15 @@ img { display: block; }
   padding-right: 12px;
   font-family: var(--font-sans);
   font-size: 14px;
-  font-weight: 400;
-  color: var(--primary);
+  font-weight: 500;
+  color: #fff;
   pointer-events: none;
   letter-spacing: -0.01em;
   white-space: nowrap;
-  transition: opacity 0.12s;
 }
-.swipe-track.done { background: rgba(120,2,105,0.2); }
-.swipe-track.done .swipe-thumb { background: var(--primary); }
+.swipe-track.done { background: rgba(255, 42, 141, 0.35); }
+.swipe-track.done .swipe-thumb { background: #ff2a8d; }
 .swipe-track.done .swipe-thumb svg { stroke: #fff; }
-.swipe-track.done .swipe-label { color: #fff; padding-left: 0; font-weight: 500; }
 
 /* ── Petals ──────────────────────────────── */
 .petals {
@@ -429,20 +415,17 @@ img { display: block; }
   top: -24px;
   width: 9px;
   height: 13px;
-  background: radial-gradient(ellipse,
-    rgba(255,210,235,0.75),
-    rgba(240,140,200,0.35));
+  background: radial-gradient(ellipse, rgba(255,210,235,0.7), rgba(255,42,141,0.3));
   border-radius: 50% 0 50% 0;
   animation: petalFall var(--dur) linear var(--delay) infinite;
 }
 @keyframes petalFall {
-  0%   { transform: translateY(0) rotate(0deg);    opacity: 0; }
+  0%   { transform: translateY(0) rotate(0deg); opacity: 0; }
   8%   { opacity: 0.75; }
   90%  { opacity: 0.45; }
   100% { transform: translateY(105vh) rotate(380deg); opacity: 0; }
 }
 
-/* ── Entrance animations ─────────────────── */
 .splash-enter {
   opacity: 0;
   animation: splashFadeIn 0.75s ease var(--delay, 0s) forwards;
@@ -452,38 +435,18 @@ img { display: block; }
   to   { opacity: 1; translate: 0 0; }
 }
 
-.mp-icon { display: block; }
-
-#splash.exit {
-  pointer-events: none;
-  animation: splashExit 0.9s var(--ease-ios) forwards;
-}
-@keyframes splashExit {
-  to { opacity: 0.2; transform: scale(0.95); }
-}
-
-.count-box span.flip {
-  animation: countFlip 0.3s ease;
-}
-@keyframes countFlip {
-  0%  { transform: scaleY(1); }
-  45% { transform: scaleY(0); opacity: 0; }
-  55% { transform: scaleY(0); opacity: 0; }
-  100%{ transform: scaleY(1); opacity: 1; }
-}
-
 /* ════════════════════════════════════════════
-   DETAILS PAGE — LUXURY FROSTED GLASS THEME
+   DETAILS PAGE — LUXURY WINE RED & TRUE FROSTED GLASS
 ════════════════════════════════════════════ */
 
-/* ── Hero header ─────────────────────────── */
+/* ── Hero top ────────────────────────────── */
 .details-hero {
   position: relative;
   width: 100%;
   height: 320px;
   overflow: hidden;
   flex-shrink: 0;
-  background: linear-gradient(160deg, #d490c4 0%, #a03898 50%, #780269 100%);
+  background: linear-gradient(160deg, #660334 0%, #3d011f 50%, #1f000e 100%);
 }
 .details-hero-bg {
   position: absolute;
@@ -493,13 +456,12 @@ img { display: block; }
   height: 115%;
   object-fit: cover;
   object-position: center 35%;
+  opacity: 0.85;
 }
 .details-hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg,
-    rgba(180,80,160,0.05) 0%,
-    rgba(180,80,160,0.15) 100%);
+  background: linear-gradient(180deg, rgba(35, 1, 18, 0.2) 0%, rgba(35, 1, 18, 0.85) 100%);
 }
 
 .music-pill-details {
@@ -509,7 +471,6 @@ img { display: block; }
   z-index: 10;
 }
 
-/* Groom name */
 .dh-groom {
   position: absolute;
   left: 50%;
@@ -522,17 +483,14 @@ img { display: block; }
   font-size: clamp(28px, 8.5vw, 34px) !important;
   font-weight: 700 !important;
   font-style: italic !important;
-  letter-spacing: 0.5px !important;
-  text-transform: capitalize !important;
   color: #fff6d6 !important;
-  text-shadow: 0 2px 10px rgba(90, 0, 80, 0.5) !important;
+  text-shadow: 0 3px 15px rgba(255, 42, 141, 0.5) !important;
   text-align: center;
   line-height: 1.05;
   white-space: nowrap;
   z-index: 2;
 }
 
-/* "weds" badge */
 .dh-weds-wrap {
   position: absolute;
   left: 50%;
@@ -549,7 +507,7 @@ img { display: block; }
   position: absolute;
   width: 72px;
   height: 24px;
-  background: linear-gradient(135deg, #ff0099 0%, #780269 100%) !important;
+  background: linear-gradient(135deg, #ff007f 0%, #780269 100%) !important;
   border-radius: 4px;
   transform: rotate(-21deg);
 }
@@ -559,14 +517,13 @@ img { display: block; }
   font-style: italic !important;
   font-size: 22px !important;
   font-weight: 700 !important;
-  color: #fff6d6 !important;
+  color: #fff !important;
   transform: rotate(-21deg);
   line-height: 1;
   white-space: nowrap;
   z-index: 1;
 }
 
-/* Bride name */
 .dh-bride {
   position: absolute;
   left: 50%;
@@ -576,17 +533,14 @@ img { display: block; }
   font-size: clamp(28px, 8.5vw, 34px) !important;
   font-weight: 700 !important;
   font-style: italic !important;
-  letter-spacing: 0.5px !important;
-  text-transform: capitalize !important;
   color: #fff6d6 !important;
-  text-shadow: 0 2px 10px rgba(90, 0, 80, 0.5) !important;
+  text-shadow: 0 3px 15px rgba(255, 42, 141, 0.5) !important;
   text-align: center;
   line-height: 1.05;
   white-space: nowrap;
   z-index: 2;
 }
 
-/* Sparkle divider */
 .dh-divider-row {
   position: absolute;
   left: 50%;
@@ -601,7 +555,7 @@ img { display: block; }
 .dh-divider-line {
   flex: 1;
   height: 1px;
-  background: rgba(255,255,255,0.45);
+  background: rgba(255,255,255,0.3);
 }
 .dh-sparkle-star {
   color: #ffd700;
@@ -610,17 +564,71 @@ img { display: block; }
   flex-shrink: 0;
 }
 
-/* ── Luxury Frosted Rose Sheet Background ── */
+/* ── Deep Wine Red Velvet Sheet With Glowing Light Orbs ── */
 .details-sheet {
-  background: linear-gradient(180deg, #fdf6fa 0%, #fbedf6 35%, #fae2f3 70%, #f5d3ec 100%) !important;
+  position: relative;
+  background: radial-gradient(circle at 10% 20%, #4a0326 0%, #290115 50%, #17000b 95%) !important;
   border-radius: 28px 28px 0 0;
   margin-top: -30px;
   padding: 16px 18px calc(env(safe-area-inset-bottom, 24px) + 48px);
   min-height: calc(100dvh - 280px);
-  box-shadow: 0 -12px 35px rgba(120, 2, 105, 0.15);
+  box-shadow: 0 -15px 40px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+  z-index: 1;
 }
 
-/* ── Save the Date card (Ultra Frosted Glass) ── */
+/* 3D Glass Light Orbs */
+.details-sheet::before,
+.details-sheet::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+  filter: blur(45px);
+}
+.details-sheet::before {
+  top: 70px;
+  right: -40px;
+  width: 230px;
+  height: 230px;
+  background: radial-gradient(circle, #ff2a8d 0%, #a20556 60%, transparent 80%);
+  opacity: 0.6;
+  animation: orbFloat1 7s ease-in-out infinite alternate;
+}
+.details-sheet::after {
+  top: 500px;
+  left: -50px;
+  width: 270px;
+  height: 270px;
+  background: radial-gradient(circle, #ff007f 0%, #680138 60%, transparent 80%);
+  opacity: 0.55;
+  animation: orbFloat2 9s ease-in-out infinite alternate;
+}
+
+@keyframes orbFloat1 {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(-20px, 30px) scale(1.1); }
+}
+@keyframes orbFloat2 {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(30px, -25px) scale(1.08); }
+}
+
+/* ── Pure Frosted Glass Cards (Screenshot Match) ── */
+.info-card, .save-date-card {
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(25px) saturate(190%) !important;
+  -webkit-backdrop-filter: blur(25px) saturate(190%) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.38) !important;
+  border-radius: 22px !important;
+  box-shadow: 
+    0 15px 35px 0 rgba(0, 0, 0, 0.35),
+    inset 0 1px 2px 0 rgba(255, 255, 255, 0.5) !important;
+  color: #fff;
+}
+
+/* ── Save the Date Card ──────────────────── */
 .save-date-card {
   display: flex;
   flex-direction: column;
@@ -629,16 +637,6 @@ img { display: block; }
   gap: 6px;
   padding: 24px 20px 22px;
   margin: 10px 0 20px;
-  background: rgba(255, 255, 255, 0.65) !important;
-  backdrop-filter: blur(20px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-  border: 1.5px solid rgba(255, 255, 255, 0.9) !important;
-  border-radius: 22px !important;
-  box-shadow: 
-    0 10px 32px 0 rgba(120, 2, 105, 0.08),
-    inset 0 1px 2px 0 rgba(255, 255, 255, 0.95) !important;
-  position: relative;
-  z-index: 5;
 }
 .sdt-ornament {
   display: flex;
@@ -650,18 +648,17 @@ img { display: block; }
 .sdt-line {
   flex: 1;
   height: 1px;
-  background: #c59bbd;
+  background: rgba(255, 255, 255, 0.4);
 }
 .sdt-sparkle {
-  color: var(--primary);
+  color: #ffd700;
   font-size: 12px;
-  line-height: 1;
 }
 .sdt-eyebrow {
   font-family: var(--font-heading);
   font-size: 12px;
   font-weight: 700;
-  color: var(--primary);
+  color: #fbcfe8;
   letter-spacing: 0.15em;
   text-transform: uppercase;
 }
@@ -669,24 +666,24 @@ img { display: block; }
   font-family: var(--font-serif);
   font-size: 21px;
   font-weight: 700;
-  color: #222;
+  color: #ffffff;
   letter-spacing: 0.02em;
   line-height: 1.3;
   margin-top: 4px;
 }
 .sdt-venue-hint {
   font-size: 13px;
-  color: var(--text-body);
+  color: rgba(255, 255, 255, 0.85);
   line-height: 1.45;
 }
 
-/* ── Section heading ─────────────────────── */
+/* ── Section Heading ─────────────────────── */
 .card-section { margin-top: 26px; }
 .section-heading {
   font-family: var(--font-heading);
   font-size: 16px;
   font-weight: 700;
-  color: var(--primary);
+  color: #fce7f3;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   margin-bottom: 12px;
@@ -695,516 +692,188 @@ img { display: block; }
   gap: 8px;
 }
 
-/* ── Base info card (Ultra Frosted Glass) ── */
-.info-card {
-  background: rgba(255, 255, 255, 0.65) !important;
-  backdrop-filter: blur(20px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-  border: 1.5px solid rgba(255, 255, 255, 0.85) !important;
-  border-radius: 20px !important;
-  padding: 20px;
-  box-shadow: 
-    0 10px 30px 0 rgba(120, 2, 105, 0.07),
-    inset 0 1px 2px 0 rgba(255, 255, 255, 0.95) !important;
-}
-
-/* ── RSVP Frosted Glass Card & Form ───────── */
+/* ── RSVP Glass Form ─────────────────────── */
 .rsvp-card {
-  background: linear-gradient(
-    135deg, 
-    rgba(255, 255, 255, 0.75) 0%, 
-    rgba(255, 240, 250, 0.55) 100%
-  ) !important;
-  backdrop-filter: blur(20px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-  border: 1.5px solid rgba(255, 255, 255, 0.95) !important;
-  box-shadow: 
-    0 12px 35px 0 rgba(120, 2, 105, 0.1),
-    inset 0 1px 2px 0 rgba(255, 255, 255, 0.95) !important;
+  background: rgba(255, 255, 255, 0.11) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.42) !important;
+}
+.rsvp-label {
+  color: #fce7f3 !important;
 }
 .rsvp-input, .rsvp-select, .rsvp-textarea {
-  background: rgba(255, 255, 255, 0.7) !important;
-  backdrop-filter: blur(10px) !important;
-  -webkit-backdrop-filter: blur(10px) !important;
-  border: 1.5px solid rgba(255, 255, 255, 0.85) !important;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02), 0 2px 6px rgba(120, 2, 105, 0.03) !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(15px) !important;
+  -webkit-backdrop-filter: blur(15px) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.28) !important;
+  color: #ffffff !important;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.25) !important;
+}
+.rsvp-input::placeholder, .rsvp-textarea::placeholder {
+  color: rgba(255, 255, 255, 0.5) !important;
 }
 .rsvp-input:focus, .rsvp-select:focus, .rsvp-textarea:focus {
-  background: rgba(255, 255, 255, 0.92) !important;
-  border-color: #780269 !important;
+  background: rgba(255, 255, 255, 0.16) !important;
+  border-color: #ff2a8d !important;
 }
-.rsvp-radio-btn {
-  background: rgba(255, 255, 255, 0.6) !important;
-  backdrop-filter: blur(8px) !important;
-  -webkit-backdrop-filter: blur(8px) !important;
-  border: 1.5px solid rgba(255, 255, 255, 0.8) !important;
-}
-.rsvp-radio-btn.active {
-  background: var(--primary) !important;
-  border-color: var(--primary) !important;
-  color: #fff !important;
+.rsvp-select option {
+  background: #2b0117;
+  color: #fff;
 }
 
-/* ── Venue card ──────────────────────────── */
-.venue-elegant { display: flex; flex-direction: column; gap: 0; }
-.venue-top {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
+/* Glass Radio Buttons */
+.rsvp-radio-btn {
+  background: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.28) !important;
+  color: rgba(255, 255, 255, 0.85) !important;
 }
-.venue-pin-circle {
-  width: 44px; height: 44px; border-radius: 50%;
-  background: rgba(120,2,105,0.08);
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-  color: var(--primary);
+.rsvp-radio-btn.active {
+  background: linear-gradient(135deg, #ff2a8d 0%, #99004d 100%) !important;
+  border-color: rgba(255, 255, 255, 0.7) !important;
+  color: #fff !important;
+  box-shadow: 0 4px 15px rgba(255, 42, 141, 0.45);
 }
-.venue-text { display: flex; flex-direction: column; gap: 4px; flex: 1; }
+
+/* ── Glowing Glass Buttons (Screenshot Style) ── */
+.rsvp-submit-btn, .directions-btn-full {
+  background: linear-gradient(135deg, #38011c 0%, #8b0042 50%, #38011c 100%) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.45) !important;
+  color: #fff !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), inset 0 1px 2px rgba(255, 255, 255, 0.5) !important;
+  backdrop-filter: blur(10px);
+}
+.rsvp-submit-btn:hover, .directions-btn-full:hover {
+  border-color: rgba(255, 255, 255, 0.8) !important;
+  box-shadow: 0 10px 30px rgba(255, 42, 141, 0.5) !important;
+}
+
+/* ── Venue Card ──────────────────────────── */
 .venue-name {
   font-family: var(--font-heading);
   font-size: 18px; font-weight: 700;
-  color: #1a1a1a;
-  letter-spacing: 0.04em;
-  line-height: 1.25;
+  color: #ffffff;
 }
 .venue-addr {
-  font-size: 13px; color: var(--text-body); line-height: 1.45;
+  font-size: 13px; color: rgba(255, 255, 255, 0.8); line-height: 1.45;
+}
+.venue-pin-circle {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #ff2a8d;
 }
 .venue-sep {
   height: 1px;
-  background: rgba(120, 2, 105, 0.1);
+  background: rgba(255, 255, 255, 0.18);
   margin: 14px 0;
 }
 .venue-time {
-  display: flex; align-items: center; gap: 8px;
-  font-size: 13px; color: #333;
-  margin-bottom: 16px;
-  font-weight: 500;
+  font-size: 13px; color: #fce7f3;
 }
-.directions-btn-full {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  width: 100%;
-  padding: 13px;
-  border-radius: var(--radius-pill);
-  background: linear-gradient(135deg, var(--primary) 0%, #5a0050 100%);
-  color: #fff;
-  font-family: var(--font-sans);
-  font-size: 14px;
-  font-weight: 500;
-  box-shadow: 0 4px 14px rgba(120,2,105,0.25);
-  transition: opacity 0.2s, transform 0.15s;
-}
-.directions-btn-full:active { opacity: 0.88; transform: scale(0.97); }
 
-/* ── Contact cards ───────────────────────── */
-.contact-full {
-  display: flex; align-items: center;
-  justify-content: space-between; gap: 16px;
-  margin-bottom: 12px;
-}
-.contact-meta { display: flex; flex-direction: column; gap: 4px; }
+/* ── Contacts ────────────────────────────── */
 .contact-name {
   font-family: var(--font-heading);
   font-size: 17px; font-weight: 700;
-  color: #1a1a1a; letter-spacing: 0.04em; line-height: 1.2;
+  color: #ffffff;
 }
-.contact-role { font-size: 12px; color: var(--text-body); }
-.contact-phone { font-size: 13px; color: var(--primary); font-weight: 500; }
-.phone-btn {
-  width: 44px; height: 44px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0; transition: transform 0.2s;
+.contact-role { font-size: 12px; color: rgba(255, 255, 255, 0.75); }
+.contact-phone { font-size: 13px; color: #ff85c2; font-weight: 500; }
+.phone-btn.primary {
+  background: linear-gradient(135deg, #ff2a8d 0%, #99004d 100%);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  box-shadow: 0 4px 15px rgba(255, 42, 141, 0.45);
 }
-.phone-btn:active { transform: scale(0.93); }
-.phone-btn.primary { background: var(--primary); color: #fff; }
-.phone-btn.outline { border: 1.5px solid var(--primary); color: var(--primary); background: rgba(255,255,255,0.5); }
-
-.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.contact-center {
-  display: flex; flex-direction: column; align-items: center;
-  text-align: center; gap: 4px; padding: 18px 12px 14px;
+.phone-btn.outline {
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
 }
-.contact-center .contact-name { font-size: 15px; font-weight: 700; }
-.contact-center .phone-btn { margin-top: 10px; }
 
-/* ── How to Reach ────────────────────────── */
-.transport-accordion { display: flex; flex-direction: column; gap: 10px; }
-
+/* ── How to Reach Accordion ──────────────── */
 .accordion-item {
-  background: rgba(255, 255, 255, 0.65) !important;
-  border: 1.5px solid rgba(255, 255, 255, 0.85) !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.32) !important;
   border-radius: 14px;
-  overflow: hidden;
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(20px);
 }
-.accordion-header {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  width: 100%;
-  padding: 15px 18px;
-  background: none;
-  cursor: pointer;
-  text-align: left;
-  transition: background 0.18s;
-}
-.accordion-header:active { background: rgba(120,2,105,0.05); }
 .transport-icon {
-  width: 40px; height: 40px; border-radius: 10px;
-  background: rgba(120,2,105,0.08);
-  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-  color: var(--primary);
-  transition: background 0.2s;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ff2a8d;
 }
-.accordion-item.open .transport-icon { background: rgba(120,2,105,0.14); }
-.transport-title {
-  font-size: 15px; font-weight: 600; color: #222; flex: 1;
-}
-.accordion-chevron {
-  color: var(--text-body);
-  flex-shrink: 0;
-  transition: transform 0.32s cubic-bezier(0.32,0.72,0,1);
-}
-.accordion-item.open .accordion-chevron { transform: rotate(180deg); }
-
-.accordion-body {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.32s cubic-bezier(0.32,0.72,0,1);
-}
-.accordion-item.open .accordion-body {
-  grid-template-rows: 1fr;
-}
-.accordion-inner {
-  overflow: hidden;
-  padding: 0 18px;
-  transition: padding 0.32s cubic-bezier(0.32,0.72,0,1);
-}
-.accordion-item.open .accordion-inner {
-  padding: 0 18px 16px;
-}
-
-.transport-list {
-  list-style: none;
-  display: flex; flex-direction: column; gap: 7px;
-  padding: 0;
-}
-.transport-list li {
-  font-size: 13px; color: var(--text-body); line-height: 1.5;
-  padding-left: 14px;
-  position: relative;
-}
-.transport-list li::before {
-  content: '·';
-  position: absolute; left: 0;
-  color: var(--primary);
-  font-weight: 700;
-}
-.t-highlight { color: var(--primary); font-weight: 500; }
+.transport-title { color: #fff; }
+.accordion-chevron { color: rgba(255, 255, 255, 0.7); }
+.transport-list li { color: rgba(255, 255, 255, 0.85); }
+.transport-list li::before { color: #ff2a8d; }
+.t-highlight { color: #fce7f3; font-weight: 500; }
 
 /* ── Photo Gallery / Selfie card ─────────── */
 .selfie-card { padding: 0; overflow: hidden; }
-
 .selfie-header {
-  background: linear-gradient(135deg, #c040a0 0%, #780269 100%);
-  padding: 22px 20px;
-  display: flex;
-  align-items: center;
-  gap: 14px;
+  background: linear-gradient(135deg, rgba(255, 42, 141, 0.35) 0%, rgba(120, 2, 105, 0.35) 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
 }
-
-.selfie-scan-wrap {
-  position: relative;
-  width: 54px; height: 54px;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-}
-.kwik-ring {
-  position: absolute;
-  border-radius: 50%;
-  border: 1.5px solid rgba(255,255,255,0.3);
-  pointer-events: none;
-}
-.kwik-ring-1 { width: 54px; height: 54px; animation: kwik-pulse 2.4s ease-in-out infinite; }
-.kwik-ring-2 { width: 38px; height: 38px; animation: kwik-pulse 2.4s ease-in-out 0.8s infinite; }
-@keyframes kwik-pulse {
-  0%, 100% { opacity: 0.25; transform: scale(1); }
-  50%       { opacity: 0.7;  transform: scale(1.07); }
-}
-.kwik-face-icon { color: #fff; position: relative; z-index: 1; }
-
-.selfie-coming-tag {
-  margin-left: auto;
-  color: rgba(255,255,255,0.9);
-  font-family: var(--font-sans);
-  font-size: 10px; font-weight: 600;
-  letter-spacing: 0.08em; text-transform: uppercase;
-  background: rgba(255,255,255,0.15);
-  padding: 4px 11px; border-radius: var(--radius-pill);
-  border: 1px solid rgba(255,255,255,0.22);
-}
-
-.selfie-body { padding: 18px 20px 22px; }
-
-.selfie-headline {
-  font-family: var(--font-heading);
-  font-size: 20px; font-weight: 700;
-  color: var(--text-dark);
-  line-height: 1.25; letter-spacing: 0.02em;
-}
-.selfie-sub {
-  font-size: 13px; color: var(--text-body);
-  line-height: 1.6; margin-top: 9px;
-}
-
-.selfie-cta {
-  display: flex; align-items: center; justify-content: center; gap: 8px;
-  width: 100%; margin-top: 18px;
-  padding: 14px;
-  background: rgba(120,2,105,0.18);
-  color: rgba(120,2,105,0.55);
-  border-radius: var(--radius-pill);
-  font-family: var(--font-sans); font-size: 15px; font-weight: 500;
-  cursor: not-allowed;
-  border: none;
-}
-
-.selfie-note {
-  font-size: 11px;
-  color: var(--text-body);
-  text-align: center;
-  margin-top: 10px;
-  font-style: italic;
-  opacity: 0.75;
-}
+.selfie-headline { color: #fff; }
+.selfie-sub { color: rgba(255, 255, 255, 0.8); }
+.selfie-note { color: rgba(255, 255, 255, 0.65); }
 
 /* ── Downloads ───────────────────────────── */
-.download-grid { 
-  display: grid; 
-  grid-template-columns: 1fr 1fr; 
-  gap: 12px; 
-}
-
-/* 3-ാമത്തെ കാർഡ് നടുക്കായി മനോഹരമായി നിൽക്കാൻ */
-.download-card:nth-child(3):last-child {
-  grid-column: span 2;
-  max-width: calc(50% - 6px);
-  justify-self: center;
-  width: 100%;
-}
-
-.download-card {
-  display: flex; 
-  flex-direction: column; 
-  gap: 10px;
-  padding: 10px; 
-  align-items: center;
-}
-
 .download-thumb-wrap {
-  width: 100%; 
-  height: 130px;
-  border-radius: var(--radius-sm);
-  border: 1.5px solid rgba(255, 255, 255, 0.8);
-  overflow: hidden;
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
 }
-
-.download-thumb { 
-  width: 100%; 
-  height: 100%; 
-  object-fit: cover; 
-}
-
-/* Coming soon കാർഡുകൾക്കുള്ള സോഫ്റ്റ് ഗ്രേഡിയന്റ് ബോക്സ് */
 .placeholder-thumb {
-  background: linear-gradient(135deg, rgba(120, 2, 105, 0.05) 0%, rgba(252, 114, 215, 0.12) 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: rgba(255, 255, 255, 0.06);
 }
-
-.download-label { 
-  font-size: 12px; 
-  color: var(--text-body); 
-  width: 100%; 
-  text-align: center; 
-  font-weight: 500;
-}
-
+.download-label { color: rgba(255, 255, 255, 0.9); }
 .download-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%; 
-  padding: 10px 12px; 
-  border-radius: var(--radius-pill);
-  background: var(--primary); 
+  background: linear-gradient(135deg, #ff2a8d 0%, #99004d 100%);
   color: #fff;
-  font-size: 13px; 
-  font-weight: 400; 
-  border: none; 
-  cursor: pointer;
-  transition: background 0.2s, transform 0.15s;
+  border: 1px solid rgba(255, 255, 255, 0.35);
 }
-
-.download-btn:active { 
-  background: var(--primary-dark); 
-  transform: scale(0.97); 
-}
-
 .download-btn.disabled {
-  background: rgba(120, 2, 105, 0.2);
-  color: rgba(120, 2, 105, 0.6);
-  cursor: not-allowed; 
-  transform: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 /* ── Footer ──────────────────────────────── */
-.wedding-footer { margin-top: 44px; text-align: center; padding-bottom: 12px; }
-.wedding-footer p { font-size: 13px; color: var(--text-body); }
+.wedding-footer p { color: rgba(255, 255, 255, 0.75); }
 .footer-names {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 26px !important;
-  font-weight: 700;
-  color: var(--primary) !important;
-  margin-top: 6px;
+  color: #fff6d6 !important;
+  text-shadow: 0 0 15px rgba(255, 42, 141, 0.7);
 }
 
-/* ════════════════════════════════════════════
-   LUXURY SCROLL & GLOW ANIMATIONS (DETAILS)
-════════════════════════════════════════════ */
-
-/* 1. Scroll Reveal Floating Effect */
+/* ── Scroll & Sparkle Glow ───────────────── */
 .reveal-on-scroll {
   opacity: 0;
   transform: translateY(28px);
   transition: opacity 0.75s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.75s cubic-bezier(0.2, 0.8, 0.2, 1);
-  will-change: opacity, transform;
 }
-
 .reveal-on-scroll.is-visible {
   opacity: 1;
   transform: translateY(0);
 }
-
-/* 2. Sparkle Star Gentle Glow */
 .dh-sparkle-star, .sdt-sparkle {
   display: inline-block;
   animation: sparkleGlow 2.5s infinite ease-in-out;
 }
-
 @keyframes sparkleGlow {
-  0%, 100% {
-    transform: scale(1) rotate(0deg);
-    opacity: 0.75;
-    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.4));
-  }
-  50% {
-    transform: scale(1.3) rotate(15deg);
-    opacity: 1;
-    filter: drop-shadow(0 0 8px #ffb3f3);
-  }
-}
-
-/* 3. Button Shimmer Pass (RSVP & Map Buttons) */
-.rsvp-submit-btn, .directions-btn-full {
-  position: relative;
-  overflow: hidden;
-}
-
-.rsvp-submit-btn::after, .directions-btn-full::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -60%;
-  width: 40%;
-  height: 200%;
-  background: linear-gradient(
-    60deg,
-    rgba(255, 255, 255, 0) 20%,
-    rgba(255, 255, 255, 0.35) 50%,
-    rgba(255, 255, 255, 0) 80%
-  );
-  transform: rotate(25deg);
-  animation: buttonShimmer 4s infinite ease-in-out;
-}
-
-@keyframes buttonShimmer {
-  0% { left: -60%; }
-  35% { left: 140%; }
-  100% { left: 140%; }
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 2px #fff); }
+  50% { transform: scale(1.3); filter: drop-shadow(0 0 8px #ff2a8d); }
 }
 
 /* ════════════════════════════════════════════
-   RESPONSIVE — COMPACT HEIGHTS (≤820px)
-════════════════════════════════════════════ */
-@media (max-height: 820px) {
-  .splash-groom, .splash-bride { font-size: clamp(30px, 8.5vw, 36px) !important; }
-  .splash-weds  { font-size: 22px !important; }
-
-  .count-box       { width: 54px; height: 70px; }
-  .count-box span  { font-size: 24px; }
-  .count-label     { font-size: 12px; }
-  .count-sep       { padding-bottom: 28px; }
-
-  .swipe-wrap {
-    bottom: calc(max(env(safe-area-inset-bottom, 0px), 20px) + 16px);
-  }
-  .event-meta {
-    top: auto;
-    bottom: calc(max(env(safe-area-inset-bottom, 0px), 20px) + 96px);
-  }
-  .countdown {
-    top: auto;
-    bottom: calc(max(env(safe-area-inset-bottom, 0px), 20px) + 148px);
-  }
-
-  .swipe-track  { height: 68px; }
-  .swipe-thumb  { width: 54px; height: 54px; }
-  .swipe-label  { padding-left: 70px; font-size: 13px; }
-  .swipe-track.done .swipe-label { padding-left: 0; }
-}
-
-/* ════════════════════════════════════════════
-   RESPONSIVE — TINY SCREENS (≤700px, e.g. SE)
-════════════════════════════════════════════ */
-@media (max-height: 700px) {
-  .splash-invite {
-    top: calc(max(env(safe-area-inset-top, 0px), 44px) + 210px);
-    font-size: 10px;
-  }
-  .splash-groom {
-    top: calc(max(env(safe-area-inset-top, 0px), 44px) + 236px);
-    font-size: clamp(24px, 7.5vw, 28px) !important;
-  }
-  .splash-weds-wrap {
-    top: calc(max(env(safe-area-inset-top, 0px), 44px) + 284px);
-    width: 100px; height: 48px;
-  }
-  .splash-bride {
-    top: calc(max(env(safe-area-inset-top, 0px), 44px) + 330px);
-    font-size: clamp(24px, 7.5vw, 28px) !important;
-  }
-  .countdown {
-    bottom: calc(max(env(safe-area-inset-bottom, 0px), 16px) + 152px);
-  }
-}
-
-/* ════════════════════════════════════════════
-   DESKTOP — CENTERED PHONE FRAME
+   RESPONSIVE
 ════════════════════════════════════════════ */
 @media (min-width: 620px) {
-  html, body { background: #1a1a1a; }
+  html, body { background: #14000a; }
   .page {
     left: 50% !important; right: auto !important;
     width: 393px !important;
-    box-shadow: 0 0 80px rgba(0,0,0,0.6);
+    box-shadow: 0 0 80px rgba(255, 42, 141, 0.3);
     border-radius: 44px;
     overflow: hidden;
     transform: translateX(-50%) !important;
