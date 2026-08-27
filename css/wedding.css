@@ -13,7 +13,7 @@
   --text-dark:    #1f1f1f;
   --text-body:    #5a6570;
   --card-bg:      #ffffff;
-  --border:       rgba(230, 185, 218, 0.6);
+  --border:       rgba(255, 255, 255, 0.85);
 
   /* Royal Font Families */
   --font-serif:    'Playfair Display', Georgia, serif;
@@ -71,7 +71,7 @@ img { display: block; }
 ════════════════════════════════════════════ */
 #splash { display: block; overflow: hidden; }
 
-/* ── Background ──────────────────────────── */
+/* ── Background ──────────────────── */
 .splash-bg {
   position: absolute;
   inset: 0;
@@ -473,7 +473,7 @@ img { display: block; }
 }
 
 /* ════════════════════════════════════════════
-   DETAILS PAGE — LUXURY WARM ROSE THEME
+   DETAILS PAGE — LUXURY FROSTED GLASS THEME
 ════════════════════════════════════════════ */
 
 /* ── Hero header ─────────────────────────── */
@@ -610,9 +610,9 @@ img { display: block; }
   flex-shrink: 0;
 }
 
-/* ── Luxury Rose-Champagne Sheet Background ── */
+/* ── Luxury Frosted Rose Sheet Background ── */
 .details-sheet {
-  background: linear-gradient(180deg, #fdf7fa 0%, #fbedf6 35%, #fae4f4 70%, #f6d8ee 100%) !important;
+  background: linear-gradient(180deg, #fdf6fa 0%, #fbedf6 35%, #fae2f3 70%, #f5d3ec 100%) !important;
   border-radius: 28px 28px 0 0;
   margin-top: -30px;
   padding: 16px 18px calc(env(safe-area-inset-bottom, 24px) + 48px);
@@ -620,7 +620,7 @@ img { display: block; }
   box-shadow: 0 -12px 35px rgba(120, 2, 105, 0.15);
 }
 
-/* ── Save the Date card (Luxury Glass Style) ── */
+/* ── Save the Date card (Ultra Frosted Glass) ── */
 .save-date-card {
   display: flex;
   flex-direction: column;
@@ -629,12 +629,14 @@ img { display: block; }
   gap: 6px;
   padding: 24px 20px 22px;
   margin: 10px 0 20px;
-  background: rgba(255, 255, 255, 0.9) !important;
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
-  border: 1.5px solid rgba(230, 185, 218, 0.6) !important;
-  border-radius: 20px !important;
-  box-shadow: 0 12px 30px rgba(120, 2, 105, 0.08), 0 2px 6px rgba(0, 0, 0, 0.02) !important;
+  background: rgba(255, 255, 255, 0.65) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.9) !important;
+  border-radius: 22px !important;
+  box-shadow: 
+    0 10px 32px 0 rgba(120, 2, 105, 0.08),
+    inset 0 1px 2px 0 rgba(255, 255, 255, 0.95) !important;
   position: relative;
   z-index: 5;
 }
@@ -693,27 +695,54 @@ img { display: block; }
   gap: 8px;
 }
 
-/* ── Base info card (Glassmorphism & Soft Border) ── */
+/* ── Base info card (Ultra Frosted Glass) ── */
 .info-card {
-  background: rgba(255, 255, 255, 0.9) !important;
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
-  border: 1.5px solid rgba(230, 185, 218, 0.55) !important;
-  border-radius: 18px !important;
+  background: rgba(255, 255, 255, 0.65) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.85) !important;
+  border-radius: 20px !important;
   padding: 20px;
-  box-shadow: 0 10px 25px rgba(120, 2, 105, 0.06), 0 2px 6px rgba(0,0,0,0.02) !important;
+  box-shadow: 
+    0 10px 30px 0 rgba(120, 2, 105, 0.07),
+    inset 0 1px 2px 0 rgba(255, 255, 255, 0.95) !important;
 }
 
-/* ── RSVP Specific Card Style ────────────── */
+/* ── RSVP Frosted Glass Card & Form ───────── */
 .rsvp-card {
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.96) 0%, rgba(253, 243, 250, 0.9) 100%) !important;
-  border: 1.5px solid rgba(224, 168, 210, 0.65) !important;
-  box-shadow: 0 14px 32px rgba(120, 2, 105, 0.09) !important;
+  background: linear-gradient(
+    135deg, 
+    rgba(255, 255, 255, 0.75) 0%, 
+    rgba(255, 240, 250, 0.55) 100%
+  ) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.95) !important;
+  box-shadow: 
+    0 12px 35px 0 rgba(120, 2, 105, 0.1),
+    inset 0 1px 2px 0 rgba(255, 255, 255, 0.95) !important;
 }
 .rsvp-input, .rsvp-select, .rsvp-textarea {
-  background: rgba(255, 255, 255, 0.95) !important;
-  border: 1.5px solid rgba(220, 180, 210, 0.6) !important;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.03);
+  background: rgba(255, 255, 255, 0.7) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.85) !important;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02), 0 2px 6px rgba(120, 2, 105, 0.03) !important;
+}
+.rsvp-input:focus, .rsvp-select:focus, .rsvp-textarea:focus {
+  background: rgba(255, 255, 255, 0.92) !important;
+  border-color: #780269 !important;
+}
+.rsvp-radio-btn {
+  background: rgba(255, 255, 255, 0.6) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.8) !important;
+}
+.rsvp-radio-btn.active {
+  background: var(--primary) !important;
+  border-color: var(--primary) !important;
+  color: #fff !important;
 }
 
 /* ── Venue card ──────────────────────────── */
@@ -743,7 +772,7 @@ img { display: block; }
 }
 .venue-sep {
   height: 1px;
-  background: #f0e6ef;
+  background: rgba(120, 2, 105, 0.1);
   margin: 14px 0;
 }
 .venue-time {
@@ -791,7 +820,7 @@ img { display: block; }
 }
 .phone-btn:active { transform: scale(0.93); }
 .phone-btn.primary { background: var(--primary); color: #fff; }
-.phone-btn.outline { border: 1px solid var(--primary); color: var(--primary); }
+.phone-btn.outline { border: 1.5px solid var(--primary); color: var(--primary); background: rgba(255,255,255,0.5); }
 
 .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .contact-center {
@@ -805,11 +834,13 @@ img { display: block; }
 .transport-accordion { display: flex; flex-direction: column; gap: 10px; }
 
 .accordion-item {
-  background: rgba(255, 255, 255, 0.9);
-  border: 1.5px solid rgba(230, 185, 218, 0.55);
+  background: rgba(255, 255, 255, 0.65) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.85) !important;
   border-radius: 14px;
   overflow: hidden;
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.9);
 }
 .accordion-header {
   display: flex;
@@ -979,7 +1010,7 @@ img { display: block; }
   width: 100%; 
   height: 130px;
   border-radius: var(--radius-sm);
-  border: 1px solid var(--border);
+  border: 1.5px solid rgba(255, 255, 255, 0.8);
   overflow: hidden;
 }
 
