@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&family=Poppins:wght@300;400;500;600&family=Sora:wght@600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/wedding.css?v=11" />
+  <link rel="stylesheet" href="css/wedding.css?v=12" />
 </head>
 <body>
 
@@ -380,13 +380,13 @@
   </audio>
 
   <!-- ════════════════════════════════════════
-       ROBUST AUDIO UNLOCK & FULL SWIPE JS
+       STRICT FULL-SWIPE ONLY & ACCURATE COUNTDOWN
   ════════════════════════════════════════ -->
   <script>
     (function() {
       var audio = document.getElementById('bgMusic');
       var pills = [document.getElementById('musicPill'), document.getElementById('musicPillDetails')];
-      var isAudioUnlocked = false;
+      var hasRevealed = false;
 
       function updateMusicUI(isPlaying) {
         pills.forEach(function(p) {
@@ -405,15 +405,6 @@
         });
       }
 
-      // Mobile Browser Autoplay Unblocker
-      function unlockAudio() {
-        if (!audio || isAudioUnlocked) return;
-        audio.play().then(function() {
-          isAudioUnlocked = true;
-          updateMusicUI(true);
-        }).catch(function() {});
-      }
-
       function toggleMusic(e) {
         if (e) {
           e.preventDefault();
@@ -422,7 +413,6 @@
         if (!audio) return;
         if (audio.paused) {
           audio.play().then(function() {
-            isAudioUnlocked = true;
             updateMusicUI(true);
           }).catch(function() {});
         } else {
@@ -434,11 +424,10 @@
       pills.forEach(function(p) { 
         if (p) {
           p.addEventListener('click', toggleMusic);
-          p.addEventListener('touchend', toggleMusic);
         }
       });
 
-      // 2. Countdown Timer (Target: 15 Nov 2026, 17:00 IST)
+      // Countdown Timer (Target: 15 Nov 2026, 17:00 IST)
       var targetDate = new Date('2026-11-15T17:00:00+05:30').getTime();
       function updateCountdown() {
         var now = new Date().getTime();
@@ -466,90 +455,120 @@
       setInterval(updateCountdown, 1000);
       updateCountdown();
 
-      // 3. Strict Full-Swipe Logic
+      // Strict Full-Swipe Logic
       var track = document.getElementById('swipeTrack');
       var thumb = document.getElementById('swipeThumb');
       var fill = document.getElementById('swipeFill');
       var details = document.getElementById('details');
 
-      function completeSwipe() {
-        if (!details) return;
+      function triggerFinalReveal() {
+        if (hasRevealed || !details) return;
+        hasRevealed = true;
         details.classList.add('revealed');
         if (track) track.classList.add('done');
+        
         if (audio) {
           audio.play().then(function() {
-            isAudioUnlocked = true;
             updateMusicUI(true);
           }).catch(function() {});
         }
       }
 
       if (thumb && track) {
-        var startX = 0, isDragging = false;
+        var startX = 0;
+        var currentX = 0;
+        var isDragging = false;
 
-        // Unlock audio on very first touch/click anywhere or on thumb
+        // Touch Events
         thumb.addEventListener('touchstart', function(e) {
+          if (hasRevealed) return;
           isDragging = true;
           startX = e.touches[0].clientX;
-          unlockAudio();
+          currentX = 0;
         }, { passive: true });
 
         window.addEventListener('touchmove', function(e) {
-          if (!isDragging) return;
-          var currentX = e.touches[0].clientX - startX;
-          var maxDrag = track.clientWidth - thumb.clientWidth - 12;
+          if (!isDragging || hasRevealed) return;
+          var touchX = e.touches[0].clientX;
+          var moveDist = touchX - startX;
+          var maxDrag = track.clientWidth - thumb.clientWidth - 14;
 
-          if (currentX >= 0 && currentX <= maxDrag) {
+          if (moveDist >= 0 && moveDist <= maxDrag) {
+            currentX = moveDist;
             thumb.style.transform = 'translate(' + currentX + 'px, -50%)';
             fill.style.width = (currentX + 28) + 'px';
-          }
-
-          if (currentX >= maxDrag * 0.90) {
-            isDragging = false;
+          } else if (moveDist > maxDrag) {
+            currentX = maxDrag;
             thumb.style.transform = 'translate(' + maxDrag + 'px, -50%)';
             fill.style.width = '100%';
-            completeSwipe();
           }
         }, { passive: true });
 
         window.addEventListener('touchend', function() {
-          if (!isDragging) return;
+          if (!isDragging || hasRevealed) return;
           isDragging = false;
-          thumb.style.transform = 'translate(0px, -50%)';
-          fill.style.width = '0px';
+          var maxDrag = track.clientWidth - thumb.clientWidth - 14;
+
+          if (currentX >= maxDrag * 0.92) {
+            thumb.style.transform = 'translate(' + maxDrag + 'px, -50%)';
+            fill.style.width = '100%';
+            triggerFinalReveal();
+          } else {
+            thumb.style.transition = 'transform 0.25s ease';
+            fill.style.transition = 'width 0.25s ease';
+            thumb.style.transform = 'translate(0px, -50%)';
+            fill.style.width = '0px';
+            setTimeout(function() {
+              thumb.style.transition = '';
+              fill.style.transition = '';
+            }, 260);
+          }
         });
 
         // Mouse Events
         thumb.addEventListener('mousedown', function(e) {
+          if (hasRevealed) return;
           isDragging = true;
           startX = e.clientX;
-          unlockAudio();
+          currentX = 0;
           e.preventDefault();
         });
 
         window.addEventListener('mousemove', function(e) {
-          if (!isDragging) return;
-          var currentX = e.clientX - startX;
-          var maxDrag = track.clientWidth - thumb.clientWidth - 12;
+          if (!isDragging || hasRevealed) return;
+          var moveDist = e.clientX - startX;
+          var maxDrag = track.clientWidth - thumb.clientWidth - 14;
 
-          if (currentX >= 0 && currentX <= maxDrag) {
+          if (moveDist >= 0 && moveDist <= maxDrag) {
+            currentX = moveDist;
             thumb.style.transform = 'translate(' + currentX + 'px, -50%)';
             fill.style.width = (currentX + 28) + 'px';
-          }
-
-          if (currentX >= maxDrag * 0.90) {
-            isDragging = false;
+          } else if (moveDist > maxDrag) {
+            currentX = maxDrag;
             thumb.style.transform = 'translate(' + maxDrag + 'px, -50%)';
             fill.style.width = '100%';
-            completeSwipe();
           }
         });
 
         window.addEventListener('mouseup', function() {
-          if (!isDragging) return;
+          if (!isDragging || hasRevealed) return;
           isDragging = false;
-          thumb.style.transform = 'translate(0px, -50%)';
-          fill.style.width = '0px';
+          var maxDrag = track.clientWidth - thumb.clientWidth - 14;
+
+          if (currentX >= maxDrag * 0.92) {
+            thumb.style.transform = 'translate(' + maxDrag + 'px, -50%)';
+            fill.style.width = '100%';
+            triggerFinalReveal();
+          } else {
+            thumb.style.transition = 'transform 0.25s ease';
+            fill.style.transition = 'width 0.25s ease';
+            thumb.style.transform = 'translate(0px, -50%)';
+            fill.style.width = '0px';
+            setTimeout(function() {
+              thumb.style.transition = '';
+              fill.style.transition = '';
+            }, 260);
+          }
         });
       }
     })();
