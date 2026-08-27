@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&family=Poppins:wght@300;400;500;600&family=Sora:wght@600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/wedding.css?v=8" />
+  <link rel="stylesheet" href="css/wedding.css?v=10" />
 </head>
 <body>
 
@@ -383,27 +383,16 @@
        ACCURATE COUNTDOWN & STRICT SWIPE JS
   ════════════════════════════════════════ -->
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    (function() {
       // 1. Music Logic
-      const audio = document.getElementById('bgMusic');
-      const pills = [document.getElementById('musicPill'), document.getElementById('musicPillDetails')];
-
-      function toggleMusic(e) {
-        if (e) e.stopPropagation();
-        if (!audio) return;
-        if (audio.paused) {
-          audio.play().then(() => updateMusicUI(true)).catch(() => {});
-        } else {
-          audio.pause();
-          updateMusicUI(false);
-        }
-      }
+      var audio = document.getElementById('bgMusic');
+      var pills = [document.getElementById('musicPill'), document.getElementById('musicPillDetails')];
 
       function updateMusicUI(isPlaying) {
-        pills.forEach(p => {
+        pills.forEach(function(p) {
           if (!p) return;
-          const playI = p.querySelector('.icon-play');
-          const pauseI = p.querySelector('.icon-pause');
+          var playI = p.querySelector('.icon-play');
+          var pauseI = p.querySelector('.icon-pause');
           if (isPlaying) {
             p.classList.add('playing');
             if (playI) playI.style.display = 'none';
@@ -416,13 +405,32 @@
         });
       }
 
-      pills.forEach(p => { if (p) p.addEventListener('click', toggleMusic); });
+      function toggleMusic(e) {
+        if (e) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+        if (!audio) return;
+        if (audio.paused) {
+          audio.play().then(function() { updateMusicUI(true); }).catch(function() {});
+        } else {
+          audio.pause();
+          updateMusicUI(false);
+        }
+      }
+
+      pills.forEach(function(p) { 
+        if (p) {
+          p.addEventListener('click', toggleMusic);
+          p.addEventListener('touchend', toggleMusic);
+        }
+      });
 
       // 2. Countdown Timer (Target: 15 Nov 2026, 17:00 IST)
-      const targetDate = new Date(2026, 10, 15, 17, 0, 0).getTime();
+      var targetDate = new Date('2026-11-15T17:00:00+05:30').getTime();
       function updateCountdown() {
-        const now = new Date().getTime();
-        const diff = targetDate - now;
+        var now = new Date().getTime();
+        var diff = targetDate - now;
 
         if (diff <= 0) {
           document.getElementById('cd-days').textContent = '00';
@@ -432,12 +440,12 @@
           return;
         }
 
-        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const s = Math.floor((diff % (1000 * 60)) / 1000);
+        var d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        var h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        var s = Math.floor((diff % (1000 * 60)) / 1000);
 
-        const pad = (n) => String(n).padStart(2, '0');
+        function pad(n) { return String(n).padStart(2, '0'); }
         document.getElementById('cd-days').textContent = pad(d);
         document.getElementById('cd-hours').textContent = pad(h);
         document.getElementById('cd-mins').textContent = pad(m);
@@ -446,90 +454,87 @@
       setInterval(updateCountdown, 1000);
       updateCountdown();
 
-      // 3. Strict Full-Swipe Logic (Only reveals upon full drag to the right)
-      const track = document.getElementById('swipeTrack');
-      const thumb = document.getElementById('swipeThumb');
-      const fill = document.getElementById('swipeFill');
-      const details = document.getElementById('details');
+      // 3. Strict Full-Swipe Logic (Reveals ONLY on drag)
+      var track = document.getElementById('swipeTrack');
+      var thumb = document.getElementById('swipeThumb');
+      var fill = document.getElementById('swipeFill');
+      var details = document.getElementById('details');
 
       function completeSwipe() {
         if (!details) return;
         details.classList.add('revealed');
         if (track) track.classList.add('done');
         if (audio && audio.paused) {
-          audio.play().then(() => updateMusicUI(true)).catch(() => {});
+          audio.play().then(function() { updateMusicUI(true); }).catch(function() {});
         }
       }
 
       if (thumb && track) {
-        let startX = 0, isDragging = false;
+        var startX = 0, isDragging = false;
 
-        // Mobile Touch Events
-        thumb.addEventListener('touchstart', (e) => {
+        thumb.addEventListener('touchstart', function(e) {
           isDragging = true;
           startX = e.touches[0].clientX;
         }, { passive: true });
 
-        window.addEventListener('touchmove', (e) => {
+        window.addEventListener('touchmove', function(e) {
           if (!isDragging) return;
-          const currentX = e.touches[0].clientX - startX;
-          const maxDrag = track.clientWidth - thumb.clientWidth - 12;
+          var currentX = e.touches[0].clientX - startX;
+          var maxDrag = track.clientWidth - thumb.clientWidth - 12;
 
           if (currentX >= 0 && currentX <= maxDrag) {
-            thumb.style.transform = `translate(${currentX}px, -50%)`;
-            fill.style.width = `${currentX + 28}px`;
+            thumb.style.transform = 'translate(' + currentX + 'px, -50%)';
+            fill.style.width = (currentX + 28) + 'px';
           }
 
-          // Trigger ONLY when dragged at least 88% across
-          if (currentX >= maxDrag * 0.88) {
+          if (currentX >= maxDrag * 0.90) {
             isDragging = false;
-            thumb.style.transform = `translate(${maxDrag}px, -50%)`;
-            fill.style.width = `100%`;
+            thumb.style.transform = 'translate(' + maxDrag + 'px, -50%)';
+            fill.style.width = '100%';
             completeSwipe();
           }
         }, { passive: true });
 
-        window.addEventListener('touchend', () => {
+        window.addEventListener('touchend', function() {
           if (!isDragging) return;
           isDragging = false;
-          // Snap back if released before full swipe
           thumb.style.transform = 'translate(0px, -50%)';
           fill.style.width = '0px';
         });
 
-        // Desktop Mouse Drag Events
-        thumb.addEventListener('mousedown', (e) => {
+        // Mouse Events
+        thumb.addEventListener('mousedown', function(e) {
           isDragging = true;
           startX = e.clientX;
           e.preventDefault();
         });
 
-        window.addEventListener('mousemove', (e) => {
+        window.addEventListener('mousemove', function(e) {
           if (!isDragging) return;
-          const currentX = e.clientX - startX;
-          const maxDrag = track.clientWidth - thumb.clientWidth - 12;
+          var currentX = e.clientX - startX;
+          var maxDrag = track.clientWidth - thumb.clientWidth - 12;
 
           if (currentX >= 0 && currentX <= maxDrag) {
-            thumb.style.transform = `translate(${currentX}px, -50%)`;
-            fill.style.width = `${currentX + 28}px`;
+            thumb.style.transform = 'translate(' + currentX + 'px, -50%)';
+            fill.style.width = (currentX + 28) + 'px';
           }
 
-          if (currentX >= maxDrag * 0.88) {
+          if (currentX >= maxDrag * 0.90) {
             isDragging = false;
-            thumb.style.transform = `translate(${maxDrag}px, -50%)`;
-            fill.style.width = `100%`;
+            thumb.style.transform = 'translate(' + maxDrag + 'px, -50%)';
+            fill.style.width = '100%';
             completeSwipe();
           }
         });
 
-        window.addEventListener('mouseup', () => {
+        window.addEventListener('mouseup', function() {
           if (!isDragging) return;
           isDragging = false;
           thumb.style.transform = 'translate(0px, -50%)';
           fill.style.width = '0px';
         });
       }
-    });
+    })();
   </script>
 </body>
 </html>
