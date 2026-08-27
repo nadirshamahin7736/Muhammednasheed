@@ -1,49 +1,8 @@
 /* ══════════════════════════════════════════
    WEDDING WEBSITE — STYLES
-   Mohammed Abdul Razak & Henna Shireen
-   20 May 2026 · Malabar Avenue Auditorium
+   Nadirsha Mahin & Rismina Shafi
+   15 November 2026 · Q Vintage Resort, Kollam
 ══════════════════════════════════════════ */
-
-/* ── Astonia (place Astonia-JRD9m.otf in fonts/) ── */
-@font-face {
-  font-family: 'Astonia';
-  src: url('../fonts/Astonia-JRD9m.otf') format('opentype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* ── Apple Garamond (local font files) ───── */
-@font-face {
-  font-family: 'AppleGaramond';
-  src: url('../fonts/AppleGaramond-Light.ttf') format('truetype');
-  font-weight: 300; font-style: normal; font-display: swap;
-}
-@font-face {
-  font-family: 'AppleGaramond';
-  src: url('../fonts/AppleGaramond-LightItalic.ttf') format('truetype');
-  font-weight: 300; font-style: italic; font-display: swap;
-}
-@font-face {
-  font-family: 'AppleGaramond';
-  src: url('../fonts/AppleGaramond.ttf') format('truetype');
-  font-weight: 400; font-style: normal; font-display: swap;
-}
-@font-face {
-  font-family: 'AppleGaramond';
-  src: url('../fonts/AppleGaramond-Italic.ttf') format('truetype');
-  font-weight: 400; font-style: italic; font-display: swap;
-}
-@font-face {
-  font-family: 'AppleGaramond';
-  src: url('../fonts/AppleGaramond-Bold.ttf') format('truetype');
-  font-weight: 700; font-style: normal; font-display: swap;
-}
-@font-face {
-  font-family: 'AppleGaramond';
-  src: url('../fonts/AppleGaramond-BoldItalic.ttf') format('truetype');
-  font-weight: 700; font-style: italic; font-display: swap;
-}
 
 /* ── Design Tokens ───────────────────────── */
 :root {
@@ -56,10 +15,11 @@
   --card-bg:      #f6f6f6;
   --border:       #e3e3e3;
 
-  --font-serif:    'AppleGaramond', 'Apple Garamond', 'Cormorant Garamond', Garamond, Georgia, serif;
+  /* Royal Font Families */
+  --font-serif:    'Cinzel', 'Cormorant Garamond', Georgia, serif;
   --font-sans:     'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-astonia:  'Astonia', 'AppleGaramond', Georgia, serif;
-  --font-comforter: 'Comforter', cursive;
+  --font-script:   'Alex Brush', 'Comforter', cursive;
+  --font-comforter:'Comforter', cursive;
 
   --radius-sm:    6px;
   --radius-md:    12px;
@@ -115,7 +75,6 @@ img { display: block; }
   position: absolute;
   inset: 0;
   z-index: 0;
-  /* Gradient fallback if image fails to load */
   background: linear-gradient(160deg, #f5d5ef 0%, #e080cc 30%, #b840a8 60%, #780269 100%);
 }
 .splash-bg-img {
@@ -157,7 +116,7 @@ img { display: block; }
 }
 .music-pill:active { background: rgba(255,255,255,0.22); }
 .music-pill-label {
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
   font-size: 13px;
   font-weight: 400;
   letter-spacing: -0.01em;
@@ -185,9 +144,8 @@ img { display: block; }
 }
 
 /* ── Bismillah ───────────────────────────── */
-/*  Figma: y=80, w=104, h=27                   */
 .bismillah {
-  top: calc(max(env(safe-area-inset-top, 0px), 54px) + 41px); /* Figma y=80 + 15 breathing */
+  top: calc(max(env(safe-area-inset-top, 0px), 54px) + 41px);
   left: 50%;
   transform: translateX(-50%);
   width: 104px;
@@ -201,9 +159,8 @@ img { display: block; }
 }
 
 /* ── Malayalam title logo ────────────────── */
-/*  Figma: y=119, w=224, h=116                 */
 .splash-title-logo {
-  top: calc(max(env(safe-area-inset-top, 0px), 54px) + 80px); /* Figma y=119 + 15 */
+  top: calc(max(env(safe-area-inset-top, 0px), 54px) + 80px);
   left: 50%;
   transform: translateX(-50%);
   width: 224px;
@@ -216,9 +173,8 @@ img { display: block; }
 }
 
 /* ── Invite text ─────────────────────────── */
-/*  Figma: y=268, Poppins Regular 12px         */
 .splash-invite {
-  top: calc(max(env(safe-area-inset-top, 0px), 54px) + 229px); /* Figma y=268 + 15 */
+  top: calc(max(env(safe-area-inset-top, 0px), 54px) + 229px);
   left: 50%;
   transform: translateX(-50%);
   width: min(298px, calc(100% - 32px));
@@ -230,29 +186,27 @@ img { display: block; }
   line-height: 1.3;
 }
 
-/* ── Groom name ──────────────────────────── */
-/*  Figma: y=314, Astonia Regular ~40px        */
+/* ── Groom name (Royal Calligraphy) ─────── */
 .splash-groom {
-  top: calc(max(env(safe-area-inset-top, 0px), 54px) + 275px); /* Figma y=314 + 15 */
+  top: calc(max(env(safe-area-inset-top, 0px), 54px) + 270px);
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: var(--font-astonia);
-  font-size: clamp(34px, 10.1vw, 40px);
+  font-family: var(--font-script);
+  font-size: clamp(38px, 11vw, 46px);
   font-weight: 400;
   color: #fff;
   text-align: center;
-  line-height: 1.1;
+  line-height: 1.05;
   white-space: nowrap;
   z-index: 2;
 }
 
 /* ── "weds" badge ────────────────────────── */
-/*  Figma: y≈381, Comforter on pink bar        */
 .splash-weds-wrap {
-  top: calc(max(env(safe-area-inset-top, 0px), 54px) + 342px); /* Figma y=381 + 15 */
+  top: calc(max(env(safe-area-inset-top, 0px), 54px) + 342px);
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -281,26 +235,24 @@ img { display: block; }
   z-index: 1;
 }
 
-/* ── Bride name ──────────────────────────── */
-/*  Figma: y=437, Astonia Regular ~40px        */
+/* ── Bride name (Royal Calligraphy) ─────── */
 .splash-bride {
-  top: calc(max(env(safe-area-inset-top, 0px), 54px) + 398px); /* Figma y=437 + 15 */
+  top: calc(max(env(safe-area-inset-top, 0px), 54px) + 395px);
   left: 50%;
   transform: translateX(-50%);
-  font-family: var(--font-astonia);
-  font-size: clamp(34px, 10.1vw, 40px);
+  font-family: var(--font-script);
+  font-size: clamp(38px, 11vw, 46px);
   font-weight: 400;
   color: #fff;
   text-align: center;
-  line-height: 1.1;
+  line-height: 1.05;
   white-space: nowrap;
   z-index: 2;
 }
 
 /* ── Countdown ───────────────────────────── */
-/*  Figma: y=526                               */
 .countdown {
-  top: calc(max(env(safe-area-inset-top, 0px), 54px) + 487px); /* Figma y=526 + 15 */
+  top: calc(max(env(safe-area-inset-top, 0px), 54px) + 487px);
   left: 0; right: 0;
   display: flex;
   align-items: flex-end;
@@ -322,7 +274,6 @@ img { display: block; }
   letter-spacing: 0;
   line-height: 1;
 }
-/* Figma: box 59.61×82.4px, gradient pink, border white */
 .count-box {
   width: 60px;
   height: 82px;
@@ -344,7 +295,6 @@ img { display: block; }
   background: rgba(255,255,255,0.18);
   pointer-events: none;
 }
-/* Figma: Sora SemiBold 28px */
 .count-box span {
   font-family: 'Sora', var(--font-sans);
   font-size: 28px;
@@ -364,14 +314,12 @@ img { display: block; }
 }
 
 /* ── Event Date / Venue ──────────────────── */
-/*  Figma: y=646 (date), y=666 (venue)         */
 .event-meta {
-  top: calc(max(env(safe-area-inset-top, 0px), 54px) + 607px); /* Figma y=646 + 15 */
+  top: calc(max(env(safe-area-inset-top, 0px), 54px) + 607px);
   left: 0; right: 0;
   text-align: center;
   padding: 0 24px;
 }
-/* Figma: Poppins Regular 13.366px, color #780269 */
 .event-date,
 .event-venue {
   font-family: var(--font-sans);
@@ -383,9 +331,8 @@ img { display: block; }
 }
 
 /* ── Swipe CTA ───────────────────────────── */
-/*  Figma: centered, y=698, w=296, h=78        */
 .swipe-wrap {
-  bottom: calc(env(safe-area-inset-bottom, 34px) + 22px); /* Figma y=725 */
+  bottom: calc(env(safe-area-inset-bottom, 34px) + 22px);
   left: 50%;
   transform: translateX(-50%);
   width: min(296px, calc(100% - 48px));
@@ -450,7 +397,6 @@ img { display: block; }
   white-space: nowrap;
   transition: opacity 0.12s;
 }
-/* Done state */
 .swipe-track.done { background: rgba(120,2,105,0.2); }
 .swipe-track.done .swipe-thumb { background: var(--primary); }
 .swipe-track.done .swipe-thumb svg { stroke: #fff; }
@@ -484,8 +430,6 @@ img { display: block; }
 }
 
 /* ── Entrance animations ─────────────────── */
-/* Uses `translate` (individual property) so it composes with
-   `transform: translateX(-50%)` centering without conflict   */
 .splash-enter {
   opacity: 0;
   animation: splashFadeIn 0.75s ease var(--delay, 0s) forwards;
@@ -495,10 +439,8 @@ img { display: block; }
   to   { opacity: 1; translate: 0 0; }
 }
 
-/* mp-icon: hide/show via play/pause toggle */
 .mp-icon { display: block; }
 
-/* Splash exit */
 #splash.exit {
   pointer-events: none;
   animation: splashExit 0.9s var(--ease-ios) forwards;
@@ -507,7 +449,6 @@ img { display: block; }
   to { opacity: 0.2; transform: scale(0.95); }
 }
 
-/* Count flip */
 .count-box span.flip {
   animation: countFlip 0.3s ease;
 }
@@ -530,7 +471,6 @@ img { display: block; }
   height: 320px;
   overflow: hidden;
   flex-shrink: 0;
-  /* Gradient fallback if image fails to load */
   background: linear-gradient(160deg, #d490c4 0%, #a03898 50%, #780269 100%);
 }
 .details-hero-bg {
@@ -550,7 +490,6 @@ img { display: block; }
     rgba(180,80,160,0.08) 100%);
 }
 
-/* Music pill on details page */
 .music-pill-details {
   position: absolute;
   top: calc(max(env(safe-area-inset-top, 0px), 12px) + 8px);
@@ -558,19 +497,17 @@ img { display: block; }
   z-index: 10;
 }
 
-/* ── Details hero names — same style as splash ── */
-
-/* Groom: Mohammed + Abdul Razak, centered */
+/* Groom name (Royal Calligraphy) */
 .dh-groom {
   position: absolute;
   left: 50%;
-  top: 78px;
+  top: 75px;
   transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: var(--font-astonia);
-  font-size: clamp(26px, 8.6vw, 34px);
+  font-family: var(--font-script);
+  font-size: clamp(30px, 9.5vw, 38px);
   font-weight: 400;
   color: #fff;
   text-align: center;
@@ -611,14 +548,14 @@ img { display: block; }
   z-index: 1;
 }
 
-/* Bride: Henna Shireen, centered */
+/* Bride name (Royal Calligraphy) */
 .dh-bride {
   position: absolute;
   left: 50%;
-  top: 196px;
+  top: 194px;
   transform: translateX(-50%);
-  font-family: var(--font-astonia);
-  font-size: clamp(26px, 8.6vw, 34px);
+  font-family: var(--font-script);
+  font-size: clamp(30px, 9.5vw, 38px);
   font-weight: 400;
   color: #fff;
   text-align: center;
@@ -631,7 +568,7 @@ img { display: block; }
 .dh-divider-row {
   position: absolute;
   left: 50%;
-  top: 238px;
+  top: 242px;
   transform: translateX(-50%);
   width: min(220px, calc(100% - 100px));
   display: flex;
@@ -660,7 +597,7 @@ img { display: block; }
   min-height: calc(100dvh - 280px);
 }
 
-/* ── Save the Date card ──────────────────────── */
+/* ── Save the Date card ──────────────────── */
 .save-date-card {
   display: flex;
   flex-direction: column;
@@ -697,17 +634,17 @@ img { display: block; }
 .sdt-eyebrow {
   font-family: var(--font-serif);
   font-size: 13px;
-  font-style: italic;
-  font-weight: 400;
+  font-weight: 600;
   color: var(--text-body);
-  letter-spacing: 0.03em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 .sdt-date {
   font-family: var(--font-serif);
-  font-size: 21px;
-  font-weight: 400;
+  font-size: 20px;
+  font-weight: 600;
   color: var(--text-dark);
-  letter-spacing: -0.01em;
+  letter-spacing: 0.02em;
   line-height: 1.2;
   margin-top: 2px;
 }
@@ -716,31 +653,16 @@ img { display: block; }
   color: var(--text-body);
   line-height: 1.4;
 }
-.sdt-cal-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 11px 24px;
-  margin-top: 10px;
-  border-radius: var(--radius-pill);
-  background: var(--primary);
-  color: #fff;
-  font-family: var(--font-sans);
-  font-size: 13px;
-  font-weight: 400;
-  white-space: nowrap;
-  transition: background 0.2s, transform 0.15s;
-}
-.sdt-cal-btn:active { background: var(--primary-dark); transform: scale(0.97); }
 
 /* ── Section heading ─────────────────────── */
 .card-section { margin-top: 22px; }
 .section-heading {
   font-family: var(--font-serif);
-  font-size: 18px;
-  font-weight: 400;
+  font-size: 17px;
+  font-weight: 700;
   color: var(--text-dark);
-  letter-spacing: -0.02em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   margin-bottom: 10px;
 }
 
@@ -768,9 +690,9 @@ img { display: block; }
 .venue-text { display: flex; flex-direction: column; gap: 5px; flex: 1; }
 .venue-name {
   font-family: var(--font-serif);
-  font-size: 20px; font-weight: 400;
+  font-size: 19px; font-weight: 700;
   color: var(--text-dark);
-  letter-spacing: -0.025em;
+  letter-spacing: 0.02em;
   line-height: 1.2;
 }
 .venue-addr {
@@ -812,8 +734,8 @@ img { display: block; }
 .contact-meta { display: flex; flex-direction: column; gap: 4px; }
 .contact-name {
   font-family: var(--font-serif);
-  font-size: 22px; font-weight: 400;
-  color: var(--text-dark); letter-spacing: -0.025em; line-height: 1.1;
+  font-size: 18px; font-weight: 700;
+  color: var(--text-dark); letter-spacing: 0.02em; line-height: 1.2;
 }
 .contact-role { font-size: 12px; color: var(--text-body); }
 .contact-phone { font-size: 12px; color: var(--primary); font-weight: 400; }
@@ -831,7 +753,7 @@ img { display: block; }
   display: flex; flex-direction: column; align-items: center;
   text-align: center; gap: 4px; padding: 18px 12px 14px;
 }
-.contact-center .contact-name { font-size: 18px; }
+.contact-center .contact-name { font-size: 16px; font-weight: 700; }
 .contact-center .phone-btn { margin-top: 10px; }
 
 /* ── How to Reach — accordion ────────────── */
@@ -872,7 +794,6 @@ img { display: block; }
 }
 .accordion-item.open .accordion-chevron { transform: rotate(180deg); }
 
-/* CSS grid trick — smooth height animation without JS max-height hacks */
 .accordion-body {
   display: grid;
   grid-template-rows: 0fr;
@@ -911,7 +832,6 @@ img { display: block; }
 /* ── Photo Gallery / Selfie card ─────────── */
 .selfie-card { padding: 0; overflow: hidden; }
 
-/* Gradient header */
 .selfie-header {
   background: linear-gradient(135deg, #c040a0 0%, #780269 100%);
   padding: 22px 20px;
@@ -920,7 +840,6 @@ img { display: block; }
   gap: 14px;
 }
 
-/* Animated face-scan rings (shared with selfie) */
 .selfie-scan-wrap {
   position: relative;
   width: 54px; height: 54px;
@@ -941,7 +860,6 @@ img { display: block; }
 }
 .kwik-face-icon { color: #fff; position: relative; z-index: 1; }
 
-/* "Coming Soon" badge */
 .selfie-coming-tag {
   margin-left: auto;
   color: rgba(255,255,255,0.9);
@@ -953,21 +871,19 @@ img { display: block; }
   border: 1px solid rgba(255,255,255,0.22);
 }
 
-/* Body */
 .selfie-body { padding: 18px 20px 22px; }
 
 .selfie-headline {
   font-family: var(--font-serif);
-  font-size: 24px; font-weight: 400;
+  font-size: 20px; font-weight: 700;
   color: var(--text-dark);
-  line-height: 1.2; letter-spacing: -0.02em;
+  line-height: 1.25; letter-spacing: 0.02em;
 }
 .selfie-sub {
   font-size: 13px; color: var(--text-body);
   line-height: 1.6; margin-top: 9px;
 }
 
-/* CTA — disabled state */
 .selfie-cta {
   display: flex; align-items: center; justify-content: center; gap: 8px;
   width: 100%; margin-top: 18px;
@@ -995,15 +911,18 @@ img { display: block; }
   display: flex; flex-direction: column; gap: 10px;
   padding: 10px; align-items: center;
 }
-.download-preview {
+.download-thumb-wrap {
   width: 100%; height: 130px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
   overflow: hidden;
 }
 .download-thumb { width: 100%; height: 100%; object-fit: cover; }
-.download-label { font-size: 12px; color: var(--text-body); width: 100%; }
+.download-label { font-size: 12px; color: var(--text-body); width: 100%; text-align: center; }
 .download-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   width: 100%; padding: 10px 12px; border-radius: var(--radius-pill);
   background: var(--primary); color: #fff;
   font-size: 13px; font-weight: 400; border: none; cursor: pointer;
@@ -1019,43 +938,36 @@ img { display: block; }
 .wedding-footer { margin-top: 44px; text-align: center; padding-bottom: 12px; }
 .wedding-footer p { font-size: 13px; color: var(--text-body); }
 .footer-names {
-  font-family: var(--font-serif);
-  font-size: 20px !important; font-style: italic;
-  color: var(--primary) !important; margin-top: 6px;
+  font-family: var(--font-script);
+  font-size: 28px !important;
+  color: var(--primary) !important;
+  margin-top: 6px;
 }
 
 /* ════════════════════════════════════════════
    RESPONSIVE — COMPACT HEIGHTS (≤820px)
-   Fixes swipe-CTA / countdown overlap on
-   iPhone mini, 13 mini, small Androids
 ════════════════════════════════════════════ */
 @media (max-height: 820px) {
-  /* Scale names down so bride's bottom edge sits higher */
-  .splash-groom, .splash-bride { font-size: clamp(26px, 7.7vw, 30px); }
+  .splash-groom, .splash-bride { font-size: clamp(32px, 9vw, 36px); }
   .splash-weds  { font-size: clamp(28px, 8.9vw, 32px); }
 
-  /* Shrink countdown boxes */
   .count-box       { width: 54px; height: 70px; }
   .count-box span  { font-size: 24px; }
   .count-label     { font-size: 12px; }
   .count-sep       { padding-bottom: 28px; }
 
-  /* Bottom-anchor timer, date, and swipe — they never overlap regardless of height */
   .swipe-wrap {
     bottom: calc(max(env(safe-area-inset-bottom, 0px), 20px) + 16px);
   }
   .event-meta {
     top: auto;
     bottom: calc(max(env(safe-area-inset-bottom, 0px), 20px) + 96px);
-    /* = 16px gap + 68px swipe + 12px gap  = 96 */
   }
   .countdown {
     top: auto;
     bottom: calc(max(env(safe-area-inset-bottom, 0px), 20px) + 148px);
-    /* = 96px + 36px meta + 16px gap = 148 */
   }
 
-  /* Shrink swipe track */
   .swipe-track  { height: 68px; }
   .swipe-thumb  { width: 54px; height: 54px; }
   .swipe-label  { padding-left: 70px; font-size: 13px; }
@@ -1066,14 +978,13 @@ img { display: block; }
    RESPONSIVE — TINY SCREENS (≤700px, e.g. SE)
 ════════════════════════════════════════════ */
 @media (max-height: 700px) {
-  /* Compress the names block upward to give countdown room */
   .splash-invite {
     top: calc(max(env(safe-area-inset-top, 0px), 44px) + 210px);
     font-size: 10px;
   }
   .splash-groom {
     top: calc(max(env(safe-area-inset-top, 0px), 44px) + 238px);
-    font-size: clamp(22px, 6.5vw, 24px);
+    font-size: clamp(26px, 8vw, 30px);
   }
   .splash-weds-wrap {
     top: calc(max(env(safe-area-inset-top, 0px), 44px) + 284px);
@@ -1081,9 +992,8 @@ img { display: block; }
   }
   .splash-bride {
     top: calc(max(env(safe-area-inset-top, 0px), 44px) + 330px);
-    font-size: clamp(22px, 6.5vw, 24px);
+    font-size: clamp(26px, 8vw, 30px);
   }
-  /* Give countdown a touch more clearance on SE */
   .countdown {
     bottom: calc(max(env(safe-area-inset-bottom, 0px), 16px) + 152px);
   }
