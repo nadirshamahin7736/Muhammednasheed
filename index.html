@@ -45,39 +45,36 @@
       box-shadow: 0 4px 15px rgba(255, 42, 141, 0.2);
     }
 
-    /* ── Side Couple Illustrations (Left & Right) ── */
-    .side-groom-avatar {
+    /* ── Royal Falling Golden Petals for Second Page ── */
+    .royal-petals-container {
       position: absolute;
-      left: -5px;
-      bottom: 80px;
-      width: 95px;
-      height: 200px;
-      background: url('assets/details-hero-bg.jpg') no-repeat center/cover;
-      opacity: 0.9;
-      z-index: 1;
+      inset: 0;
       pointer-events: none;
-      mask-image: linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0));
-      -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0));
+      overflow: hidden;
+      z-index: 2;
     }
-    .side-bride-avatar {
+    .golden-petal {
       position: absolute;
-      right: -5px;
-      bottom: 80px;
-      width: 95px;
-      height: 200px;
-      background: url('assets/details-hero-bg.jpg') no-repeat center/cover;
-      opacity: 0.9;
-      z-index: 1;
-      pointer-events: none;
-      mask-image: linear-gradient(to left, rgba(0,0,0,1), rgba(0,0,0,0));
-      -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,1), rgba(0,0,0,0));
+      top: -30px;
+      width: 12px;
+      height: 16px;
+      background: radial-gradient(ellipse at center, #ffd700 0%, #ff8c00 70%, #d4af37 100%);
+      border-radius: 50% 0 50% 0;
+      opacity: 0.8;
+      animation: royalFall var(--dur) linear var(--delay) infinite;
+    }
+    @keyframes royalFall {
+      0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.9; }
+      90% { opacity: 0.7; }
+      100% { transform: translateY(105vh) translateX(60px) rotate(400deg); opacity: 0; }
     }
   </style>
 </head>
 <body>
 
   <!-- ═══════════════════════════════════════
-       PAGE 1 — SPLASH / HERO
+       PAGE 1 — SPLASH / HERO (Untouched)
   ═══════════════════════════════════════ -->
   <section id="splash" class="page">
 
@@ -85,10 +82,6 @@
       <img src="assets/splash-bg.jpg" alt="" aria-hidden="true" class="splash-bg-img" />
       <div class="splash-overlay"></div>
     </div>
-
-    <!-- Side Couple Avatars / Illustrations -->
-    <div class="side-groom-avatar"></div>
-    <div class="side-bride-avatar"></div>
 
     <!-- Music pill (top-right) -->
     <button class="music-pill" id="musicPill" aria-label="Play Nikkah Nasheed">
@@ -158,6 +151,12 @@
       </div>
     </div>
 
+    <!-- Date + venue -->
+    <div class="event-meta splash-enter">
+      <p class="event-date">Sunday, 15 November 2026</p>
+      <p class="event-venue">Q Vintage Resort, Ashtamudi lakeside, Asramam, Kollam</p>
+    </div>
+
     <!-- ── BOTTOM SWIPE BAR & SCRATCH OVERLAY ── -->
     <div class="swipe-wrap splash-enter">
       <div class="swipe-track" id="swipeTrack" role="button" aria-label="Swipe right to confirm attendance">
@@ -183,9 +182,19 @@
   </section>
 
   <!-- ═══════════════════════════════════════
-       PAGE 2 — DETAILS
+       PAGE 2 — DETAILS (With Golden Petals Effect)
   ═══════════════════════════════════════ -->
   <section id="details" class="page" aria-hidden="true">
+
+    <!-- Royal Falling Golden Petals Animation Elements -->
+    <div class="royal-petals-container" aria-hidden="true">
+      <span class="golden-petal" style="left: 8%; --delay: 0s; --dur: 6.5s;"></span>
+      <span class="golden-petal" style="left: 22%; --delay: 2s; --dur: 8s;"></span>
+      <span class="golden-petal" style="left: 40%; --delay: 1s; --dur: 7s;"></span>
+      <span class="golden-petal" style="left: 60%; --delay: 3.5s; --dur: 6s;"></span>
+      <span class="golden-petal" style="left: 78%; --delay: 0.8s; --dur: 7.5s;"></span>
+      <span class="golden-petal" style="left: 90%; --delay: 2.2s; --dur: 8.5s;"></span>
+    </div>
 
     <div class="details-hero">
       <img src="assets/details-hero-bg.jpg" alt="" aria-hidden="true" class="details-hero-bg" />
@@ -466,7 +475,7 @@
   </audio>
 
   <!-- ════════════════════════════════════════
-       SCRIPTS: FIXED COUNTDOWN & SWIPE/SCRATCH
+       SCRIPTS
   ════════════════════════════════════════ -->
   <script>
     (function() {
@@ -525,7 +534,7 @@
         }
       });
 
-      // ── FIXED COUNTDOWN TIMER ──
+      // Countdown Timer
       var targetDate = new Date('2026-11-15T17:00:00+05:30').getTime();
       function updateCountdown() {
         var now = new Date().getTime();
@@ -553,7 +562,7 @@
       setInterval(updateCountdown, 1000);
       updateCountdown();
 
-      // ── SCRATCH CARD SETUP ──
+      // Scratch Card Setup
       var canvas = document.getElementById('scratchCanvas');
       var isScratchCleared = false;
 
@@ -627,7 +636,7 @@
       window.addEventListener('load', initScratchCard);
       setTimeout(initScratchCard, 300);
 
-      // ── SWIPE LOGIC ──
+      // Swipe Logic
       var track = document.getElementById('swipeTrack');
       var thumb = document.getElementById('swipeThumb');
       var fill = document.getElementById('swipeFill');
