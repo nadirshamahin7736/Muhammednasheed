@@ -6,6 +6,7 @@
   <meta name="theme-color" content="#240112" />
   <title>Nadirsha Mahin & Rismina Shafi | Wedding Invitation</title>
 
+  <!-- Open Graph / WhatsApp Preview Meta Tags -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://nadirshamahin7736.github.io/Muhammednasheed/">
   <meta property="og:title" content="Wedding Invitation — Nadirsha & Rismina">
@@ -14,16 +15,18 @@
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="1600">
 
+  <!-- Twitter Card -->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="https://nadirshamahin7736.github.io/Muhammednasheed/">
   <meta property="twitter:title" content="Wedding Invitation — Nadirsha & Rismina">
   <meta property="twitter:description" content="Join us to celebrate our wedding on Sunday, 15 Nov 2026 at Q Vintage Resort, Kollam.">
   <meta property="twitter:image" content="https://nadirshamahin7736.github.io/Muhammednasheed/assets/preview.jpg?v=2">
 
+  <!-- Luxury Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&family=Poppins:wght@300;400;500;600&family=Sora:wght@600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/wedding.css?v=250" />
+  <link rel="stylesheet" href="css/wedding.css?v=900" />
 
   <style>
     .rsvp-success-msg {
@@ -41,10 +44,41 @@
       border: 1px solid rgba(255, 255, 255, 0.4);
       box-shadow: 0 4px 15px rgba(255, 42, 141, 0.2);
     }
+    
+    /* Scratchable Save the Date Card Container */
+    .scratch-date-container {
+      position: relative;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      margin: 10px 0 20px;
+      box-shadow: 0 12px 30px rgba(120, 2, 105, 0.12);
+    }
+    #dateScratchCanvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: var(--radius-md);
+      z-index: 5;
+      touch-action: none;
+      cursor: pointer;
+    }
+
+    /* Enhanced Pulsing Animation for First Scratch Bar */
+    .swipe-wrap {
+      animation: superPulse 2s infinite ease-in-out !important;
+    }
+    @keyframes superPulse {
+      0%, 100% { transform: translateX(-50%) scale(1); filter: drop-shadow(0 4px 15px rgba(120, 2, 105, 0.4)); }
+      50% { transform: translateX(-50%) scale(1.04); filter: drop-shadow(0 8px 25px rgba(252, 114, 215, 0.8)); }
+    }
   </style>
 </head>
 <body>
 
+  <!-- ═══════════════════════════════════════
+       PAGE 1 — SPLASH / HERO (Clean Look)
+  ═══════════════════════════════════════ -->
   <section id="splash" class="page">
 
     <div class="splash-bg">
@@ -52,6 +86,7 @@
       <div class="splash-overlay"></div>
     </div>
 
+    <!-- Music pill (top-right) -->
     <button class="music-pill" id="musicPill" aria-label="Play Nikkah Nasheed">
       <span class="music-pill-label">Nikkah nasheed</span>
       <span class="music-pill-btn">
@@ -60,31 +95,38 @@
       </span>
     </button>
 
+    <!-- Bismillah calligraphy -->
     <div class="bismillah splash-enter">
       <img src="assets/bismillah.svg" alt="Bismillah ir-Rahman ir-Raheem" class="bismillah-img" />
     </div>
 
+    <!-- Malayalam title logo -->
     <div class="splash-title-logo splash-enter">
       <img src="assets/malayalam-logo.svg" alt="" class="splash-title-img" />
     </div>
 
+    <!-- Invite text -->
     <p class="splash-invite splash-enter">
       We cordially invite You to honor us with Your presence at the blessed occasion of our wedding
     </p>
 
+    <!-- Groom name -->
     <div class="splash-groom splash-enter">
       <span>Nadirsha</span>
       <span>Mahin</span>
     </div>
 
+    <!-- "weds" badge -->
     <div class="splash-weds-wrap splash-enter">
       <div class="splash-weds-bar"></div>
       <span class="splash-weds">weds</span>
     </div>
 
+    <!-- Bride name -->
     <p class="splash-bride splash-enter">Rismina Shafi</p>
 
-    <div class="countdown splash-enter" id="countdown">
+    <!-- Countdown timer (Clean Position) -->
+    <div class="countdown splash-enter" id="countdown" style="top: calc(max(env(safe-area-inset-top, 0px), 54px) + 510px);">
       <div class="count-unit">
         <span class="count-label">Days</span>
         <div class="count-box"><span id="cd-days">00</span></div>
@@ -112,11 +154,7 @@
       </div>
     </div>
 
-    <div class="event-meta splash-enter">
-      <p class="event-date">Sunday, 15 November 2026</p>
-      <p class="event-venue">Q Vintage Resort, Ashtamudi lakeside, Asramam, Kollam</p>
-    </div>
-
+    <!-- ── LARGER & ANIMATED SCRATCH-TO-ATTEND BAR ── -->
     <div class="swipe-wrap splash-enter">
       <div class="swipe-track" id="swipeTrack" role="button" aria-label="Swipe right to confirm attendance">
         <div class="swipe-thumb" id="swipeThumb">
@@ -128,6 +166,7 @@
       <canvas id="scratchCanvas"></canvas>
     </div>
 
+    <!-- Floating petals -->
     <div class="petals" aria-hidden="true">
       <span class="petal" style="--x:10%;--delay:0s;--dur:6s"></span>
       <span class="petal" style="--x:25%;--delay:1.5s;--dur:7s"></span>
@@ -138,12 +177,16 @@
 
   </section>
 
+  <!-- ═══════════════════════════════════════
+       PAGE 2 — DETAILS (With Scratchable Save the Date Card)
+  ═══════════════════════════════════════ -->
   <section id="details" class="page" aria-hidden="true">
 
     <div class="details-hero">
       <img src="assets/details-hero-bg.jpg" alt="" aria-hidden="true" class="details-hero-bg" />
       <div class="details-hero-overlay"></div>
 
+      <!-- Music pill -->
       <button class="music-pill music-pill-details" id="musicPillDetails" aria-label="Toggle music">
         <span class="music-pill-label">Nikkah nasheed</span>
         <span class="music-pill-btn">
@@ -173,20 +216,26 @@
 
     <div class="details-sheet">
 
-      <div class="save-date-card reveal-on-scroll">
-        <div class="sdt-ornament">
-          <div class="sdt-line"></div>
-          <span class="sdt-sparkle">✦</span>
-          <div class="sdt-line"></div>
+      <!-- Scratchable Save the Date Card -->
+      <div class="scratch-date-container reveal-on-scroll">
+        <div class="save-date-card" style="margin: 0; background: rgba(255, 255, 255, 0.95) !important;">
+          <div class="sdt-ornament">
+            <div class="sdt-line"></div>
+            <span class="sdt-sparkle">✦</span>
+            <div class="sdt-line"></div>
+          </div>
+          <p class="sdt-eyebrow">Save the Date</p>
+          <p class="sdt-date">Sunday, 15 November 2026</p>
+          <p class="sdt-venue-hint">Q Vintage Resort, Ashtamudi lakeside, Asramam, Kollam</p>
+          <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Nadirsha+%26+Rismina+Wedding&dates=20261115T113000Z/20261115T153000Z&details=Wedding+Ceremony+of+Nadirsha+%26+Rismina&location=Q+Vintage+Resort,+Ashtamudi+lakeside,+Asramam,+Kollam" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(135deg, #780269 0%, #5a0050 100%); color: #ffffff; padding: 12px 28px; border-radius: 9999px; text-decoration: none; font-weight: 600; margin-top: 16px; box-shadow: 0 4px 15px rgba(120,2,105,0.25);">
+            Add to Calendar
+          </a>
         </div>
-        <p class="sdt-eyebrow">Save the Date</p>
-        <p class="sdt-date">Sunday, 15 November 2026</p>
-        <p class="sdt-venue-hint">Q Vintage Resort, Ashtamudi lakeside, Asramam, Kollam</p>
-        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Nadirsha+%26+Rismina+Wedding&dates=20261115T113000Z/20261115T153000Z&details=Wedding+Ceremony+of+Nadirsha+%26+Rismina&location=Q+Vintage+Resort,+Ashtamudi+lakeside,+Asramam,+Kollam" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(135deg, #780269 0%, #5a0050 100%); color: #ffffff; padding: 12px 28px; border-radius: 9999px; text-decoration: none; font-weight: 600; margin-top: 16px; box-shadow: 0 4px 15px rgba(120,2,105,0.25);">
-          Add to Calendar
-        </a>
+        <!-- Canvas Layer on top of Save the Date Card -->
+        <canvas id="dateScratchCanvas"></canvas>
       </div>
 
+      <!-- ── RSVP ── -->
       <div class="card-section reveal-on-scroll">
         <h2 class="section-heading">RSVP</h2>
         <div class="info-card rsvp-card">
@@ -239,6 +288,7 @@
         </div>
       </div>
 
+      <!-- ── Venue ── -->
       <div class="card-section reveal-on-scroll">
         <h2 class="section-heading">Venue</h2>
         <div class="info-card venue-elegant">
@@ -261,6 +311,7 @@
         </div>
       </div>
 
+      <!-- ── For Enquiry ── -->
       <div class="card-section reveal-on-scroll">
         <h2 class="section-heading">For Enquiry</h2>
 
@@ -295,6 +346,7 @@
         </div>
       </div>
 
+      <!-- ── How to Reach ── -->
       <div class="card-section reveal-on-scroll">
         <h2 class="section-heading">How to Reach</h2>
         <div class="transport-accordion">
@@ -350,6 +402,7 @@
         </div>
       </div>
 
+      <!-- ── Photo Gallery ── -->
       <div class="card-section reveal-on-scroll">
         <h2 class="section-heading">Photo Gallery</h2>
         <div class="info-card selfie-card">
@@ -366,6 +419,7 @@
         </div>
       </div>
 
+      <!-- ── Downloads ── -->
       <div class="card-section reveal-on-scroll">
         <h2 class="section-heading">Downloads</h2>
         <div class="download-grid">
@@ -405,10 +459,14 @@
     </div>
   </section>
 
+  <!-- Background music -->
   <audio id="bgMusic" loop preload="auto" playsinline>
     <source src="audio/nikah-nasheed.mp3" type="audio/mpeg" />
   </audio>
 
+  <!-- ════════════════════════════════════════
+       SCRIPTS: DUAL SCRATCH LOGIC
+  ════════════════════════════════════════ -->
   <script>
     (function() {
       var audio = document.getElementById('bgMusic');
@@ -494,7 +552,7 @@
       setInterval(updateCountdown, 1000);
       updateCountdown();
 
-      // Scratch Card Setup with Dark Wine/Rose Gradient
+      // ── 1. Main Splash Scratch Card Setup ──
       var canvas = document.getElementById('scratchCanvas');
       var isScratchCleared = false;
 
@@ -506,7 +564,6 @@
         canvas.width = rect.width || 330;
         canvas.height = rect.height || 72;
 
-        // Dark, High-Contrast Rich Wine/Purple Gradient Overlay
         var grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
         grad.addColorStop(0, '#8e026f');
         grad.addColorStop(0.5, '#620150');
@@ -514,7 +571,6 @@
         ctx.fillStyle = grad;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        // Bold & Glowing White Text
         ctx.font = '600 15px Poppins, sans-serif';
         ctx.fillStyle = '#ffffff';
         ctx.textAlign = 'center';
@@ -567,10 +623,79 @@
         window.addEventListener('touchend', function() { isDrawing = false; });
       }
 
-      window.addEventListener('load', initScratchCard);
-      setTimeout(initScratchCard, 300);
+      // ── 2. Save the Date Scratch Card Setup (2nd Page) ──
+      var dateCanvas = document.getElementById('dateScratchCanvas');
+      var isDateScratchCleared = false;
 
-      // Swipe Logic
+      function initDateScratchCard() {
+        if (!dateCanvas) return;
+        var ctx = dateCanvas.getContext('2d');
+        var rect = dateCanvas.getBoundingClientRect();
+        
+        dateCanvas.width = rect.width || 350;
+        dateCanvas.height = rect.height || 180;
+
+        var grad = ctx.createLinearGradient(0, 0, dateCanvas.width, dateCanvas.height);
+        grad.addColorStop(0, '#780269');
+        grad.addColorStop(0.5, '#9c1c8a');
+        grad.addColorStop(1, '#5a0050');
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, dateCanvas.width, dateCanvas.height);
+
+        ctx.font = '600 16px Poppins, sans-serif';
+        ctx.fillStyle = '#ffffff';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+        ctx.shadowBlur = 5;
+        ctx.fillText('✨ Scratch to Reveal Date & Venue', dateCanvas.width / 2, dateCanvas.height / 2);
+
+        var isDrawingDate = false;
+        var dateScratchedPixels = 0;
+
+        function scratchDate(e) {
+          if (!isDrawingDate || isDateScratchCleared) return;
+          var clientX = e.touches ? e.touches[0].clientX : e.clientX;
+          var clientY = e.touches ? e.touches[0].clientY : e.clientY;
+          var cRect = dateCanvas.getBoundingClientRect();
+          var x = clientX - cRect.left;
+          var y = clientY - cRect.top;
+
+          ctx.globalCompositeOperation = 'destination-out';
+          ctx.beginPath();
+          ctx.arc(x, y, 28, 0, Math.PI * 2);
+          ctx.fill();
+
+          dateScratchedPixels++;
+          if (dateScratchedPixels > 20 && !isDateScratchCleared) {
+            isDateScratchCleared = true;
+            dateCanvas.style.transition = 'opacity 0.4s ease';
+            dateCanvas.style.opacity = '0';
+            setTimeout(function() {
+              dateCanvas.style.display = 'none';
+            }, 400);
+          }
+        }
+
+        dateCanvas.addEventListener('mousedown', function(e) { isDrawingDate = true; scratchDate(e); });
+        window.addEventListener('mousemove', scratchDate);
+        window.addEventListener('mouseup', function() { isDrawingDate = false; });
+
+        dateCanvas.addEventListener('touchstart', function(e) { isDrawingDate = true; scratchDate(e); }, { passive: true });
+        window.addEventListener('touchmove', scratchDate, { passive: true });
+        window.addEventListener('touchend', function() { isDrawingDate = false; });
+      }
+
+      window.addEventListener('load', function() {
+        initScratchCard();
+        initDateScratchCard();
+      });
+      setTimeout(function() {
+        initScratchCard();
+        initDateScratchCard();
+      }, 300);
+
+      // Swipe / Slide Logic
       var track = document.getElementById('swipeTrack');
       var thumb = document.getElementById('swipeThumb');
       var fill = document.getElementById('swipeFill');
