@@ -44,6 +44,34 @@
       border: 1px solid rgba(255, 255, 255, 0.4);
       box-shadow: 0 4px 15px rgba(255, 42, 141, 0.2);
     }
+
+    /* ── Side Couple Illustrations (Left & Right) ── */
+    .side-groom-avatar {
+      position: absolute;
+      left: -5px;
+      bottom: 80px;
+      width: 95px;
+      height: 200px;
+      background: url('assets/details-hero-bg.jpg') no-repeat center/cover;
+      opacity: 0.9;
+      z-index: 1;
+      pointer-events: none;
+      mask-image: linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0));
+      -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0));
+    }
+    .side-bride-avatar {
+      position: absolute;
+      right: -5px;
+      bottom: 80px;
+      width: 95px;
+      height: 200px;
+      background: url('assets/details-hero-bg.jpg') no-repeat center/cover;
+      opacity: 0.9;
+      z-index: 1;
+      pointer-events: none;
+      mask-image: linear-gradient(to left, rgba(0,0,0,1), rgba(0,0,0,0));
+      -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,1), rgba(0,0,0,0));
+    }
   </style>
 </head>
 <body>
@@ -57,6 +85,10 @@
       <img src="assets/splash-bg.jpg" alt="" aria-hidden="true" class="splash-bg-img" />
       <div class="splash-overlay"></div>
     </div>
+
+    <!-- Side Couple Avatars / Illustrations -->
+    <div class="side-groom-avatar"></div>
+    <div class="side-bride-avatar"></div>
 
     <!-- Music pill (top-right) -->
     <button class="music-pill" id="musicPill" aria-label="Play Nikkah Nasheed">
@@ -124,12 +156,6 @@
         <span class="count-label">Seconds</span>
         <div class="count-box"><span id="cd-secs">00</span></div>
       </div>
-    </div>
-
-    <!-- Date + venue -->
-    <div class="event-meta splash-enter">
-      <p class="event-date">Sunday, 15 November 2026</p>
-      <p class="event-venue">Q Vintage Resort, Ashtamudi lakeside, Asramam, Kollam</p>
     </div>
 
     <!-- ── BOTTOM SWIPE BAR & SCRATCH OVERLAY ── -->
