@@ -297,3 +297,463 @@
 
       <div class="card-section reveal-on-scroll">
         <h2 class="section-heading">How to Reach</h2>
+        <div class="transport-accordion">
+
+          <div class="accordion-item">
+            <button class="accordion-header" onclick="this.parentElement.classList.toggle('open')">
+              <span>
+                <span class="transport-icon">✈️</span>
+                <span class="transport-title">By Air</span>
+              </span>
+              <span class="accordion-chevron">▼</span>
+            </button>
+            <div class="accordion-body">
+              <ul class="transport-list">
+                <li>Nearest airport: <span class="t-highlight">Thiruvananthapuram International Airport (TRV)</span></li>
+                <li>Distance: <span class="t-highlight">67.6 km · ~2 hr drive</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-header" onclick="this.parentElement.classList.toggle('open')">
+              <span>
+                <span class="transport-icon">🚆</span>
+                <span class="transport-title">By Train</span>
+              </span>
+              <span class="accordion-chevron">▼</span>
+            </button>
+            <div class="accordion-body">
+              <ul class="transport-list">
+                <li>Nearest station: <span class="t-highlight">Kollam Railway Station</span></li>
+                <li>Distance: <span class="t-highlight">2.5 km · ~7 min drive</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-header" onclick="this.parentElement.classList.toggle('open')">
+              <span>
+                <span class="transport-icon">🚌</span>
+                <span class="transport-title">By Bus</span>
+              </span>
+              <span class="accordion-chevron">▼</span>
+            </button>
+            <div class="accordion-body">
+              <ul class="transport-list">
+                <li>Nearest bus stand: <span class="t-highlight">KSRTC Bus Station Kollam</span></li>
+                <li>Distance: <span class="t-highlight">1.8 km · ~4 min drive</span></li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="card-section reveal-on-scroll">
+        <h2 class="section-heading">Photo Gallery</h2>
+        <div class="info-card selfie-card">
+          <div class="selfie-header">
+            <div class="selfie-scan-wrap">📸</div>
+            <span class="selfie-coming-tag">Coming Soon</span>
+          </div>
+          <div class="selfie-body">
+            <h3 class="selfie-headline">Your face,<br>your memories</h3>
+            <p class="selfie-sub">Take a quick selfie after the wedding and our smart gallery will find every photo you appear in — delivered straight to your phone.</p>
+            <button class="selfie-cta" disabled>Get My Photos</button>
+            <p class="selfie-note">Link will be available a few days after the wedding</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-section reveal-on-scroll">
+        <h2 class="section-heading">Downloads</h2>
+        <div class="download-grid">
+          
+          <div class="info-card download-card">
+            <div class="download-thumb-wrap">
+              <img src="assets/preview.jpg" alt="Our Story Begins Preview" class="download-thumb" />
+            </div>
+            <p class="download-label">Our Story Begins</p>
+            <a href="assets/preview.jpg" download="Our-Story-Begins-Nadirsha-Rismina.jpg" class="download-btn">Download</a>
+          </div>
+
+          <div class="info-card download-card">
+            <div class="download-thumb-wrap placeholder-thumb">
+              <span style="font-size: 30px;">💌</span>
+            </div>
+            <p class="download-label">Wedding Card</p>
+            <button class="download-btn disabled" disabled>Coming soon...</button>
+          </div>
+
+          <div class="info-card download-card">
+            <div class="download-thumb-wrap placeholder-thumb">
+              <span style="font-size: 30px;">🎬</span>
+            </div>
+            <p class="download-label">Save Date Video</p>
+            <button class="download-btn disabled" disabled>Coming soon...</button>
+          </div>
+
+        </div>
+      </div>
+
+      <footer class="wedding-footer">
+        <p>With love & prayers</p>
+        <p class="footer-names">Nadirsha & Rismina</p>
+      </footer>
+
+    </div>
+  </section>
+
+  <audio id="bgMusic" loop preload="auto" playsinline>
+    <source src="audio/nikah-nasheed.mp3" type="audio/mpeg" />
+  </audio>
+
+  <script>
+    (function() {
+      var audio = document.getElementById('bgMusic');
+      var pills = [document.getElementById('musicPill'), document.getElementById('musicPillDetails')];
+      var hasRevealed = false;
+
+      function updateMusicUI(isPlaying) {
+        pills.forEach(function(p) {
+          if (!p) return;
+          var playI = p.querySelector('.icon-play');
+          var pauseI = p.querySelector('.icon-pause');
+          if (isPlaying) {
+            p.classList.add('playing');
+            if (playI) playI.style.display = 'none';
+            if (pauseI) pauseI.style.display = 'block';
+          } else {
+            p.classList.remove('playing');
+            if (playI) playI.style.display = 'block';
+            if (pauseI) pauseI.style.display = 'none';
+          }
+        });
+      }
+
+      function playFullMusic() {
+        if (!audio) return;
+        audio.volume = 1.0;
+        var p = audio.play();
+        if (p !== undefined) {
+          p.then(function() {
+            updateMusicUI(true);
+          }).catch(function() {
+            setTimeout(function() { audio.play(); updateMusicUI(true); }, 50);
+          });
+        }
+      }
+
+      function toggleMusic(e) {
+        if (e) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+        if (!audio) return;
+        if (audio.paused) {
+          playFullMusic();
+        } else {
+          audio.pause();
+          updateMusicUI(false);
+        }
+      }
+
+      pills.forEach(function(p) { 
+        if (p) {
+          p.addEventListener('click', toggleMusic);
+          p.addEventListener('touchend', toggleMusic);
+        }
+      });
+
+      // Countdown Timer
+      var targetDate = new Date('2026-11-15T17:00:00+05:30').getTime();
+      function updateCountdown() {
+        var now = new Date().getTime();
+        var diff = targetDate - now;
+
+        if (diff <= 0) {
+          document.getElementById('cd-days').textContent = '00';
+          document.getElementById('cd-hours').textContent = '00';
+          document.getElementById('cd-mins').textContent = '00';
+          document.getElementById('cd-secs').textContent = '00';
+          return;
+        }
+
+        var d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        var h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        var s = Math.floor((diff % (1000 * 60)) / 1000);
+
+        function pad(n) { return String(n).padStart(2, '0'); }
+        document.getElementById('cd-days').textContent = pad(d);
+        document.getElementById('cd-hours').textContent = pad(h);
+        document.getElementById('cd-mins').textContent = pad(m);
+        document.getElementById('cd-secs').textContent = pad(s);
+      }
+      setInterval(updateCountdown, 1000);
+      updateCountdown();
+
+      // Scratch Card Setup with Dark Wine/Rose Gradient
+      var canvas = document.getElementById('scratchCanvas');
+      var isScratchCleared = false;
+
+      function initScratchCard() {
+        if (!canvas) return;
+        var ctx = canvas.getContext('2d');
+        var rect = canvas.getBoundingClientRect();
+        
+        canvas.width = rect.width || 330;
+        canvas.height = rect.height || 72;
+
+        // Dark, High-Contrast Rich Wine/Purple Gradient Overlay
+        var grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+        grad.addColorStop(0, '#8e026f');
+        grad.addColorStop(0.5, '#620150');
+        grad.addColorStop(1, '#3b0030');
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Bold & Glowing White Text
+        ctx.font = '600 15px Poppins, sans-serif';
+        ctx.fillStyle = '#ffffff';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.6)';
+        ctx.shadowBlur = 6;
+        ctx.fillText('✨ Scratch to Attend', canvas.width / 2, canvas.height / 2);
+
+        var isDrawing = false;
+        var scratchedPixels = 0;
+
+        function scratch(e) {
+          if (!isDrawing || isScratchCleared) return;
+          var clientX = e.touches ? e.touches[0].clientX : e.clientX;
+          var clientY = e.touches ? e.touches[0].clientY : e.clientY;
+          var cRect = canvas.getBoundingClientRect();
+          var x = clientX - cRect.left;
+          var y = clientY - cRect.top;
+
+          ctx.globalCompositeOperation = 'destination-out';
+          ctx.beginPath();
+          ctx.arc(x, y, 26, 0, Math.PI * 2);
+          ctx.fill();
+
+          scratchedPixels++;
+          if (scratchedPixels === 1 && audio) {
+            audio.volume = 0.001;
+            var p = audio.play();
+            if (p !== undefined) {
+              p.catch(function() {});
+            }
+          }
+
+          if (scratchedPixels > 14 && !isScratchCleared) {
+            isScratchCleared = true;
+            canvas.style.transition = 'opacity 0.35s ease';
+            canvas.style.opacity = '0';
+            setTimeout(function() {
+              canvas.style.display = 'none';
+            }, 350);
+          }
+        }
+
+        canvas.addEventListener('mousedown', function(e) { isDrawing = true; scratch(e); });
+        window.addEventListener('mousemove', scratch);
+        window.addEventListener('mouseup', function() { isDrawing = false; });
+
+        canvas.addEventListener('touchstart', function(e) { isDrawing = true; scratch(e); }, { passive: true });
+        window.addEventListener('touchmove', scratch, { passive: true });
+        window.addEventListener('touchend', function() { isDrawing = false; });
+      }
+
+      window.addEventListener('load', initScratchCard);
+      setTimeout(initScratchCard, 300);
+
+      // Swipe Logic
+      var track = document.getElementById('swipeTrack');
+      var thumb = document.getElementById('swipeThumb');
+      var fill = document.getElementById('swipeFill');
+      var details = document.getElementById('details');
+
+      function triggerFinalReveal() {
+        if (hasRevealed || !details) return;
+        hasRevealed = true;
+        details.classList.add('revealed');
+        if (track) track.classList.add('done');
+        playFullMusic();
+      }
+
+      if (thumb && track) {
+        var startX = 0;
+        var currentX = 0;
+        var isDragging = false;
+
+        thumb.addEventListener('touchstart', function(e) {
+          if (hasRevealed) return;
+          isDragging = true;
+          startX = e.touches[0].clientX;
+          currentX = 0;
+        }, { passive: true });
+
+        window.addEventListener('touchmove', function(e) {
+          if (!isDragging || hasRevealed) return;
+          var touchX = e.touches[0].clientX;
+          var moveDist = touchX - startX;
+          var maxDrag = track.clientWidth - thumb.clientWidth - 12;
+
+          if (moveDist >= 0 && moveDist <= maxDrag) {
+            currentX = moveDist;
+            thumb.style.transform = 'translate(' + currentX + 'px, -50%)';
+            fill.style.width = (currentX + 26) + 'px';
+          } else if (moveDist > maxDrag) {
+            currentX = maxDrag;
+            thumb.style.transform = 'translate(' + maxDrag + 'px, -50%)';
+            fill.style.width = '100%';
+          }
+        }, { passive: true });
+
+        window.addEventListener('touchend', function() {
+          if (!isDragging || hasRevealed) return;
+          isDragging = false;
+          var maxDrag = track.clientWidth - thumb.clientWidth - 12;
+
+          if (currentX >= maxDrag * 0.75) {
+            thumb.style.transform = 'translate(' + maxDrag + 'px, -50%)';
+            fill.style.width = '100%';
+            triggerFinalReveal();
+          } else {
+            thumb.style.transition = 'transform 0.25s ease';
+            fill.style.transition = 'width 0.25s ease';
+            thumb.style.transform = 'translate(0px, -50%)';
+            fill.style.width = '0px';
+            setTimeout(function() {
+              thumb.style.transition = '';
+              fill.style.transition = '';
+            }, 260);
+          }
+        });
+
+        // Desktop Mouse
+        thumb.addEventListener('mousedown', function(e) {
+          if (hasRevealed) return;
+          isDragging = true;
+          startX = e.clientX;
+          currentX = 0;
+        });
+
+        window.addEventListener('mousemove', function(e) {
+          if (!isDragging || hasRevealed) return;
+          var moveDist = e.clientX - startX;
+          var maxDrag = track.clientWidth - thumb.clientWidth - 12;
+
+          if (moveDist >= 0 && moveDist <= maxDrag) {
+            currentX = moveDist;
+            thumb.style.transform = 'translate(' + currentX + 'px, -50%)';
+            fill.style.width = (currentX + 26) + 'px';
+          } else if (moveDist > maxDrag) {
+            currentX = maxDrag;
+            thumb.style.transform = 'translate(' + maxDrag + 'px, -50%)';
+            fill.style.width = '100%';
+          }
+        });
+
+        window.addEventListener('mouseup', function() {
+          if (!isDragging || hasRevealed) return;
+          isDragging = false;
+          var maxDrag = track.clientWidth - thumb.clientWidth - 12;
+
+          if (currentX >= maxDrag * 0.75) {
+            thumb.style.transform = 'translate(' + maxDrag + 'px, -50%)';
+            fill.style.width = '100%';
+            triggerFinalReveal();
+          } else {
+            thumb.style.transition = 'transform 0.25s ease';
+            fill.style.transition = 'width 0.25s ease';
+            thumb.style.transform = 'translate(0px, -50%)';
+            fill.style.width = '0px';
+            setTimeout(function() {
+              thumb.style.transition = '';
+              fill.style.transition = '';
+            }, 260);
+          }
+        });
+      }
+
+      // RSVP Form Logic
+      var rsvpForm = document.getElementById('rsvpForm');
+      var yesLabel = document.getElementById('attendingYesLabel');
+      var noLabel = document.getElementById('attendingNoLabel');
+      var guestCountField = document.getElementById('guestCountField');
+
+      if (yesLabel && noLabel) {
+        yesLabel.addEventListener('click', function() {
+          yesLabel.classList.add('active');
+          noLabel.classList.remove('active');
+          guestCountField.style.display = 'block';
+        });
+        noLabel.addEventListener('click', function() {
+          noLabel.classList.add('active');
+          yesLabel.classList.remove('active');
+          guestCountField.style.display = 'none';
+        });
+      }
+
+      if (rsvpForm) {
+        rsvpForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          var submitBtn = document.getElementById('rsvpSubmitBtn');
+          var successMsg = document.getElementById('rsvpSuccessMsg');
+          
+          var name = document.getElementById('guestName').value;
+          var phone = document.getElementById('guestPhone').value;
+          var attending = document.querySelector('input[name="attending"]:checked').value;
+          var guests = attending === 'Yes' ? document.getElementById('guestCount').value : '0';
+          var wishes = document.getElementById('guestWishes').value;
+
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Submitting...';
+
+          var scriptUrl = 'https://script.google.com/macros/s/AKfycbxwO-kCUY4OTHKb06NI_Dy3-l92rbx7ZZ2yajJbjQ9vWUxYq9oVEN8IBtncuTEQHLMxoQ/exec';
+
+          fetch(scriptUrl, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              name: name,
+              phone: phone,
+              attending: attending,
+              guests: guests,
+              wishes: wishes
+            })
+          }).then(function() {
+            submitBtn.style.display = 'none';
+            successMsg.style.display = 'block';
+            rsvpForm.reset();
+          }).catch(function() {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Confirm Attendance';
+            alert('Something went wrong. Please try again!');
+          });
+        });
+      }
+
+      // Scroll Reveal Observer
+      if ('IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+            }
+          });
+        }, { threshold: 0.12 });
+
+        document.querySelectorAll('.reveal-on-scroll').forEach(function(el) {
+          observer.observe(el);
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
