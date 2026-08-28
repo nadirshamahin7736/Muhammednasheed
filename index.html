@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&family=Poppins:wght@300;400;500;600&family=Sora:wght@600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/wedding.css?v=220" />
+  <link rel="stylesheet" href="css/wedding.css?v=200" />
 
   <style>
     .rsvp-success-msg {
@@ -132,11 +132,11 @@
       <p class="event-venue">Q Vintage Resort, Ashtamudi lakeside, Asramam, Kollam</p>
     </div>
 
-    <!-- ── BIG & CLEAR SCRATCH-TO-SWIPE BAR ── -->
+    <!-- ── BOTTOM SWIPE BAR & SCRATCH OVERLAY ── -->
     <div class="swipe-wrap splash-enter">
       <div class="swipe-track" id="swipeTrack" role="button" aria-label="Swipe right to confirm attendance">
         <div class="swipe-thumb" id="swipeThumb">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#780269" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#780269" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
         </div>
         <span class="swipe-label" id="swipeLabel">Yeah, I am attending</span>
         <div class="swipe-fill" id="swipeFill"></div>
@@ -440,7 +440,7 @@
   </audio>
 
   <!-- ════════════════════════════════════════
-       SCRIPTS
+       SCRIPTS: DIRECT SCRATCH + SWIPE AUDIO
   ════════════════════════════════════════ -->
   <script>
     (function() {
@@ -527,7 +527,7 @@
       setInterval(updateCountdown, 1000);
       updateCountdown();
 
-      // Scratch Card Setup
+      // ── Step 1: Scratch Layer Setup & Logic ──
       var canvas = document.getElementById('scratchCanvas');
       var isScratchCleared = false;
 
@@ -536,24 +536,23 @@
         var ctx = canvas.getContext('2d');
         var rect = canvas.getBoundingClientRect();
         
-        canvas.width = rect.width || 316;
-        canvas.height = rect.height || 66;
+        // Exact pixel size
+        canvas.width = rect.width || 296;
+        canvas.height = rect.height || 64;
 
-        // Rich Gold / Deep Rose Gold Gradient Overlay
+        // Luxury Gradient
         var grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-        grad.addColorStop(0, '#fcd1ec');
-        grad.addColorStop(0.4, '#fc72d7');
-        grad.addColorStop(1, '#660157');
+        grad.addColorStop(0, '#f9b4e5');
+        grad.addColorStop(0.5, '#fc72d7');
+        grad.addColorStop(1, '#780269');
         ctx.fillStyle = grad;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        // Bold & Clear Text
-        ctx.font = '600 14px Poppins, sans-serif';
+        // Label on Scratch Card
+        ctx.font = '600 13px Poppins, sans-serif';
         ctx.fillStyle = '#ffffff';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
-        ctx.shadowBlur = 4;
         ctx.fillText('✨ Scratch to Attend', canvas.width / 2, canvas.height / 2);
 
         var isDrawing = false;
@@ -569,10 +568,11 @@
 
           ctx.globalCompositeOperation = 'destination-out';
           ctx.beginPath();
-          ctx.arc(x, y, 26, 0, Math.PI * 2);
+          ctx.arc(x, y, 22, 0, Math.PI * 2);
           ctx.fill();
 
           scratchedPixels++;
+          // First touch unlocks audio engine silently
           if (scratchedPixels === 1 && audio) {
             audio.volume = 0.001;
             var p = audio.play();
@@ -581,7 +581,8 @@
             }
           }
 
-          if (scratchedPixels > 14 && !isScratchCleared) {
+          // Clear scratch card after light scratch
+          if (scratchedPixels > 16 && !isScratchCleared) {
             isScratchCleared = true;
             canvas.style.transition = 'opacity 0.35s ease';
             canvas.style.opacity = '0';
@@ -603,7 +604,7 @@
       window.addEventListener('load', initScratchCard);
       setTimeout(initScratchCard, 300);
 
-      // Swipe Logic
+      // ── Step 2: Swipe Logic (Reveals Details & Plays Audio) ──
       var track = document.getElementById('swipeTrack');
       var thumb = document.getElementById('swipeThumb');
       var fill = document.getElementById('swipeFill');
