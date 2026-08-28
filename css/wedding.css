@@ -301,52 +301,79 @@ img { display: block; max-width: 100%; }
   line-height: 1.35;
 }
 
-/* ── Luxury Scratch Card ─────────────────── */
-.scratch-wrap {
-  bottom: calc(env(safe-area-inset-bottom, 34px) + 24px);
+/* ── Scratch-to-Swipe Wrapper ────────────── */
+.swipe-wrap {
+  bottom: calc(env(safe-area-inset-bottom, 34px) + 22px);
   left: 50%;
   transform: translateX(-50%);
-  width: min(290px, calc(100% - 48px));
-  height: 64px;
+  width: min(296px, calc(100% - 48px));
+  height: 78px;
   position: absolute;
   z-index: 5;
-  border-radius: var(--radius-pill);
-  box-shadow: 0 14px 30px rgba(120, 2, 105, 0.25);
 }
 
-.scratch-container {
+.swipe-track {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 78px;
   border-radius: var(--radius-pill);
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: var(--shadow-float);
+  border: 1px solid rgba(255,255,255,0.28);
   overflow: hidden;
-  border: 1.5px solid rgba(255, 255, 255, 0.6);
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
 }
-
-.scratch-secret {
+.swipe-fill {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(90deg, rgba(120,2,105,0.35), rgba(252,114,215,0.25));
+  width: 0;
+}
+.swipe-thumb {
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  cursor: grab;
+}
+.swipe-thumb svg { stroke: var(--primary); }
+.swipe-label {
   position: absolute;
   inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-left: 80px;
+  padding-right: 12px;
   font-size: 14px;
-  font-weight: 600;
   color: var(--primary);
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(252, 230, 245, 0.9));
-  z-index: 1;
+  white-space: nowrap;
 }
+.swipe-track.done { background: rgba(120,2,105,0.2); }
+.swipe-track.done .swipe-thumb { background: var(--primary); }
+.swipe-track.done .swipe-thumb svg { stroke: #fff; }
 
+/* Scratch Canvas Overlay */
 #scratchCanvas {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  z-index: 2;
+  border-radius: var(--radius-pill);
+  z-index: 10;
   touch-action: none;
   cursor: pointer;
+  box-shadow: 0 10px 25px rgba(120, 2, 105, 0.25);
 }
 
 .petals {
@@ -497,7 +524,6 @@ img { display: block; max-width: 100%; }
   font-size: 14px;
 }
 
-/* ── Pure Soft Blush Pink Sheet ── */
 .details-sheet {
   background: linear-gradient(180deg, #fcebf7 0%, #f9d8f1 35%, #f6cbee 70%, #f3bde9 100%) !important;
   border-radius: 28px 28px 0 0;
@@ -507,7 +533,6 @@ img { display: block; max-width: 100%; }
   box-shadow: 0 -12px 35px rgba(120, 2, 105, 0.15);
 }
 
-/* ── Pure White Frosted Glass Cards ── */
 .info-card, .save-date-card {
   background: rgba(255, 255, 255, 0.78) !important;
   backdrop-filter: blur(20px) saturate(180%) !important;
@@ -519,7 +544,6 @@ img { display: block; max-width: 100%; }
   box-sizing: border-box;
 }
 
-/* ── Save the Date Card ──────────────────── */
 .save-date-card {
   display: flex;
   flex-direction: column;
@@ -563,7 +587,6 @@ img { display: block; max-width: 100%; }
   line-height: 1.45;
 }
 
-/* ── Section Heading ─────────────────────── */
 .card-section { margin-top: 26px; }
 .section-heading {
   font-family: var(--font-heading);
@@ -575,7 +598,6 @@ img { display: block; max-width: 100%; }
   margin-bottom: 12px;
 }
 
-/* ── RSVP Form Structure ─────────────────── */
 .rsvp-card {
   background: rgba(255, 255, 255, 0.85) !important;
 }
@@ -627,7 +649,6 @@ img { display: block; max-width: 100%; }
   color: #fff !important;
 }
 
-/* ── Buttons (Photo Theme Match) ─────────── */
 .rsvp-submit-btn, .directions-btn-full {
   display: flex;
   align-items: center;
@@ -647,7 +668,6 @@ img { display: block; max-width: 100%; }
 }
 .directions-btn-full { margin-top: 14px; }
 
-/* ── Venue Card ──────────────────────────── */
 .venue-elegant {
   display: flex;
   flex-direction: column;
@@ -705,7 +725,6 @@ img { display: block; max-width: 100%; }
   font-weight: 500;
 }
 
-/* ── Contact Cards ───────────────────────── */
 .contact-full {
   display: flex;
   align-items: center;
@@ -773,7 +792,6 @@ img { display: block; max-width: 100%; }
 .contact-center .contact-name { font-size: 15px; }
 .contact-center .phone-btn { margin-top: 10px; }
 
-/* ── How to Reach Accordion ──────────────── */
 .transport-accordion {
   display: flex;
   flex-direction: column;
@@ -846,7 +864,6 @@ img { display: block; max-width: 100%; }
   font-weight: 500;
 }
 
-/* ── Photo Gallery / Selfie Card ─────────── */
 .selfie-card {
   padding: 0 !important;
   overflow: hidden;
@@ -912,7 +929,6 @@ img { display: block; max-width: 100%; }
   opacity: 0.8;
 }
 
-/* ── Downloads Grid ──────────────────────── */
 .download-grid { 
   display: grid; 
   grid-template-columns: 1fr 1fr; 
@@ -976,7 +992,6 @@ img { display: block; max-width: 100%; }
   cursor: not-allowed;
 }
 
-/* ── Footer ──────────────────────────────── */
 .wedding-footer { margin-top: 40px; text-align: center; padding-bottom: 12px; }
 .wedding-footer p { font-size: 13px; color: var(--text-body); }
 .footer-names {
@@ -987,10 +1002,6 @@ img { display: block; max-width: 100%; }
   color: var(--primary) !important;
   margin-top: 6px;
 }
-
-/* ════════════════════════════════════════════
-   LUXURY MICRO-ANIMATIONS (DETAILS PAGE)
-════════════════════════════════════════════ */
 
 .reveal-on-scroll {
   opacity: 0;
@@ -1050,7 +1061,6 @@ img { display: block; max-width: 100%; }
   100% { left: 140%; }
 }
 
-/* ── Responsive Desktop ──────────────────── */
 @media (min-width: 620px) {
   html, body { background: #1a1a1a; }
   .page {
