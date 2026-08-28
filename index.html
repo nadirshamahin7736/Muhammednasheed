@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&family=Poppins:wght@300;400;500;600&family=Sora:wght@600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/wedding.css?v=1300" />
+  <link rel="stylesheet" href="css/wedding.css?v=1200" />
 
   <style>
     .rsvp-success-msg {
@@ -45,6 +45,25 @@
       box-shadow: 0 4px 15px rgba(255, 42, 141, 0.2);
     }
     
+    /* Scratchable Save the Date Card Container */
+    .scratch-date-container {
+      position: relative;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      margin: 10px 0 20px;
+      box-shadow: 0 12px 30px rgba(120, 2, 105, 0.12);
+    }
+    #dateScratchCanvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: var(--radius-md);
+      z-index: 5;
+      touch-action: none;
+      cursor: pointer;
+    }
+
     /* Extra Large & Prominent Pulsing Scratch Bar for First Page */
     .swipe-wrap {
       width: min(350px, calc(100% - 24px)) !important;
@@ -110,7 +129,7 @@
     <!-- Bride name -->
     <p class="splash-bride splash-enter">Rismina Shafi</p>
 
-    <!-- Countdown timer -->
+    <!-- Countdown timer (Positioned nicely above the big button) -->
     <div class="countdown splash-enter" id="countdown" style="top: calc(max(env(safe-area-inset-top, 0px), 54px) + 440px);">
       <div class="count-unit">
         <span class="count-label">Days</span>
@@ -163,7 +182,7 @@
   </section>
 
   <!-- ═══════════════════════════════════════
-       PAGE 2 — DETAILS (Normal Save the Date Card)
+       PAGE 2 — DETAILS (With Scratchable Save the Date Card)
   ═══════════════════════════════════════ -->
   <section id="details" class="page" aria-hidden="true">
 
@@ -201,19 +220,23 @@
 
     <div class="details-sheet">
 
-      <!-- Save the date card (Normal & Clear) -->
-      <div class="save-date-card reveal-on-scroll">
-        <div class="sdt-ornament">
-          <div class="sdt-line"></div>
-          <span class="sdt-sparkle">✦</span>
-          <div class="sdt-line"></div>
+      <!-- Scratchable Save the Date Card -->
+      <div class="scratch-date-container reveal-on-scroll">
+        <div class="save-date-card" style="margin: 0; background: rgba(255, 255, 255, 0.95) !important;">
+          <div class="sdt-ornament">
+            <div class="sdt-line"></div>
+            <span class="sdt-sparkle">✦</span>
+            <div class="sdt-line"></div>
+          </div>
+          <p class="sdt-eyebrow">Save the Date</p>
+          <p class="sdt-date">Sunday, 15 November 2026</p>
+          <p class="sdt-venue-hint">Q Vintage Resort, Ashtamudi lakeside, Asramam, Kollam</p>
+          <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Nadirsha+%26+Rismina+Wedding&dates=20261115T113000Z/20261115T153000Z&details=Wedding+Ceremony+of+Nadirsha+%26+Rismina&location=Q+Vintage+Resort,+Ashtamudi+lakeside,+Asramam,+Kollam" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(135deg, #780269 0%, #5a0050 100%); color: #ffffff; padding: 12px 28px; border-radius: 9999px; text-decoration: none; font-weight: 600; margin-top: 16px; box-shadow: 0 4px 15px rgba(120,2,105,0.25);">
+            Add to Calendar
+          </a>
         </div>
-        <p class="sdt-eyebrow">Save the Date</p>
-        <p class="sdt-date">Sunday, 15 November 2026</p>
-        <p class="sdt-venue-hint">Q Vintage Resort, Ashtamudi lakeside, Asramam, Kollam</p>
-        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Nadirsha+%26+Rismina+Wedding&dates=20261115T113000Z/20261115T153000Z&details=Wedding+Ceremony+of+Nadirsha+%26+Rismina&location=Q+Vintage+Resort,+Ashtamudi+lakeside,+Asramam,+Kollam" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(135deg, #780269 0%, #5a0050 100%); color: #ffffff; padding: 12px 28px; border-radius: 9999px; text-decoration: none; font-weight: 600; margin-top: 16px; box-shadow: 0 4px 15px rgba(120,2,105,0.25);">
-          Add to Calendar
-        </a>
+        <!-- Canvas Layer on top of Save the Date Card -->
+        <canvas id="dateScratchCanvas"></canvas>
       </div>
 
       <!-- ── RSVP ── -->
@@ -446,7 +469,7 @@
   </audio>
 
   <!-- ════════════════════════════════════════
-       SCRIPTS
+       SCRIPTS: DUAL SCRATCH LOGIC
   ════════════════════════════════════════ -->
   <script>
     (function() {
@@ -533,7 +556,7 @@
       setInterval(updateCountdown, 1000);
       updateCountdown();
 
-      // Scratch Card Setup
+      // ── 1. Main Splash Scratch Card Setup ──
       var canvas = document.getElementById('scratchCanvas');
       var isScratchCleared = false;
 
@@ -604,8 +627,77 @@
         window.addEventListener('touchend', function() { isDrawing = false; });
       }
 
-      window.addEventListener('load', initScratchCard);
-      setTimeout(initScratchCard, 300);
+      // ── 2. Save the Date Scratch Card Setup (2nd Page) ──
+      var dateCanvas = document.getElementById('dateScratchCanvas');
+      var isDateScratchCleared = false;
+
+      function initDateScratchCard() {
+        if (!dateCanvas) return;
+        var ctx = dateCanvas.getContext('2d');
+        var rect = dateCanvas.getBoundingClientRect();
+        
+        dateCanvas.width = rect.width || 350;
+        dateCanvas.height = rect.height || 180;
+
+        var grad = ctx.createLinearGradient(0, 0, dateCanvas.width, dateCanvas.height);
+        grad.addColorStop(0, '#780269');
+        grad.addColorStop(0.5, '#9c1c8a');
+        grad.addColorStop(1, '#5a0050');
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, dateCanvas.width, dateCanvas.height);
+
+        ctx.font = '600 16px Poppins, sans-serif';
+        ctx.fillStyle = '#ffffff';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+        ctx.shadowBlur = 5;
+        ctx.fillText('✨ Scratch to Reveal Date & Venue', dateCanvas.width / 2, dateCanvas.height / 2);
+
+        var isDrawingDate = false;
+        var dateScratchedPixels = 0;
+
+        function scratchDate(e) {
+          if (!isDrawingDate || isDateScratchCleared) return;
+          var clientX = e.touches ? e.touches[0].clientX : e.clientX;
+          var clientY = e.touches ? e.touches[0].clientY : e.clientY;
+          var cRect = dateCanvas.getBoundingClientRect();
+          var x = clientX - cRect.left;
+          var y = clientY - cRect.top;
+
+          ctx.globalCompositeOperation = 'destination-out';
+          ctx.beginPath();
+          ctx.arc(x, y, 28, 0, Math.PI * 2);
+          ctx.fill();
+
+          dateScratchedPixels++;
+          if (dateScratchedPixels > 20 && !isDateScratchCleared) {
+            isDateScratchCleared = true;
+            dateCanvas.style.transition = 'opacity 0.4s ease';
+            dateCanvas.style.opacity = '0';
+            setTimeout(function() {
+              dateCanvas.style.display = 'none';
+            }, 400);
+          }
+        }
+
+        dateCanvas.addEventListener('mousedown', function(e) { isDrawingDate = true; scratchDate(e); });
+        window.addEventListener('mousemove', scratchDate);
+        window.addEventListener('mouseup', function() { isDrawingDate = false; });
+
+        dateCanvas.addEventListener('touchstart', function(e) { isDrawingDate = true; scratchDate(e); }, { passive: true });
+        window.addEventListener('touchmove', scratchDate, { passive: true });
+        window.addEventListener('touchend', function() { isDrawingDate = false; });
+      }
+
+      window.addEventListener('load', function() {
+        initScratchCard();
+        initDateScratchCard();
+      });
+      setTimeout(function() {
+        initScratchCard();
+        initDateScratchCard();
+      }, 300);
 
       // Swipe Logic
       var track = document.getElementById('swipeTrack');
