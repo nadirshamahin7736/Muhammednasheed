@@ -4,7 +4,6 @@
    15 November 2026 · Q Vintage Resort, Kollam
 ══════════════════════════════════════════ */
 
-/* ── Design Tokens ───────────────────────── */
 :root {
   --primary:      #780269;
   --primary-dark: #5a0050;
@@ -23,10 +22,8 @@
   --radius-pill:  999px;
 
   --shadow-float: 0 18px 32px rgba(82,0,72,0.28);
-  --ease-ios:     cubic-bezier(0.32, 0.72, 0, 1);
 }
 
-/* ── Reset ───────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html, body {
   height: 100%; height: 100dvh;
@@ -39,9 +36,6 @@ a { text-decoration: none; color: inherit; }
 button { border: none; background: none; cursor: pointer; font-family: inherit; }
 img { display: block; max-width: 100%; }
 
-/* ════════════════════════════════════════════
-   PAGE STACK & ROYAL IRIS TRANSITION
-════════════════════════════════════════════ */
 .page {
   position: fixed;
   inset: 0;
@@ -70,9 +64,6 @@ img { display: block; max-width: 100%; }
 }
 #details::-webkit-scrollbar { width: 0; }
 
-/* ════════════════════════════════════════════
-   SPLASH PAGE — ABSOLUTE LAYOUT
-════════════════════════════════════════════ */
 #splash { display: block; overflow: hidden; z-index: 2; }
 
 .splash-bg {
@@ -98,7 +89,6 @@ img { display: block; max-width: 100%; }
   z-index: 2;
 }
 
-/* ── Music Pill ──────────────────────────── */
 .music-pill {
   top: calc(max(env(safe-area-inset-top, 0px), 4px) + 8px);
   right: 16px;
@@ -142,7 +132,6 @@ img { display: block; max-width: 100%; }
   50%      { opacity: 0.55; }
 }
 
-/* ── Bismillah & Title ───────────────────── */
 .bismillah {
   top: calc(max(env(safe-area-inset-top, 0px), 54px) + 41px);
   left: 50%;
@@ -243,7 +232,6 @@ img { display: block; max-width: 100%; }
   white-space: nowrap;
 }
 
-/* ── Countdown ───────────────────────────── */
 .countdown {
   top: calc(max(env(safe-area-inset-top, 0px), 54px) + 494px);
   left: 0; right: 0;
@@ -301,28 +289,30 @@ img { display: block; max-width: 100%; }
   line-height: 1.35;
 }
 
-/* ── Scratch-to-Swipe Wrapper ────────────── */
+/* ── EXACT BOTTOM POSITION FOR SWIPE & SCRATCH ── */
 .swipe-wrap {
-  bottom: calc(env(safe-area-inset-bottom, 34px) + 22px);
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(296px, calc(100% - 48px));
-  height: 78px;
-  position: absolute;
-  z-index: 5;
+  bottom: calc(env(safe-area-inset-bottom, 24px) + 20px) !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: min(296px, calc(100% - 48px)) !important;
+  height: 64px !important;
+  position: absolute !important;
+  z-index: 5 !important;
 }
 
 .swipe-track {
-  position: relative;
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: 78px;
+  height: 100%;
   border-radius: var(--radius-pill);
-  background: rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.18);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   box-shadow: var(--shadow-float);
-  border: 1px solid rgba(255,255,255,0.28);
+  border: 1px solid rgba(255,255,255,0.4);
   overflow: hidden;
+  z-index: 1;
 }
 .swipe-fill {
   position: absolute;
@@ -333,11 +323,11 @@ img { display: block; max-width: 100%; }
 }
 .swipe-thumb {
   position: absolute;
-  left: 8px;
+  left: 6px;
   top: 50%;
   transform: translateY(-50%);
-  width: 62px;
-  height: 62px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
   background: #fff;
   display: flex;
@@ -345,6 +335,7 @@ img { display: block; max-width: 100%; }
   justify-content: center;
   z-index: 2;
   cursor: grab;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 .swipe-thumb svg { stroke: var(--primary); }
 .swipe-label {
@@ -353,9 +344,10 @@ img { display: block; max-width: 100%; }
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-left: 80px;
+  padding-left: 60px;
   padding-right: 12px;
-  font-size: 14px;
+  font-size: 13.5px;
+  font-weight: 500;
   color: var(--primary);
   white-space: nowrap;
 }
@@ -363,17 +355,17 @@ img { display: block; max-width: 100%; }
 .swipe-track.done .swipe-thumb { background: var(--primary); }
 .swipe-track.done .swipe-thumb svg { stroke: #fff; }
 
-/* Scratch Canvas Overlay */
+/* Scratch Canvas exactly covering the Swipe Track */
 #scratchCanvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: var(--radius-pill);
-  z-index: 10;
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: var(--radius-pill) !important;
+  z-index: 5 !important;
   touch-action: none;
   cursor: pointer;
-  box-shadow: 0 10px 25px rgba(120, 2, 105, 0.25);
+  box-shadow: 0 8px 20px rgba(120, 2, 105, 0.2);
 }
 
 .petals {
@@ -410,7 +402,7 @@ img { display: block; max-width: 100%; }
 }
 
 /* ════════════════════════════════════════════
-   DETAILS PAGE — BLUSH PINK & WHITE FROSTED GLASS
+   DETAILS PAGE
 ════════════════════════════════════════════ */
 
 .details-hero {
