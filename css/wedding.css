@@ -17,7 +17,6 @@
   --font-serif:    'Playfair Display', Georgia, serif;
   --font-heading:  'Cinzel', Georgia, serif;
   --font-sans:     'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-comforter:'Comforter', cursive;
 
   --radius-sm:    10px;
   --radius-md:    22px;
@@ -302,63 +301,53 @@ img { display: block; max-width: 100%; }
   line-height: 1.35;
 }
 
-/* ── Swipe CTA ───────────────────────────── */
-.swipe-wrap {
-  bottom: calc(env(safe-area-inset-bottom, 34px) + 22px);
+/* ── Luxury Scratch Card ─────────────────── */
+.scratch-wrap {
+  bottom: calc(env(safe-area-inset-bottom, 34px) + 24px);
   left: 50%;
   transform: translateX(-50%);
-  width: min(296px, calc(100% - 48px));
+  width: min(290px, calc(100% - 48px));
+  height: 64px;
+  position: absolute;
+  z-index: 5;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 14px 30px rgba(120, 2, 105, 0.25);
 }
-.swipe-track {
+
+.scratch-container {
   position: relative;
   width: 100%;
-  height: 78px;
+  height: 100%;
   border-radius: var(--radius-pill);
-  background: rgba(255,255,255,0.12);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  box-shadow: var(--shadow-float);
-  border: 1px solid rgba(255,255,255,0.28);
   overflow: hidden;
+  border: 1.5px solid rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
-.swipe-fill {
-  position: absolute;
-  inset: 0;
-  border-radius: var(--radius-pill);
-  background: linear-gradient(90deg, rgba(120,2,105,0.35), rgba(252,114,215,0.25));
-  width: 0;
-}
-.swipe-thumb {
-  position: absolute;
-  left: 8px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 62px;
-  height: 62px;
-  border-radius: 50%;
-  background: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
-  cursor: grab;
-}
-.swipe-thumb svg { stroke: var(--primary); }
-.swipe-label {
+
+.scratch-secret {
   position: absolute;
   inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-left: 80px;
-  padding-right: 12px;
   font-size: 14px;
+  font-weight: 600;
   color: var(--primary);
-  white-space: nowrap;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(252, 230, 245, 0.9));
+  z-index: 1;
 }
-.swipe-track.done { background: rgba(120,2,105,0.2); }
-.swipe-track.done .swipe-thumb { background: var(--primary); }
-.swipe-track.done .swipe-thumb svg { stroke: #fff; }
+
+#scratchCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  touch-action: none;
+  cursor: pointer;
+}
 
 .petals {
   position: absolute;
@@ -1003,7 +992,6 @@ img { display: block; max-width: 100%; }
    LUXURY MICRO-ANIMATIONS (DETAILS PAGE)
 ════════════════════════════════════════════ */
 
-/* 1. Scroll Reveal (Cards Floating Up Softly) */
 .reveal-on-scroll {
   opacity: 0;
   transform: translateY(22px);
@@ -1016,7 +1004,6 @@ img { display: block; max-width: 100%; }
   transform: translateY(0);
 }
 
-/* 2. Sparkle Star Gentle Glow */
 .dh-sparkle-star, .sdt-sparkle {
   display: inline-block;
   animation: sparkleGlow 2.5s infinite ease-in-out;
@@ -1035,7 +1022,6 @@ img { display: block; max-width: 100%; }
   }
 }
 
-/* 3. Button Shimmer Light Pass (RSVP & Map Buttons) */
 .rsvp-submit-btn, .directions-btn-full {
   position: relative;
   overflow: hidden;
