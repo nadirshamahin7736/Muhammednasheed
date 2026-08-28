@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&family=Poppins:wght@300;400;500;600&family=Sora:wght@600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/wedding.css?v=600" />
+  <link rel="stylesheet" href="css/wedding.css?v=1500" />
 
   <style>
     .rsvp-success-msg {
@@ -44,12 +44,25 @@
       border: 1px solid rgba(255, 255, 255, 0.4);
       box-shadow: 0 4px 15px rgba(255, 42, 141, 0.2);
     }
+    
+    /* Bigger & Glowing Scratch Bar with Pulsing Animation */
+    .swipe-wrap {
+      width: min(350px, calc(100% - 24px)) !important;
+      height: 76px !important;
+      bottom: calc(env(safe-area-inset-bottom, 16px) + 12px) !important;
+      top: auto !important;
+      animation: superPulse 1.8s infinite ease-in-out !important;
+    }
+    @keyframes superPulse {
+      0%, 100% { transform: translateX(-50%) scale(1); filter: drop-shadow(0 6px 20px rgba(120, 2, 105, 0.5)); }
+      50% { transform: translateX(-50%) scale(1.045); filter: drop-shadow(0 10px 30px rgba(252, 114, 215, 0.9)); }
+    }
   </style>
 </head>
 <body>
 
   <!-- ═══════════════════════════════════════
-       PAGE 1 — SPLASH / HERO
+       PAGE 1 — SPLASH / HERO (Clean Look)
   ═══════════════════════════════════════ -->
   <section id="splash" class="page">
 
@@ -84,8 +97,7 @@
 
     <!-- Groom name -->
     <div class="splash-groom splash-enter">
-      <span>Nadirsha</span>
-      <span>Mahin</span>
+      <span>Nadirsha Mahin</span>
     </div>
 
     <!-- "weds" badge -->
@@ -126,22 +138,15 @@
       </div>
     </div>
 
-    <!-- Date + venue -->
-    <div class="event-meta splash-enter">
-      <p class="event-date">Sunday, 15 November 2026</p>
-      <p class="event-venue">Q Vintage Resort, Ashtamudi lakeside, Asramam, Kollam</p>
-    </div>
-
-    <!-- ── BOTTOM SWIPE BAR & SCRATCH OVERLAY ── -->
+    <!-- ── BIGGER & PROMINENT SCRATCH-TO-ATTEND BAR ── -->
     <div class="swipe-wrap splash-enter">
       <div class="swipe-track" id="swipeTrack" role="button" aria-label="Swipe right to confirm attendance">
-        <div class="swipe-thumb" id="swipeThumb">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#780269" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        <div class="swipe-thumb" id="swipeThumb" style="width: 60px; height: 60px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#780269" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
         </div>
-        <span class="swipe-label" id="swipeLabel">Yeah, I am attending</span>
+        <span class="swipe-label" id="swipeLabel" style="font-size: 16px; font-weight: 700;">✨ Scratch to Attend</span>
         <div class="swipe-fill" id="swipeFill"></div>
       </div>
-      <!-- Canvas Overlay placed exactly on top -->
       <canvas id="scratchCanvas"></canvas>
     </div>
 
@@ -157,7 +162,7 @@
   </section>
 
   <!-- ═══════════════════════════════════════
-       PAGE 2 — DETAILS
+       PAGE 2 — DETAILS (Save the Date Card)
   ═══════════════════════════════════════ -->
   <section id="details" class="page" aria-hidden="true">
 
@@ -175,8 +180,7 @@
       </button>
 
       <div class="dh-groom">
-        <span>Nadirsha</span>
-        <span>Mahin</span>
+        <span>Nadirsha Mahin</span>
       </div>
 
       <div class="dh-weds-wrap">
@@ -440,7 +444,7 @@
   </audio>
 
   <!-- ════════════════════════════════════════
-       SCRIPTS: FIXED COUNTDOWN & SWIPE/SCRATCH
+       SCRIPTS
   ════════════════════════════════════════ -->
   <script>
     (function() {
@@ -499,7 +503,7 @@
         }
       });
 
-      // ── FIXED COUNTDOWN TIMER ──
+      // Countdown Timer
       var targetDate = new Date('2026-11-15T17:00:00+05:30').getTime();
       function updateCountdown() {
         var now = new Date().getTime();
@@ -527,7 +531,7 @@
       setInterval(updateCountdown, 1000);
       updateCountdown();
 
-      // ── SCRATCH CARD SETUP ──
+      // Scratch Card Setup
       var canvas = document.getElementById('scratchCanvas');
       var isScratchCleared = false;
 
@@ -536,8 +540,8 @@
         var ctx = canvas.getContext('2d');
         var rect = canvas.getBoundingClientRect();
         
-        canvas.width = rect.width || 330;
-        canvas.height = rect.height || 72;
+        canvas.width = rect.width || 350;
+        canvas.height = rect.height || 76;
 
         var grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
         grad.addColorStop(0, '#8e026f');
@@ -546,7 +550,7 @@
         ctx.fillStyle = grad;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        ctx.font = '600 15px Poppins, sans-serif';
+        ctx.font = '600 16px Poppins, sans-serif';
         ctx.fillStyle = '#ffffff';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
@@ -567,7 +571,7 @@
 
           ctx.globalCompositeOperation = 'destination-out';
           ctx.beginPath();
-          ctx.arc(x, y, 26, 0, Math.PI * 2);
+          ctx.arc(x, y, 28, 0, Math.PI * 2);
           ctx.fill();
 
           scratchedPixels++;
@@ -601,7 +605,7 @@
       window.addEventListener('load', initScratchCard);
       setTimeout(initScratchCard, 300);
 
-      // ── SWIPE LOGIC ──
+      // Swipe Logic
       var track = document.getElementById('swipeTrack');
       var thumb = document.getElementById('swipeThumb');
       var fill = document.getElementById('swipeFill');
