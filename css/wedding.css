@@ -990,6 +990,71 @@ img { display: block; max-width: 100%; }
   margin-top: 6px;
 }
 
+/* ════════════════════════════════════════════
+   LUXURY MICRO-ANIMATIONS (DETAILS PAGE)
+════════════════════════════════════════════ */
+
+/* 1. Scroll Reveal (Cards Floating Up Softly) */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.65s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.65s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 2. Sparkle Star Gentle Glow */
+.dh-sparkle-star, .sdt-sparkle {
+  display: inline-block;
+  animation: sparkleGlow 2.5s infinite ease-in-out;
+}
+
+@keyframes sparkleGlow {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 0.8;
+    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.6));
+  }
+  50% {
+    transform: scale(1.35) rotate(15deg);
+    opacity: 1;
+    filter: drop-shadow(0 0 7px #fc72d7);
+  }
+}
+
+/* 3. Button Shimmer Light Pass (RSVP & Map Buttons) */
+.rsvp-submit-btn, .directions-btn-full {
+  position: relative;
+  overflow: hidden;
+}
+
+.rsvp-submit-btn::after, .directions-btn-full::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 40%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    rgba(255, 255, 255, 0) 20%,
+    rgba(255, 255, 255, 0.35) 50%,
+    rgba(255, 255, 255, 0) 80%
+  );
+  transform: rotate(25deg);
+  animation: buttonShimmer 3.8s infinite ease-in-out;
+}
+
+@keyframes buttonShimmer {
+  0% { left: -60%; }
+  30% { left: 140%; }
+  100% { left: 140%; }
+}
+
 /* ── Responsive Desktop ──────────────────── */
 @media (min-width: 620px) {
   html, body { background: #1a1a1a; }
