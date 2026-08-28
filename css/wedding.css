@@ -1,5 +1,5 @@
 /* ══════════════════════════════════════════
-   WEDDING WEBSITE — STYLES (V5 - Swipe Hint Animation Added)
+   WEDDING WEBSITE — STYLES (V4 - Enlarged Swipe/Scratch)
    Nadirsha Mahin & Rismina Shafi
    15 November 2026 · Q Vintage Resort, Kollam
 ══════════════════════════════════════════ */
@@ -298,7 +298,7 @@ svg {
   line-height: 1.35;
 }
 
-/* ── SCRATCH & SWIPE BAR (Enlarged & Prominent with Hint Animation) ── */
+/* ── SCRATCH & SWIPE BAR (Enlarged & Prominent) ── */
 .swipe-wrap {
   bottom: calc(env(safe-area-inset-bottom, 16px) + 16px) !important;
   left: 50% !important;
@@ -330,12 +330,6 @@ svg {
   background: linear-gradient(90deg, rgba(120,2,105,0.4), rgba(252,114,215,0.3));
   width: 0;
 }
-
-@keyframes swipeHint {
-  0%, 100% { transform: translateY(-50%) translateX(0); }
-  50%      { transform: translateY(-50%) translateX(14px); }
-}
-
 .swipe-thumb {
   position: absolute;
   left: 6px;
@@ -351,12 +345,7 @@ svg {
   z-index: 2;
   cursor: grab;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
-  animation: swipeHint 2s ease-in-out infinite;
 }
-.swipe-track.done .swipe-thumb {
-  animation: none;
-}
-
 .swipe-thumb svg { stroke: var(--primary); }
 .swipe-label {
   position: absolute;
