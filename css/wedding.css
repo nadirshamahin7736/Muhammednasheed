@@ -1051,10 +1051,13 @@ svg {
   100% { left: 140%; }
 }
 
-/* ── Royal Falling Golden Petals Animation Styles ── */
+/* ── Falling Deep Pink Petals Animation Styles (Full Page) ── */
 .royal-petals-container {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
   overflow: hidden;
   z-index: 2;
@@ -1064,16 +1067,16 @@ svg {
   top: -30px;
   width: 12px;
   height: 16px;
-  background: radial-gradient(ellipse at center, #ffd700 0%, #ff8c00 70%, #d4af37 100%);
+  background: radial-gradient(ellipse at center, #ff2a8d 0%, #a0005b 70%, #780269 100%);
   border-radius: 50% 0 50% 0;
-  opacity: 0.8;
+  opacity: 0.85;
   animation: royalFall var(--dur) linear var(--delay) infinite;
 }
 @keyframes royalFall {
   0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
-  10% { opacity: 0.9; }
-  90% { opacity: 0.7; }
-  100% { transform: translateY(105vh) translateX(60px) rotate(400deg); opacity: 0; }
+  10% { opacity: 0.95; }
+  90% { opacity: 0.8; }
+  100% { transform: translateY(100vh) translateX(60px) rotate(400deg); opacity: 0; }
 }
 
 @media (min-width: 620px) {
