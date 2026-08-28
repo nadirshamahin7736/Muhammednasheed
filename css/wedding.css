@@ -1051,6 +1051,31 @@ svg {
   100% { left: 140%; }
 }
 
+/* ── Royal Falling Golden Petals Animation Styles ── */
+.royal-petals-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 2;
+}
+.golden-petal {
+  position: absolute;
+  top: -30px;
+  width: 12px;
+  height: 16px;
+  background: radial-gradient(ellipse at center, #ffd700 0%, #ff8c00 70%, #d4af37 100%);
+  border-radius: 50% 0 50% 0;
+  opacity: 0.8;
+  animation: royalFall var(--dur) linear var(--delay) infinite;
+}
+@keyframes royalFall {
+  0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.9; }
+  90% { opacity: 0.7; }
+  100% { transform: translateY(105vh) translateX(60px) rotate(400deg); opacity: 0; }
+}
+
 @media (min-width: 620px) {
   html, body { background: #1a1a1a; }
   .page {
