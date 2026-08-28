@@ -1,5 +1,5 @@
 /* ══════════════════════════════════════════
-   WEDDING WEBSITE — STYLES (V2)
+   WEDDING WEBSITE — STYLES (V4 - Enlarged Swipe/Scratch)
    Nadirsha Mahin & Rismina Shafi
    15 November 2026 · Q Vintage Resort, Kollam
 ══════════════════════════════════════════ */
@@ -298,13 +298,13 @@ svg {
   line-height: 1.35;
 }
 
-/* ── SCRATCH & SWIPE BAR ── */
+/* ── SCRATCH & SWIPE BAR (Enlarged & Prominent) ── */
 .swipe-wrap {
-  bottom: calc(env(safe-area-inset-bottom, 16px) + 14px) !important;
+  bottom: calc(env(safe-area-inset-bottom, 16px) + 16px) !important;
   left: 50% !important;
   transform: translateX(-50%) !important;
-  width: min(316px, calc(100% - 36px)) !important;
-  height: 66px !important;
+  width: min(348px, calc(100% - 28px)) !important;
+  height: 72px !important;
   position: absolute !important;
   z-index: 5 !important;
 }
@@ -315,11 +315,11 @@ svg {
   width: 100%;
   height: 100%;
   border-radius: var(--radius-pill);
-  background: rgba(255,255,255,0.22);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  box-shadow: var(--shadow-float);
-  border: 2px solid rgba(255,255,255,0.6);
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 12px 35px rgba(120, 2, 105, 0.35);
+  border: 2.5px solid rgba(255, 255, 255, 0.85);
   overflow: hidden;
   z-index: 1;
 }
@@ -335,8 +335,8 @@ svg {
   left: 6px;
   top: 50%;
   transform: translateY(-50%);
-  width: 54px;
-  height: 54px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   background: #fff;
   display: flex;
@@ -344,7 +344,7 @@ svg {
   justify-content: center;
   z-index: 2;
   cursor: grab;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
 }
 .swipe-thumb svg { stroke: var(--primary); }
 .swipe-label {
@@ -353,12 +353,13 @@ svg {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-left: 64px;
-  padding-right: 14px;
-  font-size: 14.5px;
-  font-weight: 600;
+  padding-left: 70px;
+  padding-right: 16px;
+  font-size: 15.5px;
+  font-weight: 700;
   color: var(--primary);
   white-space: nowrap;
+  letter-spacing: 0.02em;
 }
 .swipe-track.done { background: rgba(120,2,105,0.2); }
 .swipe-track.done .swipe-thumb { background: var(--primary); }
@@ -373,7 +374,7 @@ svg {
   z-index: 5 !important;
   touch-action: none;
   cursor: pointer;
-  box-shadow: 0 8px 25px rgba(120, 2, 105, 0.3);
+  box-shadow: 0 10px 30px rgba(120, 2, 105, 0.45);
 }
 
 .petals {
@@ -1051,7 +1052,7 @@ svg {
   100% { left: 140%; }
 }
 
-/* ── Falling Deep Pink Petals Animation Styles (Full Page & Full Height) ── */
+/* ── Falling Deep Pink Petals Animation Styles (Full Page) ── */
 .royal-petals-container {
   position: absolute;
   top: 0;
