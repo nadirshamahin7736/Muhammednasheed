@@ -1,5 +1,5 @@
 /* ══════════════════════════════════════════
-   WEDDING WEBSITE — STYLES (V4 - Enlarged Swipe/Scratch)
+   WEDDING WEBSITE — STYLES (V5 - Swipe Hint Animation Added)
    Nadirsha Mahin & Rismina Shafi
    15 November 2026 · Q Vintage Resort, Kollam
 ══════════════════════════════════════════ */
@@ -298,7 +298,7 @@ svg {
   line-height: 1.35;
 }
 
-/* ── SCRATCH & SWIPE BAR (Enlarged & Prominent) ── */
+/* ── SCRATCH & SWIPE BAR (Enlarged & Prominent with Hint Animation) ── */
 .swipe-wrap {
   bottom: calc(env(safe-area-inset-bottom, 16px) + 16px) !important;
   left: 50% !important;
@@ -330,6 +330,12 @@ svg {
   background: linear-gradient(90deg, rgba(120,2,105,0.4), rgba(252,114,215,0.3));
   width: 0;
 }
+
+@keyframes swipeHint {
+  0%, 100% { transform: translateY(-50%) translateX(0); }
+  50%      { transform: translateY(-50%) translateX(14px); }
+}
+
 .swipe-thumb {
   position: absolute;
   left: 6px;
@@ -345,7 +351,12 @@ svg {
   z-index: 2;
   cursor: grab;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+  animation: swipeHint 2s ease-in-out infinite;
 }
+.swipe-track.done .swipe-thumb {
+  animation: none;
+}
+
 .swipe-thumb svg { stroke: var(--primary); }
 .swipe-label {
   position: absolute;
@@ -769,325 +780,3 @@ svg {
 }
 .contact-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-.contact-center {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 16px 10px;
-  gap: 3px;
-}
-.contact-center .contact-name { font-size: 15px; }
-.contact-center .phone-btn { margin-top: 10px; }
-
-.transport-accordion {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.accordion-item {
-  background: rgba(255, 255, 255, 0.8) !important;
-  border: 1.5px solid var(--border-glass) !important;
-  border-radius: 14px;
-  overflow: hidden;
-  backdrop-filter: blur(15px);
-}
-.accordion-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  padding: 14px 16px;
-  background: none;
-  cursor: pointer;
-}
-.accordion-header > span:first-child {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.transport-icon { font-size: 18px; }
-.transport-title {
-  font-size: 14.5px;
-  font-weight: 600;
-  color: #222;
-}
-.accordion-chevron {
-  font-size: 11px;
-  color: var(--text-body);
-  transition: transform 0.3s ease;
-}
-.accordion-item.open .accordion-chevron {
-  transform: rotate(180deg);
-}
-.accordion-body {
-  display: none;
-  padding: 0 16px 14px;
-}
-.accordion-item.open .accordion-body {
-  display: block;
-}
-.transport-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding-left: 4px;
-}
-.transport-list li {
-  font-size: 12.5px;
-  color: var(--text-body);
-  line-height: 1.45;
-  position: relative;
-  padding-left: 14px;
-}
-.transport-list li::before {
-  content: '•';
-  position: absolute;
-  left: 0;
-  color: var(--primary);
-}
-.t-highlight {
-  color: var(--primary);
-  font-weight: 500;
-}
-
-.selfie-card {
-  padding: 0 !important;
-  overflow: hidden;
-}
-.selfie-header {
-  background: linear-gradient(135deg, #c040a0 0%, #780269 100%);
-  padding: 16px 18px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.selfie-scan-wrap {
-  display: flex;
-  align-items: center;
-  font-size: 24px;
-}
-.selfie-coming-tag {
-  color: rgba(255, 255, 255, 0.95);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  background: rgba(255, 255, 255, 0.18);
-  padding: 4px 10px;
-  border-radius: var(--radius-pill);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-}
-.selfie-body {
-  padding: 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.selfie-headline {
-  font-family: var(--font-heading);
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--text-dark);
-  line-height: 1.25;
-}
-.selfie-sub {
-  font-size: 12.5px;
-  color: var(--text-body);
-  line-height: 1.5;
-}
-.selfie-cta {
-  width: 100%;
-  margin-top: 10px;
-  padding: 12px;
-  background: rgba(120, 2, 105, 0.12);
-  color: rgba(120, 2, 105, 0.6);
-  border: none;
-  border-radius: var(--radius-pill);
-  font-size: 13.5px;
-  font-weight: 500;
-  cursor: not-allowed;
-}
-.selfie-note {
-  font-size: 11px;
-  color: var(--text-body);
-  text-align: center;
-  font-style: italic;
-  opacity: 0.8;
-}
-
-.download-grid { 
-  display: grid; 
-  grid-template-columns: 1fr 1fr; 
-  gap: 12px; 
-}
-.download-card:nth-child(3):last-child {
-  grid-column: span 2;
-  max-width: calc(50% - 6px);
-  justify-self: center;
-  width: 100%;
-}
-.download-card {
-  display: flex; 
-  flex-direction: column; 
-  gap: 10px;
-  padding: 12px !important; 
-  align-items: center;
-}
-.download-thumb-wrap {
-  width: 100%; 
-  height: 125px;
-  border-radius: var(--radius-sm);
-  border: 1px solid rgba(220, 180, 210, 0.5);
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #fff;
-}
-.download-thumb { 
-  width: 100%; 
-  height: 100%; 
-  object-fit: cover; 
-}
-.placeholder-thumb {
-  background: linear-gradient(135deg, rgba(120, 2, 105, 0.05) 0%, rgba(252, 114, 215, 0.12) 100%);
-}
-.download-label { 
-  font-size: 12px; 
-  color: var(--text-body); 
-  text-align: center; 
-  font-weight: 500;
-}
-.download-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%; 
-  padding: 9px 12px; 
-  border-radius: var(--radius-pill);
-  background: var(--primary); 
-  color: #fff;
-  font-size: 12.5px; 
-  font-weight: 500; 
-  box-shadow: 0 4px 12px rgba(120, 2, 105, 0.2);
-}
-.download-btn.disabled {
-  background: rgba(120, 2, 105, 0.12);
-  color: rgba(120, 2, 105, 0.55);
-  box-shadow: none;
-  cursor: not-allowed;
-}
-
-.wedding-footer { margin-top: 40px; text-align: center; padding-bottom: 12px; }
-.wedding-footer p { font-size: 13px; color: var(--text-body); }
-.footer-names {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 26px !important;
-  font-weight: 700;
-  color: var(--primary) !important;
-  margin-top: 6px;
-}
-
-.reveal-on-scroll {
-  opacity: 0;
-  transform: translateY(22px);
-  transition: opacity 0.65s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.65s cubic-bezier(0.2, 0.8, 0.2, 1);
-  will-change: opacity, transform;
-}
-
-.reveal-on-scroll.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.dh-sparkle-star, .sdt-sparkle {
-  display: inline-block;
-  animation: sparkleGlow 2.5s infinite ease-in-out;
-}
-
-@keyframes sparkleGlow {
-  0%, 100% {
-    transform: scale(1) rotate(0deg);
-    opacity: 0.8;
-    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.6));
-  }
-  50% {
-    transform: scale(1.35) rotate(15deg);
-    opacity: 1;
-    filter: drop-shadow(0 0 7px #fc72d7);
-  }
-}
-
-.rsvp-submit-btn, .directions-btn-full {
-  position: relative;
-  overflow: hidden;
-}
-
-.rsvp-submit-btn::after, .directions-btn-full::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -60%;
-  width: 40%;
-  height: 200%;
-  background: linear-gradient(
-    60deg,
-    rgba(255, 255, 255, 0) 20%,
-    rgba(255, 255, 255, 0.35) 50%,
-    rgba(255, 255, 255, 0) 80%
-  );
-  transform: rotate(25deg);
-  animation: buttonShimmer 3.8s infinite ease-in-out;
-}
-
-@keyframes buttonShimmer {
-  0% { left: -60%; }
-  30% { left: 140%; }
-  100% { left: 140%; }
-}
-
-/* ── Falling Deep Pink Petals Animation Styles (Full Page) ── */
-.royal-petals-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: 2;
-}
-.golden-petal {
-  position: absolute;
-  top: -30px;
-  width: 12px;
-  height: 16px;
-  background: radial-gradient(ellipse at center, #ff2a8d 0%, #a0005b 70%, #780269 100%);
-  border-radius: 50% 0 50% 0;
-  opacity: 0.85;
-  animation: royalFall var(--dur) linear var(--delay) infinite;
-}
-@keyframes royalFall {
-  0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
-  10% { opacity: 0.95; }
-  90% { opacity: 0.8; }
-  100% { transform: translateY(100vh) translateX(60px) rotate(400deg); opacity: 0; }
-}
-
-@media (min-width: 620px) {
-  html, body { background: #1a1a1a; }
-  .page {
-    left: 50% !important; right: auto !important;
-    width: 393px !important;
-    box-shadow: 0 0 80px rgba(0,0,0,0.6);
-    border-radius: 44px;
-    overflow: hidden;
-    transform: translateX(-50%) !important;
-  }
-}
