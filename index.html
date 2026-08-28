@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&family=Poppins:wght@300;400;500;600&family=Sora:wght@600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/wedding.css?v=900" />
+  <link rel="stylesheet" href="css/wedding.css?v=950" />
 
   <style>
     .rsvp-success-msg {
@@ -64,7 +64,7 @@
       cursor: pointer;
     }
 
-    /* Enhanced Pulsing Animation for First Scratch Bar */
+    /* Pulsing Animation for First Scratch Bar */
     .swipe-wrap {
       animation: superPulse 2s infinite ease-in-out !important;
     }
@@ -125,8 +125,8 @@
     <!-- Bride name -->
     <p class="splash-bride splash-enter">Rismina Shafi</p>
 
-    <!-- Countdown timer (Clean Position) -->
-    <div class="countdown splash-enter" id="countdown" style="top: calc(max(env(safe-area-inset-top, 0px), 54px) + 510px);">
+    <!-- Countdown timer (Properly Positioned) -->
+    <div class="countdown splash-enter" id="countdown" style="top: calc(max(env(safe-area-inset-top, 0px), 54px) + 480px);">
       <div class="count-unit">
         <span class="count-label">Days</span>
         <div class="count-box"><span id="cd-days">00</span></div>
@@ -154,8 +154,8 @@
       </div>
     </div>
 
-    <!-- ── LARGER & ANIMATED SCRATCH-TO-ATTEND BAR ── -->
-    <div class="swipe-wrap splash-enter">
+    <!-- ── SCRATCH-TO-ATTEND BAR (Visible on Screen) ── -->
+    <div class="swipe-wrap splash-enter" style="bottom: calc(env(safe-area-inset-bottom, 20px) + 24px) !important;">
       <div class="swipe-track" id="swipeTrack" role="button" aria-label="Swipe right to confirm attendance">
         <div class="swipe-thumb" id="swipeThumb">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#780269" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
@@ -695,7 +695,7 @@
         initDateScratchCard();
       }, 300);
 
-      // Swipe / Slide Logic
+      // Swipe Logic
       var track = document.getElementById('swipeTrack');
       var thumb = document.getElementById('swipeThumb');
       var fill = document.getElementById('swipeFill');
