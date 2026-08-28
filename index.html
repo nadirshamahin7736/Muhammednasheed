@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&family=Poppins:wght@300;400;500;600&family=Sora:wght@600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/wedding.css?v=600" />
+  <link rel="stylesheet" href="css/wedding.css?v=601" />
 
   <style>
     .rsvp-success-msg {
@@ -43,31 +43,6 @@
       margin-top: 12px;
       border: 1px solid rgba(255, 255, 255, 0.4);
       box-shadow: 0 4px 15px rgba(255, 42, 141, 0.2);
-    }
-
-    /* ── Royal Falling Golden Petals for Second Page ── */
-    .royal-petals-container {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      overflow: hidden;
-      z-index: 2;
-    }
-    .golden-petal {
-      position: absolute;
-      top: -30px;
-      width: 12px;
-      height: 16px;
-      background: radial-gradient(ellipse at center, #ffd700 0%, #ff8c00 70%, #d4af37 100%);
-      border-radius: 50% 0 50% 0;
-      opacity: 0.8;
-      animation: royalFall var(--dur) linear var(--delay) infinite;
-    }
-    @keyframes royalFall {
-      0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
-      10% { opacity: 0.9; }
-      90% { opacity: 0.7; }
-      100% { transform: translateY(105vh) translateX(60px) rotate(400deg); opacity: 0; }
     }
   </style>
 </head>
@@ -182,11 +157,11 @@
   </section>
 
   <!-- ═══════════════════════════════════════
-       PAGE 2 — DETAILS (With Golden Petals Effect)
+       PAGE 2 — DETAILS
   ═══════════════════════════════════════ -->
   <section id="details" class="page" aria-hidden="true">
 
-    <!-- Royal Falling Golden Petals Animation Elements -->
+    <!-- Falling Deep Pink Petals Animation Elements -->
     <div class="royal-petals-container" aria-hidden="true">
       <span class="golden-petal" style="left: 8%; --delay: 0s; --dur: 6.5s;"></span>
       <span class="golden-petal" style="left: 22%; --delay: 2s; --dur: 8s;"></span>
