@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&family=Poppins:wght@300;400;500;600&family=Sora:wght@600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/wedding.css?v=105" />
+  <link rel="stylesheet" href="css/wedding.css?v=125" />
 
   <style>
     .rsvp-success-msg {
@@ -132,12 +132,17 @@
       <p class="event-venue">Q Vintage Resort, Ashtamudi lakeside, Asramam, Kollam</p>
     </div>
 
-    <!-- ── Interactive Scratch Card ── -->
-    <div class="scratch-wrap splash-enter">
-      <div class="scratch-container">
-        <div class="scratch-secret">✨ Opening Invitation...</div>
-        <canvas id="scratchCanvas"></canvas>
+    <!-- ── Option 1: Scratch to Reveal Swipe ── -->
+    <div class="swipe-wrap splash-enter">
+      <div class="swipe-track" id="swipeTrack" role="button" aria-label="Swipe right to confirm attendance">
+        <div class="swipe-thumb" id="swipeThumb">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#780269" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </div>
+        <span class="swipe-label" id="swipeLabel">Yeah, I am attending</span>
+        <div class="swipe-fill" id="swipeFill"></div>
       </div>
+      <!-- Scratch Layer on top -->
+      <canvas id="scratchCanvas"></canvas>
     </div>
 
     <!-- Floating petals -->
@@ -444,7 +449,7 @@
   </audio>
 
   <!-- ════════════════════════════════════════
-       SCRIPTS: SCRATCH CARD & AUDIO ENGINE
+       SCRIPTS: DIRECT SCRATCH + SWIPE AUDIO
   ════════════════════════════════════════ -->
   <script>
     (function() {
@@ -469,7 +474,7 @@
         });
       }
 
-      function startAudio() {
+      function playFullMusic() {
         if (!audio) return;
         audio.volume = 1.0;
         var p = audio.play();
@@ -489,7 +494,7 @@
         }
         if (!audio) return;
         if (audio.paused) {
-          startAudio();
+          playFullMusic();
         } else {
           audio.pause();
           updateMusicUI(false);
@@ -531,9 +536,9 @@
       setInterval(updateCountdown, 1000);
       updateCountdown();
 
-      // ── Scratch Card Engine ──
+      // ── Step 1: Scratch Layer Logic ──
       var canvas = document.getElementById('scratchCanvas');
-      var details = document.getElementById('details');
+      var isScratchCleared = false;
 
       function initScratchCard() {
         if (!canvas) return;
@@ -550,18 +555,18 @@
         ctx.fillStyle = grad;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        // Text on Scratch Card
+        // Label on Scratch Card
         ctx.font = '600 13px Poppins, sans-serif';
         ctx.fillStyle = '#ffffff';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        ctx.fillText('✨ Scratch to Open Invitation', canvas.width / 2, canvas.height / 2);
+        ctx.fillText('✨ Scratch to Attend', canvas.width / 2, canvas.height / 2);
 
         var isDrawing = false;
         var scratchedPixels = 0;
 
         function scratch(e) {
-          if (!isDrawing || hasRevealed) return;
+          if (!isDrawing || isScratchCleared) return;
           var clientX = e.touches ? e.touches[0].clientX : e.clientX;
           var clientY = e.touches ? e.touches[0].clientY : e.clientY;
           var cRect = canvas.getBoundingClientRect();
@@ -574,15 +579,23 @@
           ctx.fill();
 
           scratchedPixels++;
-          // Trigger audio & reveal after quick scratching
-          if (scratchedPixels > 25 && !hasRevealed) {
-            hasRevealed = true;
-            canvas.style.transition = 'opacity 0.4s ease';
+          // When scratch touches: Pre-unlock audio seamlessly on device
+          if (scratchedPixels === 1 && audio) {
+            audio.volume = 0.001;
+            var p = audio.play();
+            if (p !== undefined) {
+              p.catch(function() {});
+            }
+          }
+
+          // Clear scratch card to show swipe bar
+          if (scratchedPixels > 18 && !isScratchCleared) {
+            isScratchCleared = true;
+            canvas.style.transition = 'opacity 0.35s ease';
             canvas.style.opacity = '0';
             setTimeout(function() {
-              details.classList.add('revealed');
-              startAudio(); // 100% Reliable audio play on all devices!
-            }, 200);
+              canvas.style.display = 'none';
+            }, 350);
           }
         }
 
@@ -597,6 +610,116 @@
 
       window.addEventListener('DOMContentLoaded', initScratchCard);
       setTimeout(initScratchCard, 200);
+
+      // ── Step 2: Swipe Logic (Reveals Details & Plays Loud Audio) ──
+      var track = document.getElementById('swipeTrack');
+      var thumb = document.getElementById('swipeThumb');
+      var fill = document.getElementById('swipeFill');
+      var details = document.getElementById('details');
+
+      function triggerFinalReveal() {
+        if (hasRevealed || !details) return;
+        hasRevealed = true;
+        details.classList.add('revealed');
+        if (track) track.classList.add('done');
+        playFullMusic(); // Song starts loud as swipe completes!
+      }
+
+      if (thumb && track) {
+        var startX = 0;
+        var currentX = 0;
+        var isDragging = false;
+
+        thumb.addEventListener('touchstart', function(e) {
+          if (hasRevealed) return;
+          isDragging = true;
+          startX = e.touches[0].clientX;
+          currentX = 0;
+        }, { passive: true });
+
+        window.addEventListener('touchmove', function(e) {
+          if (!isDragging || hasRevealed) return;
+          var touchX = e.touches[0].clientX;
+          var moveDist = touchX - startX;
+          var maxDrag = track.clientWidth - thumb.clientWidth - 14;
+
+          if (moveDist >= 0 && moveDist <= maxDrag) {
+            currentX = moveDist;
+            thumb.style.transform = 'translate(' + currentX + 'px, -50%)';
+            fill.style.width = (currentX + 28) + 'px';
+          } else if (moveDist > maxDrag) {
+            currentX = maxDrag;
+            thumb.style.transform = 'translate(' + maxDrag + 'px, -50%)';
+            fill.style.width = '100%';
+          }
+        }, { passive: true });
+
+        window.addEventListener('touchend', function() {
+          if (!isDragging || hasRevealed) return;
+          isDragging = false;
+          var maxDrag = track.clientWidth - thumb.clientWidth - 14;
+
+          if (currentX >= maxDrag * 0.75) {
+            thumb.style.transform = 'translate(' + maxDrag + 'px, -50%)';
+            fill.style.width = '100%';
+            triggerFinalReveal();
+          } else {
+            thumb.style.transition = 'transform 0.25s ease';
+            fill.style.transition = 'width 0.25s ease';
+            thumb.style.transform = 'translate(0px, -50%)';
+            fill.style.width = '0px';
+            setTimeout(function() {
+              thumb.style.transition = '';
+              fill.style.transition = '';
+            }, 260);
+          }
+        });
+
+        // Desktop Mouse Support
+        thumb.addEventListener('mousedown', function(e) {
+          if (hasRevealed) return;
+          isDragging = true;
+          startX = e.clientX;
+          currentX = 0;
+        });
+
+        window.addEventListener('mousemove', function(e) {
+          if (!isDragging || hasRevealed) return;
+          var moveDist = e.clientX - startX;
+          var maxDrag = track.clientWidth - thumb.clientWidth - 14;
+
+          if (moveDist >= 0 && moveDist <= maxDrag) {
+            currentX = moveDist;
+            thumb.style.transform = 'translate(' + currentX + 'px, -50%)';
+            fill.style.width = (currentX + 28) + 'px';
+          } else if (moveDist > maxDrag) {
+            currentX = maxDrag;
+            thumb.style.transform = 'translate(' + maxDrag + 'px, -50%)';
+            fill.style.width = '100%';
+          }
+        });
+
+        window.addEventListener('mouseup', function() {
+          if (!isDragging || hasRevealed) return;
+          isDragging = false;
+          var maxDrag = track.clientWidth - thumb.clientWidth - 14;
+
+          if (currentX >= maxDrag * 0.75) {
+            thumb.style.transform = 'translate(' + maxDrag + 'px, -50%)';
+            fill.style.width = '100%';
+            triggerFinalReveal();
+          } else {
+            thumb.style.transition = 'transform 0.25s ease';
+            fill.style.transition = 'width 0.25s ease';
+            thumb.style.transform = 'translate(0px, -50%)';
+            fill.style.width = '0px';
+            setTimeout(function() {
+              thumb.style.transition = '';
+              fill.style.transition = '';
+            }, 260);
+          }
+        });
+      }
 
       // RSVP Form Logic
       var rsvpForm = document.getElementById('rsvpForm');
