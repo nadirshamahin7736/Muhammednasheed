@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta name="theme-color" content="#f5c6e8" />
+  <meta name="theme-color" content="#240112" />
   <title>Nadirsha Mahin & Rismina Shafi | Wedding Invitation</title>
 
   <!-- Open Graph / WhatsApp Preview Meta Tags -->
@@ -26,102 +26,24 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&family=Poppins:wght@300;400;500;600&family=Sora:wght@600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/wedding.css?v=13" />
+  <link rel="stylesheet" href="css/wedding.css?v=14" />
 
   <style>
-    /* RSVP Styling */
-    .rsvp-card {
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 20px;
-      padding: 24px 20px;
-      box-shadow: 0 10px 30px rgba(120, 2, 105, 0.08);
-      border: 1px solid rgba(245, 198, 232, 0.6);
-      margin-top: 10px;
-    }
-    .rsvp-field {
-      margin-bottom: 16px;
-      text-align: left;
-    }
-    .rsvp-label {
-      display: block;
-      font-size: 13px;
-      font-weight: 600;
-      color: #5c0649;
-      margin-bottom: 6px;
-    }
-    .rsvp-input, .rsvp-select, .rsvp-textarea {
-      width: 100%;
-      padding: 12px 14px;
-      border: 1.5px solid #ecd5e3;
-      border-radius: 12px;
-      font-family: 'Poppins', sans-serif;
-      font-size: 14px;
-      color: #333;
-      background: #fff;
-      box-sizing: border-box;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-    .rsvp-input:focus, .rsvp-select:focus, .rsvp-textarea:focus {
-      border-color: #780269;
-    }
-    .rsvp-radio-group {
-      display: flex;
-      gap: 12px;
-    }
-    .rsvp-radio-btn {
-      flex: 1;
-      text-align: center;
-      padding: 10px 12px;
-      border: 1.5px solid #ecd5e3;
-      border-radius: 12px;
-      cursor: pointer;
-      font-size: 13px;
-      font-weight: 500;
-      color: #555;
-      transition: all 0.2s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-    }
-    .rsvp-radio-btn input {
-      display: none;
-    }
-    .rsvp-radio-btn.active {
-      background: #780269;
-      color: #fff;
-      border-color: #780269;
-    }
-    .rsvp-submit-btn {
-      width: 100%;
-      padding: 14px;
-      background: linear-gradient(135deg, #a4038f 0%, #68015b 100%);
-      color: #fff;
-      border: none;
-      border-radius: 9999px;
-      font-family: 'Poppins', sans-serif;
-      font-size: 15px;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: 0 4px 15px rgba(120, 2, 105, 0.25);
-      transition: transform 0.2s, box-shadow 0.2s;
-      margin-top: 8px;
-    }
-    .rsvp-submit-btn:active {
-      transform: scale(0.98);
-    }
+    /* Inline helper for RSVP message */
     .rsvp-success-msg {
       display: none;
-      background: #e8f5e9;
-      color: #2e7d32;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color: #fff;
       padding: 14px;
       border-radius: 12px;
-      font-size: 14px;
+      font-size: 13.5px;
       font-weight: 500;
       text-align: center;
       margin-top: 12px;
-      border: 1px solid #c8e6c9;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 0 4px 15px rgba(255, 42, 141, 0.2);
     }
   </style>
 </head>
@@ -215,7 +137,7 @@
     <div class="swipe-wrap splash-enter">
       <div class="swipe-track" id="swipeTrack" role="button" aria-label="Swipe right to confirm attendance">
         <div class="swipe-thumb" id="swipeThumb">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#780269" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#59022e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
         </div>
         <span class="swipe-label" id="swipeLabel">Yeah, I am attending</span>
         <div class="swipe-fill" id="swipeFill"></div>
@@ -288,7 +210,7 @@
         <p class="sdt-eyebrow">Save the Date</p>
         <p class="sdt-date">Sunday, 15 November 2026</p>
         <p class="sdt-venue-hint">Q Vintage Resort, Ashtamudi lakeside, Asramam, Kollam</p>
-        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Nadirsha+%26+Rismina+Wedding&dates=20261115T113000Z/20261115T153000Z&details=Wedding+Ceremony+of+Nadirsha+%26+Rismina&location=Q+Vintage+Resort,+Ashtamudi+lakeside,+Asramam,+Kollam" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; background-color: #5c0649; color: #ffffff; padding: 12px 28px; border-radius: 9999px; text-decoration: none; font-weight: 600; margin-top: 16px;">
+        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Nadirsha+%26+Rismina+Wedding&dates=20261115T113000Z/20261115T153000Z&details=Wedding+Ceremony+of+Nadirsha+%26+Rismina&location=Q+Vintage+Resort,+Ashtamudi+lakeside,+Asramam,+Kollam" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(135deg, #ff2a8d 0%, #99004d 100%); color: #ffffff; padding: 12px 28px; border-radius: 9999px; text-decoration: none; font-weight: 600; margin-top: 16px; border: 1px solid rgba(255,255,255,0.4); box-shadow: 0 4px 15px rgba(255,42,141,0.4);">
           Add to Calendar
         </a>
       </div>
@@ -352,7 +274,7 @@
         <div class="info-card venue-elegant">
           <div class="venue-top">
             <div class="venue-pin-circle">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
             </div>
             <div class="venue-text">
               <h3 class="venue-name">Q Vintage Resort</h3>
@@ -380,7 +302,7 @@
             <a href="tel:+918891955881" class="contact-phone">+91 8891 955 881</a>
           </div>
           <a href="tel:+918891955881" class="phone-btn primary" aria-label="Call Nadirsha Mahin">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
           </a>
         </div>
 
@@ -390,7 +312,7 @@
             <p class="contact-role">Groom's Mother</p>
             <a href="tel:+918138967597" class="contact-phone">+91 8138 967 597</a>
             <a href="tel:+918138967597" class="phone-btn outline" aria-label="Call Rajula E">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
             </a>
           </div>
           <div class="info-card contact-center">
@@ -398,7 +320,7 @@
             <p class="contact-role">Groom's Aunt</p>
             <a href="tel:+918129254471" class="contact-phone">+91 8129 254 471</a>
             <a href="tel:+918129254471" class="phone-btn outline" aria-label="Call Beema N E">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
             </a>
           </div>
         </div>
@@ -411,49 +333,49 @@
 
           <div class="accordion-item">
             <button class="accordion-header" onclick="this.parentElement.classList.toggle('open')">
-              <span class="transport-icon">✈️</span>
-              <span class="transport-title">By Air</span>
+              <span>
+                <span class="transport-icon">✈️</span>
+                <span class="transport-title">By Air</span>
+              </span>
               <span class="accordion-chevron">▼</span>
             </button>
             <div class="accordion-body">
-              <div class="accordion-inner">
-                <ul class="transport-list">
-                  <li>Nearest airport: <span class="t-highlight">Thiruvananthapuram International Airport (TRV)</span></li>
-                  <li>Distance: <span class="t-highlight">67.6 km · ~2 hr drive</span></li>
-                </ul>
-              </div>
+              <ul class="transport-list">
+                <li>Nearest airport: <span class="t-highlight">Thiruvananthapuram International Airport (TRV)</span></li>
+                <li>Distance: <span class="t-highlight">67.6 km · ~2 hr drive</span></li>
+              </ul>
             </div>
           </div>
 
           <div class="accordion-item">
             <button class="accordion-header" onclick="this.parentElement.classList.toggle('open')">
-              <span class="transport-icon">🚆</span>
-              <span class="transport-title">By Train</span>
+              <span>
+                <span class="transport-icon">🚆</span>
+                <span class="transport-title">By Train</span>
+              </span>
               <span class="accordion-chevron">▼</span>
             </button>
             <div class="accordion-body">
-              <div class="accordion-inner">
-                <ul class="transport-list">
-                  <li>Nearest station: <span class="t-highlight">Kollam Railway Station</span></li>
-                  <li>Distance: <span class="t-highlight">2.5 km · ~7 min drive</span></li>
-                </ul>
-              </div>
+              <ul class="transport-list">
+                <li>Nearest station: <span class="t-highlight">Kollam Railway Station</span></li>
+                <li>Distance: <span class="t-highlight">2.5 km · ~7 min drive</span></li>
+              </ul>
             </div>
           </div>
 
           <div class="accordion-item">
             <button class="accordion-header" onclick="this.parentElement.classList.toggle('open')">
-              <span class="transport-icon">🚌</span>
-              <span class="transport-title">By Bus</span>
+              <span>
+                <span class="transport-icon">🚌</span>
+                <span class="transport-title">By Bus</span>
+              </span>
               <span class="accordion-chevron">▼</span>
             </button>
             <div class="accordion-body">
-              <div class="accordion-inner">
-                <ul class="transport-list">
-                  <li>Nearest bus stand: <span class="t-highlight">KSRTC Bus Station Kollam</span></li>
-                  <li>Distance: <span class="t-highlight">1.8 km · ~4 min drive</span></li>
-                </ul>
-              </div>
+              <ul class="transport-list">
+                <li>Nearest bus stand: <span class="t-highlight">KSRTC Bus Station Kollam</span></li>
+                <li>Distance: <span class="t-highlight">1.8 km · ~4 min drive</span></li>
+              </ul>
             </div>
           </div>
 
@@ -465,11 +387,7 @@
         <h2 class="section-heading">Photo Gallery</h2>
         <div class="info-card selfie-card">
           <div class="selfie-header">
-            <div class="selfie-scan-wrap">
-              <span class="kwik-ring kwik-ring-1"></span>
-              <span class="kwik-ring kwik-ring-2"></span>
-              <span style="font-size:22px; color:#fff; position:relative; z-index:1;">📸</span>
-            </div>
+            <div class="selfie-scan-wrap">📸</div>
             <span class="selfie-coming-tag">Coming Soon</span>
           </div>
           <div class="selfie-body">
@@ -530,7 +448,7 @@
   </audio>
 
   <!-- ════════════════════════════════════════
-       SCRIPTS: FULL-SWIPE, COUNTDOWN, RSVP & ANIMATIONS
+       SCRIPTS: FULL-SWIPE, AUDIO UNLOCK & RSVP
   ════════════════════════════════════════ -->
   <script>
     (function() {
@@ -555,6 +473,13 @@
         });
       }
 
+      function startAudio() {
+        if (!audio) return;
+        audio.play().then(function() {
+          updateMusicUI(true);
+        }).catch(function() {});
+      }
+
       function toggleMusic(e) {
         if (e) {
           e.preventDefault();
@@ -562,9 +487,7 @@
         }
         if (!audio) return;
         if (audio.paused) {
-          audio.play().then(function() {
-            updateMusicUI(true);
-          }).catch(function() {});
+          startAudio();
         } else {
           audio.pause();
           updateMusicUI(false);
@@ -605,7 +528,7 @@
       setInterval(updateCountdown, 1000);
       updateCountdown();
 
-      // Strict Full-Swipe Logic
+      // Swipe Unlock Logic with Direct Audio Unlock
       var track = document.getElementById('swipeTrack');
       var thumb = document.getElementById('swipeThumb');
       var fill = document.getElementById('swipeFill');
@@ -616,12 +539,7 @@
         hasRevealed = true;
         details.classList.add('revealed');
         if (track) track.classList.add('done');
-        
-        if (audio) {
-          audio.play().then(function() {
-            updateMusicUI(true);
-          }).catch(function() {});
-        }
+        startAudio();
       }
 
       if (thumb && track) {
@@ -629,12 +547,18 @@
         var currentX = 0;
         var isDragging = false;
 
-        // Touch Events
         thumb.addEventListener('touchstart', function(e) {
           if (hasRevealed) return;
           isDragging = true;
           startX = e.touches[0].clientX;
           currentX = 0;
+          // Audio pre-unlock on initial touch
+          if (audio && audio.paused) {
+            audio.play().then(function() {
+              audio.pause();
+              audio.currentTime = 0;
+            }).catch(function() {});
+          }
         }, { passive: true });
 
         window.addEventListener('touchmove', function(e) {
@@ -659,7 +583,7 @@
           isDragging = false;
           var maxDrag = track.clientWidth - thumb.clientWidth - 14;
 
-          if (currentX >= maxDrag * 0.92) {
+          if (currentX >= maxDrag * 0.90) {
             thumb.style.transform = 'translate(' + maxDrag + 'px, -50%)';
             fill.style.width = '100%';
             triggerFinalReveal();
@@ -675,13 +599,19 @@
           }
         });
 
-        // Mouse Events
+        // Mouse Events for Desktop
         thumb.addEventListener('mousedown', function(e) {
           if (hasRevealed) return;
           isDragging = true;
           startX = e.clientX;
           currentX = 0;
           e.preventDefault();
+          if (audio && audio.paused) {
+            audio.play().then(function() {
+              audio.pause();
+              audio.currentTime = 0;
+            }).catch(function() {});
+          }
         });
 
         window.addEventListener('mousemove', function(e) {
@@ -705,7 +635,7 @@
           isDragging = false;
           var maxDrag = track.clientWidth - thumb.clientWidth - 14;
 
-          if (currentX >= maxDrag * 0.92) {
+          if (currentX >= maxDrag * 0.90) {
             thumb.style.transform = 'translate(' + maxDrag + 'px, -50%)';
             fill.style.width = '100%';
             triggerFinalReveal();
@@ -783,7 +713,7 @@
         });
       }
 
-      // Scroll Reveal Observer for Cards
+      // Scroll Reveal Observer
       if ('IntersectionObserver' in window) {
         var observer = new IntersectionObserver(function(entries) {
           entries.forEach(function(entry) {
@@ -798,7 +728,6 @@
           observer.observe(el);
         });
       }
-
     })();
   </script>
 </body>
