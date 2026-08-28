@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&family=Poppins:wght@300;400;500;600&family=Sora:wght@600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/wedding.css?v=60" />
+  <link rel="stylesheet" href="css/wedding.css?v=70" />
 
   <style>
     .rsvp-success-msg {
@@ -426,7 +426,7 @@
             <div class="download-thumb-wrap placeholder-thumb">
               <span style="font-size: 30px;">🎬</span>
             </div>
-            <p class="download-label">Save the Date Video</p>
+            <p class="download-label">Save Date Video</p>
             <button class="download-btn disabled" disabled>Coming soon...</button>
           </div>
 
@@ -447,13 +447,14 @@
   </audio>
 
   <!-- ════════════════════════════════════════
-       SCRIPTS: REAL SWIPE GESTURE ENGINE
+       SCRIPTS: 50% SILENT START & 80% SOUND BURST
   ════════════════════════════════════════ -->
   <script>
     (function() {
       var audio = document.getElementById('bgMusic');
       var pills = [document.getElementById('musicPill'), document.getElementById('musicPillDetails')];
       var hasRevealed = false;
+      var audioStartedSilently = false;
 
       function updateMusicUI(isPlaying) {
         pills.forEach(function(p) {
@@ -472,9 +473,20 @@
         });
       }
 
-      function playMusicNow() {
+      function startAudioSilently() {
+        if (!audio || audioStartedSilently || hasRevealed) return;
+        audio.volume = 0.0; // Silent at 50% swipe
+        var p = audio.play();
+        if (p !== undefined) {
+          p.then(function() {
+            audioStartedSilently = true;
+          }).catch(function() {});
+        }
+      }
+
+      function burstFullVolume() {
         if (!audio) return;
-        audio.volume = 1.0;
+        audio.volume = 1.0; // Full sound at 80%+ swipe
         var p = audio.play();
         if (p !== undefined) {
           p.then(function() {
@@ -485,14 +497,21 @@
         }
       }
 
+      function cancelAudio() {
+        if (!audio || hasRevealed) return;
+        audio.pause();
+        audio.currentTime = 0;
+        audioStartedSilently = false;
+      }
+
       function toggleMusic(e) {
         if (e) {
           e.preventDefault();
           e.stopPropagation();
         }
         if (!audio) return;
-        if (audio.paused) {
-          playMusicNow();
+        if (audio.paused || audio.volume === 0) {
+          burstFullVolume();
         } else {
           audio.pause();
           updateMusicUI(false);
@@ -534,73 +553,138 @@
       setInterval(updateCountdown, 1000);
       updateCountdown();
 
-      // Swipe Gesture Engine (Real Swipe Flick / Move)
+      // Swipe Engine with 50% Silent Start & 80% Full Sound Burst
       var track = document.getElementById('swipeTrack');
       var thumb = document.getElementById('swipeThumb');
       var fill = document.getElementById('swipeFill');
       var details = document.getElementById('details');
 
-      function executeSwipeUnlock() {
+      function triggerFinalReveal() {
         if (hasRevealed || !details) return;
         hasRevealed = true;
-        
-        var maxDrag = track.clientWidth - thumb.clientWidth - 14;
-        thumb.style.transition = 'transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1)';
-        fill.style.transition = 'width 0.35s cubic-bezier(0.2, 0.8, 0.2, 1)';
-        thumb.style.transform = 'translate(' + maxDrag + 'px, -50%)';
-        fill.style.width = '100%';
-        track.classList.add('done');
-
-        setTimeout(function() {
-          details.classList.add('revealed');
-        }, 150);
-
-        playMusicNow(); // Triggers on the swipe gesture itself!
+        details.classList.add('revealed');
+        if (track) track.classList.add('done');
+        burstFullVolume(); // Full volume sound burst at 80%+ swipe!
       }
 
-      if (track) {
-        var startTouchX = 0;
-        var startTouchTime = 0;
-        var isSwiping = false;
+      if (thumb && track) {
+        var startX = 0;
+        var currentX = 0;
+        var isDragging = false;
 
-        track.addEventListener('touchstart', function(e) {
+        thumb.addEventListener('touchstart', function(e) {
           if (hasRevealed) return;
-          isSwiping = true;
-          startTouchX = e.touches[0].clientX;
-          startTouchTime = new Date().getTime();
+          isDragging = true;
+          startX = e.touches[0].clientX;
+          currentX = 0;
         }, { passive: true });
 
-        track.addEventListener('touchend', function(e) {
-          if (!isSwiping || hasRevealed) return;
-          isSwiping = false;
-          
-          var endTouchX = e.changedTouches[0].clientX;
-          var diffX = endTouchX - startTouchX;
-          var elapsed = new Date().getTime() - startTouchTime;
+        window.addEventListener('touchmove', function(e) {
+          if (!isDragging || hasRevealed) return;
+          var touchX = e.touches[0].clientX;
+          var moveDist = touchX - startX;
+          var maxDrag = track.clientWidth - thumb.clientWidth - 14;
 
-          // A real swipe to the right (either quick flick or distance > 50px)
-          if (diffX > 50 || (diffX > 30 && elapsed < 300)) {
-            executeSwipeUnlock();
+          if (moveDist >= 0 && moveDist <= maxDrag) {
+            currentX = moveDist;
+            thumb.style.transform = 'translate(' + currentX + 'px, -50%)';
+            fill.style.width = (currentX + 28) + 'px';
+          } else if (moveDist > maxDrag) {
+            currentX = maxDrag;
+            thumb.style.transform = 'translate(' + maxDrag + 'px, -50%)';
+            fill.style.width = '100%';
+          }
+
+          // At 50% swipe -> Start audio silently in background (bypasses browser block!)
+          if (currentX >= maxDrag * 0.50 && !audioStartedSilently) {
+            startAudioSilently();
+          }
+
+          // At 80% swipe -> Trigger full reveal & full volume sound burst!
+          if (currentX >= maxDrag * 0.80 && !hasRevealed) {
+            isDragging = false;
+            thumb.style.transform = 'translate(' + maxDrag + 'px, -50%)';
+            fill.style.width = '100%';
+            triggerFinalReveal();
           }
         }, { passive: true });
 
-        // Desktop Mouse Swipe support
-        track.addEventListener('mousedown', function(e) {
-          if (hasRevealed) return;
-          isSwiping = true;
-          startTouchX = e.clientX;
-          startTouchTime = new Date().getTime();
+        window.addEventListener('touchend', function() {
+          if (!isDragging || hasRevealed) return;
+          isDragging = false;
+          var maxDrag = track.clientWidth - thumb.clientWidth - 14;
+
+          if (currentX >= maxDrag * 0.80) {
+            thumb.style.transform = 'translate(' + maxDrag + 'px, -50%)';
+            fill.style.width = '100%';
+            triggerFinalReveal();
+          } else {
+            cancelAudio();
+            thumb.style.transition = 'transform 0.25s ease';
+            fill.style.transition = 'width 0.25s ease';
+            thumb.style.transform = 'translate(0px, -50%)';
+            fill.style.width = '0px';
+            setTimeout(function() {
+              thumb.style.transition = '';
+              fill.style.transition = '';
+            }, 260);
+          }
         });
 
-        window.addEventListener('mouseup', function(e) {
-          if (!isSwiping || hasRevealed) return;
-          isSwiping = false;
-          
-          var diffX = e.clientX - startTouchX;
-          var elapsed = new Date().getTime() - startTouchTime;
+        // Desktop Mouse Support
+        thumb.addEventListener('mousedown', function(e) {
+          if (hasRevealed) return;
+          isDragging = true;
+          startX = e.clientX;
+          currentX = 0;
+        });
 
-          if (diffX > 50 || (diffX > 30 && elapsed < 300)) {
-            executeSwipeUnlock();
+        window.addEventListener('mousemove', function(e) {
+          if (!isDragging || hasRevealed) return;
+          var moveDist = e.clientX - startX;
+          var maxDrag = track.clientWidth - thumb.clientWidth - 14;
+
+          if (moveDist >= 0 && moveDist <= maxDrag) {
+            currentX = moveDist;
+            thumb.style.transform = 'translate(' + currentX + 'px, -50%)';
+            fill.style.width = (currentX + 28) + 'px';
+          } else if (moveDist > maxDrag) {
+            currentX = maxDrag;
+            thumb.style.transform = 'translate(' + maxDrag + 'px, -50%)';
+            fill.style.width = '100%';
+          }
+
+          if (currentX >= maxDrag * 0.50 && !audioStartedSilently) {
+            startAudioSilently();
+          }
+
+          if (currentX >= maxDrag * 0.80 && !hasRevealed) {
+            isDragging = false;
+            thumb.style.transform = 'translate(' + maxDrag + 'px, -50%)';
+            fill.style.width = '100%';
+            triggerFinalReveal();
+          }
+        });
+
+        window.addEventListener('mouseup', function() {
+          if (!isDragging || hasRevealed) return;
+          isDragging = false;
+          var maxDrag = track.clientWidth - thumb.clientWidth - 14;
+
+          if (currentX >= maxDrag * 0.80) {
+            thumb.style.transform = 'translate(' + maxDrag + 'px, -50%)';
+            fill.style.width = '100%';
+            triggerFinalReveal();
+          } else {
+            cancelAudio();
+            thumb.style.transition = 'transform 0.25s ease';
+            fill.style.transition = 'width 0.25s ease';
+            thumb.style.transform = 'translate(0px, -50%)';
+            fill.style.width = '0px';
+            setTimeout(function() {
+              thumb.style.transition = '';
+              fill.style.transition = '';
+            }, 260);
           }
         });
       }
