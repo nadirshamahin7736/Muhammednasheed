@@ -6,7 +6,6 @@
   <meta name="theme-color" content="#240112" />
   <title>Nadirsha Mahin & Rismina Shafi | Wedding Invitation</title>
 
-  <!-- Open Graph / WhatsApp Preview Meta Tags -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://nadirshamahin7736.github.io/Muhammednasheed/">
   <meta property="og:title" content="Wedding Invitation — Nadirsha & Rismina">
@@ -15,18 +14,10 @@
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="1600">
 
-  <!-- Twitter Card -->
-  <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://nadirshamahin7736.github.io/Muhammednasheed/">
-  <meta property="twitter:title" content="Wedding Invitation — Nadirsha & Rismina">
-  <meta property="twitter:description" content="Join us to celebrate our wedding on Sunday, 15 Nov 2026 at Q Vintage Resort, Kollam.">
-  <meta property="twitter:image" content="https://nadirshamahin7736.github.io/Muhammednasheed/assets/preview.jpg?v=2">
-
-  <!-- Luxury Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&family=Poppins:wght@300;400;500;600&family=Sora:wght@600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/wedding.css?v=70" />
+  <link rel="stylesheet" href="css/wedding.css?v=95" />
 
   <style>
     .rsvp-success-msg {
@@ -48,9 +39,6 @@
 </head>
 <body>
 
-  <!-- ═══════════════════════════════════════
-       PAGE 1 — SPLASH / HERO
-  ═══════════════════════════════════════ -->
   <section id="splash" class="page">
 
     <div class="splash-bg">
@@ -58,7 +46,6 @@
       <div class="splash-overlay"></div>
     </div>
 
-    <!-- Music pill (top-right) -->
     <button class="music-pill" id="musicPill" aria-label="Play Nikkah Nasheed">
       <span class="music-pill-label">Nikkah nasheed</span>
       <span class="music-pill-btn">
@@ -67,37 +54,30 @@
       </span>
     </button>
 
-    <!-- Bismillah calligraphy -->
     <div class="bismillah splash-enter">
       <img src="assets/bismillah.svg" alt="Bismillah ir-Rahman ir-Raheem" class="bismillah-img" />
     </div>
 
-    <!-- Malayalam title logo -->
     <div class="splash-title-logo splash-enter">
       <img src="assets/malayalam-logo.svg" alt="" class="splash-title-img" />
     </div>
 
-    <!-- Invite text -->
     <p class="splash-invite splash-enter">
       We cordially invite You to honor us with Your presence at the blessed occasion of our wedding
     </p>
 
-    <!-- Groom name -->
     <div class="splash-groom splash-enter">
       <span>Nadirsha</span>
       <span>Mahin</span>
     </div>
 
-    <!-- "weds" badge -->
     <div class="splash-weds-wrap splash-enter">
       <div class="splash-weds-bar"></div>
       <span class="splash-weds">weds</span>
     </div>
 
-    <!-- Bride name -->
     <p class="splash-bride splash-enter">Rismina Shafi</p>
 
-    <!-- Countdown timer -->
     <div class="countdown splash-enter" id="countdown">
       <div class="count-unit">
         <span class="count-label">Days</span>
@@ -126,24 +106,18 @@
       </div>
     </div>
 
-    <!-- Date + venue -->
     <div class="event-meta splash-enter">
       <p class="event-date">Sunday, 15 November 2026</p>
       <p class="event-venue">Q Vintage Resort, Ashtamudi lakeside, Asramam, Kollam</p>
     </div>
 
-    <!-- Swipe CTA -->
-    <div class="swipe-wrap splash-enter">
-      <div class="swipe-track" id="swipeTrack" role="button" aria-label="Swipe right to confirm attendance">
-        <div class="swipe-thumb" id="swipeThumb">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#780269" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-        </div>
-        <span class="swipe-label" id="swipeLabel">Yeah, I am attending</span>
-        <div class="swipe-fill" id="swipeFill"></div>
+    <div class="scratch-wrap splash-enter">
+      <div class="scratch-container">
+        <div class="scratch-secret">✨ Opening Invitation...</div>
+        <canvas id="scratchCanvas"></canvas>
       </div>
     </div>
 
-    <!-- Floating petals -->
     <div class="petals" aria-hidden="true">
       <span class="petal" style="--x:10%;--delay:0s;--dur:6s"></span>
       <span class="petal" style="--x:25%;--delay:1.5s;--dur:7s"></span>
@@ -154,17 +128,12 @@
 
   </section>
 
-  <!-- ═══════════════════════════════════════
-       PAGE 2 — DETAILS
-  ═══════════════════════════════════════ -->
   <section id="details" class="page" aria-hidden="true">
 
-    <!-- Hero top -->
     <div class="details-hero">
       <img src="assets/details-hero-bg.jpg" alt="" aria-hidden="true" class="details-hero-bg" />
       <div class="details-hero-overlay"></div>
 
-      <!-- Music pill -->
       <button class="music-pill music-pill-details" id="musicPillDetails" aria-label="Toggle music">
         <span class="music-pill-label">Nikkah nasheed</span>
         <span class="music-pill-btn">
@@ -173,22 +142,18 @@
         </span>
       </button>
 
-      <!-- Groom name -->
       <div class="dh-groom">
         <span>Nadirsha</span>
         <span>Mahin</span>
       </div>
 
-      <!-- "weds" badge -->
       <div class="dh-weds-wrap">
         <div class="dh-weds-bar"></div>
         <span class="dh-weds">weds</span>
       </div>
 
-      <!-- Bride name -->
       <p class="dh-bride">Rismina Shafi</p>
 
-      <!-- Sparkle divider -->
       <div class="dh-divider-row">
         <div class="dh-divider-line"></div>
         <span class="dh-sparkle-star">✦</span>
@@ -196,10 +161,8 @@
       </div>
     </div>
 
-    <!-- Scrollable content card -->
     <div class="details-sheet">
 
-      <!-- Save the date card -->
       <div class="save-date-card reveal-on-scroll">
         <div class="sdt-ornament">
           <div class="sdt-line"></div>
@@ -214,7 +177,6 @@
         </a>
       </div>
 
-      <!-- ── RSVP / Attendance Confirmation ── -->
       <div class="card-section reveal-on-scroll">
         <h2 class="section-heading">RSVP</h2>
         <div class="info-card rsvp-card">
@@ -267,7 +229,6 @@
         </div>
       </div>
 
-      <!-- ── Venue ── -->
       <div class="card-section reveal-on-scroll">
         <h2 class="section-heading">Venue</h2>
         <div class="info-card venue-elegant">
@@ -290,7 +251,6 @@
         </div>
       </div>
 
-      <!-- ── For Enquiry ── -->
       <div class="card-section reveal-on-scroll">
         <h2 class="section-heading">For Enquiry</h2>
 
@@ -325,7 +285,6 @@
         </div>
       </div>
 
-      <!-- ── How to Reach ── -->
       <div class="card-section reveal-on-scroll">
         <h2 class="section-heading">How to Reach</h2>
         <div class="transport-accordion">
@@ -381,7 +340,6 @@
         </div>
       </div>
 
-      <!-- ── Photo Gallery ── -->
       <div class="card-section reveal-on-scroll">
         <h2 class="section-heading">Photo Gallery</h2>
         <div class="info-card selfie-card">
@@ -398,12 +356,10 @@
         </div>
       </div>
 
-      <!-- ── Downloads ── -->
       <div class="card-section reveal-on-scroll">
         <h2 class="section-heading">Downloads</h2>
         <div class="download-grid">
           
-          <!-- Card 1: Our Story Begins -->
           <div class="info-card download-card">
             <div class="download-thumb-wrap">
               <img src="assets/preview.jpg" alt="Our Story Begins Preview" class="download-thumb" />
@@ -412,7 +368,6 @@
             <a href="assets/preview.jpg" download="Our-Story-Begins-Nadirsha-Rismina.jpg" class="download-btn">Download</a>
           </div>
 
-          <!-- Card 2: Official Wedding Card -->
           <div class="info-card download-card">
             <div class="download-thumb-wrap placeholder-thumb">
               <span style="font-size: 30px;">💌</span>
@@ -421,7 +376,6 @@
             <button class="download-btn disabled" disabled>Coming soon...</button>
           </div>
 
-          <!-- Card 3: Teaser / Save the Date Video -->
           <div class="info-card download-card">
             <div class="download-thumb-wrap placeholder-thumb">
               <span style="font-size: 30px;">🎬</span>
@@ -438,23 +392,17 @@
         <p class="footer-names">Nadirsha & Rismina</p>
       </footer>
 
-    </div><!-- /details-sheet -->
-  </section>
+    </div></section>
 
-  <!-- Background music -->
   <audio id="bgMusic" loop preload="auto" playsinline>
     <source src="audio/nikah-nasheed.mp3" type="audio/mpeg" />
   </audio>
 
-  <!-- ════════════════════════════════════════
-       SCRIPTS: 50% SILENT START & 80% SOUND BURST
-  ════════════════════════════════════════ -->
   <script>
     (function() {
       var audio = document.getElementById('bgMusic');
       var pills = [document.getElementById('musicPill'), document.getElementById('musicPillDetails')];
       var hasRevealed = false;
-      var audioStartedSilently = false;
 
       function updateMusicUI(isPlaying) {
         pills.forEach(function(p) {
@@ -473,20 +421,9 @@
         });
       }
 
-      function startAudioSilently() {
-        if (!audio || audioStartedSilently || hasRevealed) return;
-        audio.volume = 0.0; // Silent at 50% swipe
-        var p = audio.play();
-        if (p !== undefined) {
-          p.then(function() {
-            audioStartedSilently = true;
-          }).catch(function() {});
-        }
-      }
-
-      function burstFullVolume() {
+      function startAudio() {
         if (!audio) return;
-        audio.volume = 1.0; // Full sound at 80%+ swipe
+        audio.volume = 1.0;
         var p = audio.play();
         if (p !== undefined) {
           p.then(function() {
@@ -497,21 +434,14 @@
         }
       }
 
-      function cancelAudio() {
-        if (!audio || hasRevealed) return;
-        audio.pause();
-        audio.currentTime = 0;
-        audioStartedSilently = false;
-      }
-
       function toggleMusic(e) {
         if (e) {
           e.preventDefault();
           e.stopPropagation();
         }
         if (!audio) return;
-        if (audio.paused || audio.volume === 0) {
-          burstFullVolume();
+        if (audio.paused) {
+          startAudio();
         } else {
           audio.pause();
           updateMusicUI(false);
@@ -553,141 +483,72 @@
       setInterval(updateCountdown, 1000);
       updateCountdown();
 
-      // Swipe Engine with 50% Silent Start & 80% Full Sound Burst
-      var track = document.getElementById('swipeTrack');
-      var thumb = document.getElementById('swipeThumb');
-      var fill = document.getElementById('swipeFill');
+      // ── Scratch Card Engine ──
+      var canvas = document.getElementById('scratchCanvas');
       var details = document.getElementById('details');
 
-      function triggerFinalReveal() {
-        if (hasRevealed || !details) return;
-        hasRevealed = true;
-        details.classList.add('revealed');
-        if (track) track.classList.add('done');
-        burstFullVolume(); // Full volume sound burst at 80%+ swipe!
+      function initScratchCard() {
+        if (!canvas) return;
+        var ctx = canvas.getContext('2d');
+        var rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+
+        // Draw Luxury Pink/Gold Scratch Overlay
+        var grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+        grad.addColorStop(0, '#f9b4e5');
+        grad.addColorStop(0.5, '#fc72d7');
+        grad.addColorStop(1, '#780269');
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Text on Scratch Card
+        ctx.font = '600 13px Poppins, sans-serif';
+        ctx.fillStyle = '#ffffff';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('✨ Scratch to Open Invitation', canvas.width / 2, canvas.height / 2);
+
+        var isDrawing = false;
+        var scratchedPixels = 0;
+
+        function scratch(e) {
+          if (!isDrawing || hasRevealed) return;
+          var clientX = e.touches ? e.touches[0].clientX : e.clientX;
+          var clientY = e.touches ? e.touches[0].clientY : e.clientY;
+          var cRect = canvas.getBoundingClientRect();
+          var x = clientX - cRect.left;
+          var y = clientY - cRect.top;
+
+          ctx.globalCompositeOperation = 'destination-out';
+          ctx.beginPath();
+          ctx.arc(x, y, 22, 0, Math.PI * 2);
+          ctx.fill();
+
+          scratchedPixels++;
+          // Trigger audio & reveal after ~35 scratch points (quick & effortless!)
+          if (scratchedPixels > 35 && !hasRevealed) {
+            hasRevealed = true;
+            canvas.style.transition = 'opacity 0.4s ease';
+            canvas.style.opacity = '0';
+            setTimeout(function() {
+              details.classList.add('revealed');
+              startAudio(); // Plays loudly & smoothly!
+            }, 250);
+          }
+        }
+
+        canvas.addEventListener('mousedown', function(e) { isDrawing = true; scratch(e); });
+        window.addEventListener('mousemove', scratch);
+        window.addEventListener('mouseup', function() { isDrawing = false; });
+
+        canvas.addEventListener('touchstart', function(e) { isDrawing = true; scratch(e); }, { passive: true });
+        window.addEventListener('touchmove', scratch, { passive: true });
+        window.addEventListener('touchend', function() { isDrawing = false; });
       }
 
-      if (thumb && track) {
-        var startX = 0;
-        var currentX = 0;
-        var isDragging = false;
-
-        thumb.addEventListener('touchstart', function(e) {
-          if (hasRevealed) return;
-          isDragging = true;
-          startX = e.touches[0].clientX;
-          currentX = 0;
-        }, { passive: true });
-
-        window.addEventListener('touchmove', function(e) {
-          if (!isDragging || hasRevealed) return;
-          var touchX = e.touches[0].clientX;
-          var moveDist = touchX - startX;
-          var maxDrag = track.clientWidth - thumb.clientWidth - 14;
-
-          if (moveDist >= 0 && moveDist <= maxDrag) {
-            currentX = moveDist;
-            thumb.style.transform = 'translate(' + currentX + 'px, -50%)';
-            fill.style.width = (currentX + 28) + 'px';
-          } else if (moveDist > maxDrag) {
-            currentX = maxDrag;
-            thumb.style.transform = 'translate(' + maxDrag + 'px, -50%)';
-            fill.style.width = '100%';
-          }
-
-          // At 50% swipe -> Start audio silently in background (bypasses browser block!)
-          if (currentX >= maxDrag * 0.50 && !audioStartedSilently) {
-            startAudioSilently();
-          }
-
-          // At 80% swipe -> Trigger full reveal & full volume sound burst!
-          if (currentX >= maxDrag * 0.80 && !hasRevealed) {
-            isDragging = false;
-            thumb.style.transform = 'translate(' + maxDrag + 'px, -50%)';
-            fill.style.width = '100%';
-            triggerFinalReveal();
-          }
-        }, { passive: true });
-
-        window.addEventListener('touchend', function() {
-          if (!isDragging || hasRevealed) return;
-          isDragging = false;
-          var maxDrag = track.clientWidth - thumb.clientWidth - 14;
-
-          if (currentX >= maxDrag * 0.80) {
-            thumb.style.transform = 'translate(' + maxDrag + 'px, -50%)';
-            fill.style.width = '100%';
-            triggerFinalReveal();
-          } else {
-            cancelAudio();
-            thumb.style.transition = 'transform 0.25s ease';
-            fill.style.transition = 'width 0.25s ease';
-            thumb.style.transform = 'translate(0px, -50%)';
-            fill.style.width = '0px';
-            setTimeout(function() {
-              thumb.style.transition = '';
-              fill.style.transition = '';
-            }, 260);
-          }
-        });
-
-        // Desktop Mouse Support
-        thumb.addEventListener('mousedown', function(e) {
-          if (hasRevealed) return;
-          isDragging = true;
-          startX = e.clientX;
-          currentX = 0;
-        });
-
-        window.addEventListener('mousemove', function(e) {
-          if (!isDragging || hasRevealed) return;
-          var moveDist = e.clientX - startX;
-          var maxDrag = track.clientWidth - thumb.clientWidth - 14;
-
-          if (moveDist >= 0 && moveDist <= maxDrag) {
-            currentX = moveDist;
-            thumb.style.transform = 'translate(' + currentX + 'px, -50%)';
-            fill.style.width = (currentX + 28) + 'px';
-          } else if (moveDist > maxDrag) {
-            currentX = maxDrag;
-            thumb.style.transform = 'translate(' + maxDrag + 'px, -50%)';
-            fill.style.width = '100%';
-          }
-
-          if (currentX >= maxDrag * 0.50 && !audioStartedSilently) {
-            startAudioSilently();
-          }
-
-          if (currentX >= maxDrag * 0.80 && !hasRevealed) {
-            isDragging = false;
-            thumb.style.transform = 'translate(' + maxDrag + 'px, -50%)';
-            fill.style.width = '100%';
-            triggerFinalReveal();
-          }
-        });
-
-        window.addEventListener('mouseup', function() {
-          if (!isDragging || hasRevealed) return;
-          isDragging = false;
-          var maxDrag = track.clientWidth - thumb.clientWidth - 14;
-
-          if (currentX >= maxDrag * 0.80) {
-            thumb.style.transform = 'translate(' + maxDrag + 'px, -50%)';
-            fill.style.width = '100%';
-            triggerFinalReveal();
-          } else {
-            cancelAudio();
-            thumb.style.transition = 'transform 0.25s ease';
-            fill.style.transition = 'width 0.25s ease';
-            thumb.style.transform = 'translate(0px, -50%)';
-            fill.style.width = '0px';
-            setTimeout(function() {
-              thumb.style.transition = '';
-              fill.style.transition = '';
-            }, 260);
-          }
-        });
-      }
+      window.addEventListener('DOMContentLoaded', initScratchCard);
+      setTimeout(initScratchCard, 200);
 
       // RSVP Form Logic
       var rsvpForm = document.getElementById('rsvpForm');
