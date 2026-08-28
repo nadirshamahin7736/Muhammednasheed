@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&family=Poppins:wght@300;400;500;600&family=Sora:wght@600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/wedding.css?v=1600" />
+  <link rel="stylesheet" href="css/wedding.css?v=2026" />
 
   <style>
     .rsvp-success-msg {
@@ -45,16 +45,22 @@
       box-shadow: 0 4px 15px rgba(255, 42, 141, 0.2);
     }
     
-    /* Perfect Positioning: Counter and Scratch Bar in View */
-    .countdown { top: 410px !important; }
+    /* Strict layout positioning to avoid overlapping */
+    .bismillah { top: 32px !important; left: 50% !important; transform: translateX(-50%) !important; }
+    .splash-title-logo { top: 68px !important; left: 50% !important; transform: translateX(-50%) !important; }
+    .splash-invite { top: 182px !important; left: 50% !important; transform: translateX(-50%) !important; width: min(298px, calc(100% - 32px)) !important; }
+    .splash-groom { top: 220px !important; left: 50% !important; transform: translateX(-50%) !important; white-space: nowrap !important; }
+    .splash-weds-wrap { top: 295px !important; left: 50% !important; transform: translateX(-50%) !important; }
+    .splash-bride { top: 355px !important; left: 50% !important; transform: translateX(-50%) !important; white-space: nowrap !important; }
+    .countdown { top: 425px !important; left: 0 !important; right: 0 !important; position: absolute !important; display: flex !important; justify-content: center !important; gap: 5px !important; }
     
     .swipe-wrap {
       position: absolute !important;
-      top: 512px !important;
+      top: 520px !important;
       bottom: auto !important;
       left: 50% !important;
       transform: translateX(-50%) !important;
-      width: min(350px, calc(100% - 24px)) !important;
+      width: min(340px, calc(100% - 24px)) !important;
       height: 72px !important;
       animation: superPulse 1.8s infinite ease-in-out !important;
     }
@@ -143,7 +149,7 @@
       </div>
     </div>
 
-    <!-- ── SCRATCH-TO-ATTEND BAR (Visible on Screen) ── -->
+    <!-- ── SCRATCH-TO-ATTEND BAR ── -->
     <div class="swipe-wrap splash-enter">
       <div class="swipe-track" id="swipeTrack" role="button" aria-label="Swipe right to confirm attendance">
         <div class="swipe-thumb" id="swipeThumb" style="width: 58px; height: 58px;">
@@ -545,7 +551,7 @@
         var ctx = canvas.getContext('2d');
         var rect = canvas.getBoundingClientRect();
         
-        canvas.width = rect.width || 350;
+        canvas.width = rect.width || 340;
         canvas.height = rect.height || 72;
 
         var grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
@@ -610,7 +616,7 @@
       window.addEventListener('load', initScratchCard);
       setTimeout(initScratchCard, 300);
 
-      // Swipe / Scratch Reveal Logic
+      // Swipe Logic
       var track = document.getElementById('swipeTrack');
       var thumb = document.getElementById('swipeThumb');
       var fill = document.getElementById('swipeFill');
