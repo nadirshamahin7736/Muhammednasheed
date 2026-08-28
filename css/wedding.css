@@ -1,5 +1,5 @@
 /* ══════════════════════════════════════════
-   WEDDING WEBSITE — STYLES
+   WEDDING WEBSITE — STYLES (V2)
    Nadirsha Mahin & Rismina Shafi
    15 November 2026 · Q Vintage Resort, Kollam
 ══════════════════════════════════════════ */
@@ -1051,7 +1051,7 @@ svg {
   100% { left: 140%; }
 }
 
-/* ── Falling Deep Pink Petals Animation Styles (Full Page) ── */
+/* ── Falling Deep Pink Petals Animation Styles (Full Page & Full Height) ── */
 .royal-petals-container {
   position: absolute;
   top: 0;
