@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&family=Poppins:wght@300;400;500;600&family=Sora:wght@600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/wedding.css?v=1500" />
+  <link rel="stylesheet" href="css/wedding.css?v=1600" />
 
   <style>
     .rsvp-success-msg {
@@ -45,12 +45,17 @@
       box-shadow: 0 4px 15px rgba(255, 42, 141, 0.2);
     }
     
-    /* Bigger & Glowing Scratch Bar with Pulsing Animation */
+    /* Perfect Positioning: Counter and Scratch Bar in View */
+    .countdown { top: 410px !important; }
+    
     .swipe-wrap {
+      position: absolute !important;
+      top: 512px !important;
+      bottom: auto !important;
+      left: 50% !important;
+      transform: translateX(-50%) !important;
       width: min(350px, calc(100% - 24px)) !important;
-      height: 76px !important;
-      bottom: calc(env(safe-area-inset-bottom, 16px) + 12px) !important;
-      top: auto !important;
+      height: 72px !important;
       animation: superPulse 1.8s infinite ease-in-out !important;
     }
     @keyframes superPulse {
@@ -138,13 +143,13 @@
       </div>
     </div>
 
-    <!-- ── BIGGER & PROMINENT SCRATCH-TO-ATTEND BAR ── -->
+    <!-- ── SCRATCH-TO-ATTEND BAR (Visible on Screen) ── -->
     <div class="swipe-wrap splash-enter">
       <div class="swipe-track" id="swipeTrack" role="button" aria-label="Swipe right to confirm attendance">
-        <div class="swipe-thumb" id="swipeThumb" style="width: 60px; height: 60px;">
+        <div class="swipe-thumb" id="swipeThumb" style="width: 58px; height: 58px;">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#780269" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
         </div>
-        <span class="swipe-label" id="swipeLabel" style="font-size: 16px; font-weight: 700;">✨ Scratch to Attend</span>
+        <span class="swipe-label" id="swipeLabel" style="font-size: 15.5px; font-weight: 700;">✨ Scratch to Attend</span>
         <div class="swipe-fill" id="swipeFill"></div>
       </div>
       <canvas id="scratchCanvas"></canvas>
@@ -541,7 +546,7 @@
         var rect = canvas.getBoundingClientRect();
         
         canvas.width = rect.width || 350;
-        canvas.height = rect.height || 76;
+        canvas.height = rect.height || 72;
 
         var grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
         grad.addColorStop(0, '#8e026f');
@@ -571,7 +576,7 @@
 
           ctx.globalCompositeOperation = 'destination-out';
           ctx.beginPath();
-          ctx.arc(x, y, 28, 0, Math.PI * 2);
+          ctx.arc(x, y, 26, 0, Math.PI * 2);
           ctx.fill();
 
           scratchedPixels++;
@@ -605,7 +610,7 @@
       window.addEventListener('load', initScratchCard);
       setTimeout(initScratchCard, 300);
 
-      // Swipe Logic
+      // Swipe / Scratch Reveal Logic
       var track = document.getElementById('swipeTrack');
       var thumb = document.getElementById('swipeThumb');
       var fill = document.getElementById('swipeFill');
