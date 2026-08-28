@@ -26,10 +26,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&family=Poppins:wght@300;400;500;600&family=Sora:wght@600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/wedding.css?v=22" />
+  <link rel="stylesheet" href="css/wedding.css?v=28" />
 
   <style>
-    /* Inline helper for RSVP message */
     .rsvp-success-msg {
       display: none;
       background: rgba(255, 255, 255, 0.15);
@@ -448,7 +447,7 @@
   </audio>
 
   <!-- ════════════════════════════════════════
-       SCRIPTS: PLAY ONLY AFTER 90% SWIPE COMPLETE
+       SCRIPTS: DIRECT SWIPE-TO-PLAY ENGINE
   ════════════════════════════════════════ -->
   <script>
     (function() {
@@ -473,18 +472,34 @@
         });
       }
 
-      function startAudioNow() {
+      // 1. SILENT ARMING: Start audio quietly on first touch to unlock mobile restrictions
+      function armAudioQuietly() {
+        if (!audio || hasRevealed) return;
+        audio.muted = true;
+        var p = audio.play();
+        if (p !== undefined) {
+          p.catch(function() {});
+        }
+      }
+
+      // 2. UNMUTE & PLAY: Triggers loud music when 90-95% swipe completes
+      function playLoudAudio() {
         if (!audio) return;
         audio.muted = false;
         audio.volume = 1.0;
-        var p = audio.play();
-        if (p !== undefined) {
-          p.then(function() {
+        if (audio.paused) {
+          audio.play().then(function() {
             updateMusicUI(true);
-          }).catch(function(err) {
-            console.log("Audio play error:", err);
-          });
+          }).catch(function() {});
+        } else {
+          updateMusicUI(true);
         }
+      }
+
+      function cancelAudioIfIncomplete() {
+        if (!audio || hasRevealed) return;
+        audio.pause();
+        audio.currentTime = 0;
       }
 
       function toggleMusic(e) {
@@ -493,8 +508,8 @@
           e.stopPropagation();
         }
         if (!audio) return;
-        if (audio.paused) {
-          startAudioNow();
+        if (audio.paused || audio.muted) {
+          playLoudAudio();
         } else {
           audio.pause();
           updateMusicUI(false);
@@ -547,7 +562,7 @@
         hasRevealed = true;
         details.classList.add('revealed');
         if (track) track.classList.add('done');
-        startAudioNow(); // Plays song ONLY when swipe is 100% complete!
+        playLoudAudio(); // Unmutes and plays loudly on completion!
       }
 
       if (thumb && track) {
@@ -555,15 +570,15 @@
         var currentX = 0;
         var isDragging = false;
 
-        // Touch Start: ONLY records coordinates. NO AUDIO PLAY HERE.
+        // User touches slider to drag -> Arm silently immediately
         thumb.addEventListener('touchstart', function(e) {
           if (hasRevealed) return;
+          armAudioQuietly();
           isDragging = true;
           startX = e.touches[0].clientX;
           currentX = 0;
         }, { passive: true });
 
-        // Touch Move: Drag slider
         window.addEventListener('touchmove', function(e) {
           if (!isDragging || hasRevealed) return;
           var touchX = e.touches[0].clientX;
@@ -581,18 +596,20 @@
           }
         }, { passive: true });
 
-        // Touch End: Trigger song ONLY if reached 90%
+        // User releases thumb at the end of swipe
         window.addEventListener('touchend', function() {
           if (!isDragging || hasRevealed) return;
           isDragging = false;
           var maxDrag = track.clientWidth - thumb.clientWidth - 14;
 
+          // 90% or more reached -> Complete swipe & Play Song!
           if (currentX >= maxDrag * 0.88) {
             thumb.style.transform = 'translate(' + maxDrag + 'px, -50%)';
             fill.style.width = '100%';
-            triggerFinalReveal(); // Revealed & song starts!
+            triggerFinalReveal();
           } else {
-            // Did not complete swipe -> snap back, zero sound!
+            // Cancelled drag -> Reset everything silently
+            cancelAudioIfIncomplete();
             thumb.style.transition = 'transform 0.25s ease';
             fill.style.transition = 'width 0.25s ease';
             thumb.style.transform = 'translate(0px, -50%)';
@@ -604,9 +621,10 @@
           }
         });
 
-        // Desktop Mouse Support
+        // Desktop Mouse support
         thumb.addEventListener('mousedown', function(e) {
           if (hasRevealed) return;
+          armAudioQuietly();
           isDragging = true;
           startX = e.clientX;
           currentX = 0;
@@ -638,6 +656,7 @@
             fill.style.width = '100%';
             triggerFinalReveal();
           } else {
+            cancelAudioIfIncomplete();
             thumb.style.transition = 'transform 0.25s ease';
             fill.style.transition = 'width 0.25s ease';
             thumb.style.transform = 'translate(0px, -50%)';
