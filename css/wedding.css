@@ -1,5 +1,5 @@
 /* ══════════════════════════════════════════
-   WEDDING WEBSITE — STYLES (V5 - Full Scratch & Reveal)
+   WEDDING WEBSITE — STYLES (V4 - Enlarged Swipe/Scratch)
    Nadirsha Mahin & Rismina Shafi
    15 November 2026 · Q Vintage Resort, Kollam
 ══════════════════════════════════════════ */
@@ -138,7 +138,7 @@ svg {
 
 @keyframes breathe {
   0%,100% { opacity: 1; }
-  50%     { opacity: 0.55; }
+  50%      { opacity: 0.55; }
 }
 
 .bismillah {
@@ -586,71 +586,6 @@ svg {
   font-size: 13px;
   color: var(--text-body);
   line-height: 1.45;
-}
-
-/* ════════════════════════════════════════════
-   FULL WHITE CARD SCRATCH EFFECT STYLES
-════════════════════════════════════════════ */
-.scratch-full-white-wrap {
-  position: relative;
-  overflow: hidden;
-  user-select: none;
-  padding: 0 !important;
-}
-.scratch-full-white-wrap .scratch-secret-content {
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  padding: 24px 20px 22px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  width: 100%;
-}
-.scratch-full-white-wrap.revealed .scratch-secret-content {
-  opacity: 1;
-}
-.scratch-full-canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  cursor: pointer;
-  touch-action: none;
-  z-index: 5;
-  border-radius: var(--radius-md);
-  transition: opacity 0.6s ease;
-}
-.scratch-full-instruction {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-  z-index: 6;
-  font-family: var(--font-serif);
-  font-size: 15px;
-  font-weight: 600;
-  color: #fff1b0;
-  text-shadow: 0 2px 6px rgba(0,0,0,0.8);
-  transition: opacity 0.4s ease;
-}
-.scratch-full-instruction span {
-  background: rgba(120, 2, 105, 0.85);
-  padding: 10px 18px;
-  border-radius: 99px;
-  border: 1px dashed rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(8px);
-  animation: pulseFullInstruction 1.8s infinite ease-in-out;
-  color: #fff;
-}
-.scratch-full-white-wrap.revealed .scratch-full-instruction {
-  opacity: 0;
-}
-@keyframes pulseFullInstruction {
-  0%, 100% { transform: scale(1); opacity: 0.9; }
-  50% { transform: scale(1.03); opacity: 1; }
 }
 
 .card-section { margin-top: 26px; }
