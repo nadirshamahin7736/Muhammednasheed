@@ -141,6 +141,7 @@
         <span class="swipe-label" id="swipeLabel">Yeah, I am attending</span>
         <div class="swipe-fill" id="swipeFill"></div>
       </div>
+      <!-- Canvas Overlay placed exactly on top -->
       <canvas id="scratchCanvas"></canvas>
     </div>
 
@@ -204,27 +205,19 @@
 
     <div class="details-sheet">
 
-      <!-- Save the date card (Full White Scratch Card) -->
-      <div class="save-date-card scratch-full-white-wrap reveal-on-scroll" id="fullWhiteCard">
-        <!-- The Secret Content Underneath -->
-        <div class="scratch-secret-content">
-          <div class="sdt-ornament">
-            <div class="sdt-line"></div>
-            <span class="sdt-sparkle">✦</span>
-            <div class="sdt-line"></div>
-          </div>
-          <p class="sdt-eyebrow">Save the Date</p>
-          <p class="sdt-date">Sunday, 15 November 2026</p>
-          <p class="sdt-venue-hint">Q Vintage Resort, Ashtamudi lakeside, Asramam, Kollam</p>
-          <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Nadirsha+%26+Rismina+Wedding&dates=20261115T113000Z/20261115T153000Z&details=Wedding+Ceremony+of+Nadirsha+%26+Rismina&location=Q+Vintage+Resort,+Ashtamudi+lakeside,+Asramam,+Kollam" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(135deg, #780269 0%, #5a0050 100%); color: #ffffff; padding: 12px 28px; border-radius: 9999px; text-decoration: none; font-weight: 600; margin-top: 16px; box-shadow: 0 4px 15px rgba(120,2,105,0.25);">
-            Add to Calendar
-          </a>
+      <!-- Save the date card -->
+      <div class="save-date-card reveal-on-scroll">
+        <div class="sdt-ornament">
+          <div class="sdt-line"></div>
+          <span class="sdt-sparkle">✦</span>
+          <div class="sdt-line"></div>
         </div>
-        <!-- Scratch Canvas Layer on Top -->
-        <canvas id="fullWhiteScratchCanvas" class="scratch-full-canvas"></canvas>
-        <div class="scratch-full-instruction" id="fullWhiteInstruction">
-          <span>✨ Scratch here to reveal Save the Date ✨</span>
-        </div>
+        <p class="sdt-eyebrow">Save the Date</p>
+        <p class="sdt-date">Sunday, 15 November 2026</p>
+        <p class="sdt-venue-hint">Q Vintage Resort, Ashtamudi lakeside, Asramam, Kollam</p>
+        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Nadirsha+%26+Rismina+Wedding&dates=20261115T113000Z/20261115T153000Z&details=Wedding+Ceremony+of+Nadirsha+%26+Rismina&location=Q+Vintage+Resort,+Ashtamudi+lakeside,+Asramam,+Kollam" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(135deg, #780269 0%, #5a0050 100%); color: #ffffff; padding: 12px 28px; border-radius: 9999px; text-decoration: none; font-weight: 600; margin-top: 16px; box-shadow: 0 4px 15px rgba(120,2,105,0.25);">
+          Add to Calendar
+        </a>
       </div>
 
       <!-- ── Venue ── -->
@@ -457,8 +450,8 @@
   </audio>
 
   <!-- ════════════════════════════════════════
-         SCRIPTS
-     ════════════════════════════════════════ -->
+        SCRIPTS
+   ════════════════════════════════════════ -->
   <script>
     (function() {
       var audio = document.getElementById('bgMusic');
@@ -544,7 +537,7 @@
       setInterval(updateCountdown, 1000);
       updateCountdown();
 
-      // Splash Scratch Card Setup
+      // Scratch Card Setup
       var canvas = document.getElementById('scratchCanvas');
       var isScratchCleared = false;
 
@@ -617,75 +610,6 @@
 
       window.addEventListener('load', initScratchCard);
       setTimeout(initScratchCard, 300);
-
-      // Full White Save-the-Date Card Scratch Logic
-      var fwCanvas = document.getElementById('fullWhiteScratchCanvas');
-      if (fwCanvas) {
-        var fwCtx = fwCanvas.getContext('2d');
-        var fwCardWrap = document.getElementById('fullWhiteCard');
-        var fwInstruction = document.getElementById('fullWhiteInstruction');
-        var isFwCleared = false;
-
-        function initFwScratch() {
-          var rect = fwCardWrap.getBoundingClientRect();
-          fwCanvas.width = rect.width || 320;
-          fwCanvas.height = rect.height || 220;
-
-          var grad = fwCtx.createLinearGradient(0, 0, fwCanvas.width, fwCanvas.height);
-          grad.addColorStop(0, '#780269');
-          grad.addColorStop(0.5, '#5a0050');
-          grad.addColorStop(1, '#3b0030');
-          fwCtx.fillStyle = grad;
-          fwCtx.fillRect(0, 0, fwCanvas.width, fwCanvas.height);
-        }
-
-        setTimeout(initFwScratch, 350);
-
-        var isDrawingFw = false;
-
-        function scratchFw(e) {
-          if (!isDrawingFw || isFwCleared) return;
-          var cRect = fwCanvas.getBoundingClientRect();
-          var clientX = e.touches ? e.touches[0].clientX : e.clientX;
-          var clientY = e.touches ? e.touches[0].clientY : e.clientY;
-          var x = clientX - cRect.left;
-          var y = clientY - cRect.top;
-
-          fwCtx.globalCompositeOperation = 'destination-out';
-          fwCtx.beginPath();
-          fwCtx.arc(x, y, 32, 0, Math.PI * 2, false);
-          fwCtx.fill();
-
-          checkFwRevealed();
-        }
-
-        function checkFwRevealed() {
-          var imgData = fwCtx.getImageData(0, 0, fwCanvas.width, fwCanvas.height);
-          var clearedPixels = 0;
-          for (var i = 3; i < imgData.data.length; i += 4) {
-            if (imgData.data[i] === 0) clearedPixels++;
-          }
-          var percentage = (clearedPixels / (imgData.data.length / 4)) * 100;
-          if (percentage > 38 && !isFwCleared) {
-            isFwCleared = true;
-            fwCardWrap.classList.add('revealed');
-            fwCanvas.style.opacity = '0';
-            if (fwInstruction) fwInstruction.style.opacity = '0';
-            setTimeout(function() {
-              fwCanvas.style.display = 'none';
-              if (fwInstruction) fwInstruction.style.display = 'none';
-            }, 600);
-          }
-        }
-
-        fwCanvas.addEventListener('mousedown', function(e) { isDrawingFw = true; if(fwInstruction) fwInstruction.style.opacity='0'; scratchFw(e); });
-        window.addEventListener('mousemove', scratchFw);
-        window.addEventListener('mouseup', function() { isDrawingFw = false; });
-
-        fwCanvas.addEventListener('touchstart', function(e) { isDrawingFw = true; if(fwInstruction) fwInstruction.style.opacity='0'; scratchFw(e); }, {passive: true});
-        window.addEventListener('touchmove', scratchFw, {passive: true});
-        window.addEventListener('touchend', function() { isDrawingFw = false; });
-      }
 
       // Swipe Logic
       var track = document.getElementById('swipeTrack');
